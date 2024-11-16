@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="./font/fontawesome-free-6.6.0/fontawesome-free-6.6.0-web/css/all.css">
+    <link rel="stylesheet" href="topmenu.css">
+    <script>
+        function exit(){
+            var x = document.getElementById("find_wrap");
+            x.style.display="none";
+    }
+       function hien(y){
+            var element = document.getElementById(y);
+            if (element) {
+            if (y === 'find_wrap') {
+                element.style.display = 'block';
+                element.style.backdropFilter="brightness(0.5)";
+            } else if (y === 'bar_wrap') {
+                element.style.display = 'block';
+
+            }
+        }
+        }
+      document.addEventListener('mousedown', function(event){
+        var find = document.getElementById("find");
+        var find_wrap = document.getElementById("find_wrap");
+        if (!find.contains(event.target)) {
+                find_wrap.style.display = 'none';
+            }
+
+
+        var bar = document.getElementById("bar");
+        var bar_wrap = document.getElementById("bar_wrap");
+        if (!bar.contains(event.target)) {
+                bar_wrap.style.display = 'none';
+            }
+      });
+    </script>
+</head>
+<body>
+    <div id="topmenu">
+        <div id="topmenu_text">
+            ONLY.FANS
+        </div>
+        <div id="topmenu_list">
+            <div id="topmenu_list_item">
+                <div>Trang Chủ</div>
+                <div>Liên Hệ</div>
+                <div>Cửa Hàng</div>
+                <div>Giới Thiệu</div>
+            </div>
+        </div>
+        <div id="topmenu_icon">
+                <div id="topmenu_icon--bar"><i   class="fa-solid fa-bars-staggered" onclick="hien('bar_wrap');"></i></div>
+                <div id="topmenu_icon--find" ><i class="fa-solid fa-magnifying-glass" onclick="hien('find_wrap');"></i></div>
+                <div id="topmenu_icon--user"><i  class="fa-regular fa-user"></i></div>
+                <div id="topmenu_icon--love"><i  class="fa-regular fa-heart"></i></div>
+                <div id="topmenu_icon--bag"><i   class="fa-solid fa-bag-shopping""></i></div>
+        </div>
+    </div>
+        <div id="find_wrap">
+            <div id="find">
+                <input type="text" name="" id="findspace" placeholder="Tìm kiếm sản phẩm...">
+                <button id="exit" onclick="exit();"><i class="fa-solid fa-xmark" ></i></button>
+                <div id="finditem">
+                    <h4>Thương hiệu</h4>
+                    <input type="radio" name="thuonghieu" id="">Mỹ <br>
+                    <input type="radio" name="thuonghieu" id="">Úc <br>
+                    <input type="radio" name="thuonghieu" id="">Đài Loan <br>
+                    <input type="radio" name="thuonghieu" id="">Việt Nam <br>
+                </div>
+                <div  id="finditem">
+                    <h4>Loại Sản Phẩm</h4>
+                    <input type="radio" name="loai" id="">Quạt trần <br>
+                    <input type="radio" name="loai" id="">Quạt điện <br>
+                    <input type="radio" name="loai" id="">Quạt công nghiệp <br>
+                    <input type="radio" name="loai" id="">Quạt hơi nước<br>
+                </div>
+                <div id="finditem">
+                    <h4>Theo Giá Sản Phẩm</h4>
+                    <input type="text" id="giatoithieu" placeholder="Giá tối thiểu">
+                    <input type="text" id="giatoida" placeholder="Nhập giá tối đa">
+                </div>
+            </div>
+        </div>
+        <div id="bar_wrap">
+            <div id="bar">
+                <div id="bar_text">
+                    MENU
+                </div>
+                <div id="bar_list">
+                    <ul>
+                        <li>Trang Chủ</li>
+                        <li>Liên Hệ</li>
+                        <li>Cửa Hàng</li>
+                        <li>Giới Thiệu</li>
+                        <li>Yêu Thích</li>
+                       </ul>
+                   </div>
+               <div id="bar_bottom"> 
+                Liên Hệ: 0987654321
+               </div>
+            </div>
+        </div>
+    <div id="con">
+        <img src="img/download.jpg" alt="">
+        <img src="img/download.jpg" alt="">
+        <img src="img/download.jpg" alt="">
+        <img src="img/download.jpg" alt="">
+    </div> 
+</body>
+</html>
