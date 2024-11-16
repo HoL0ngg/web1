@@ -2,6 +2,63 @@ const payment = document.getElementById('payment-method');
 const payment_popup = document.getElementById('payment-method-popup');
 let icon_active = null;
 
+window.onload = loadCart;
+
+function loadCart() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const container = document.getElementById('cart-container');
+    let s = '';
+    if (cart) {
+        s = `<tr>
+                            <th></th>
+                            <th>Tên sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng</th>
+                            <th></th>
+                        </tr>`;
+        cart.forEach(item => {
+            s += `<tr class="cart-item">
+                            <td style="display: none;">${item.id}</td>
+                            <td><img src="Logo-DH-Sai-Gon-SGU-flat.webp" alt="" style="height: 55px;"></td>
+                            <td>
+                                Quạt máy senko
+                            </td>
+                            <td>
+                                <p class="item-price">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div id="chinhsoluong">
+                                    <button style="color: gray;" class="decrease">
+                                        -
+                                    </button>
+                                    <p class="quantity">${item.quantity}</p>
+                                    <button class="increase">
+                                        +
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="item-total">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div class="xoa">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </td>
+                        </tr>`
+        });
+    }
+    container.innerHTML = s;
+    updateCart();
+    EventListener();
+    checkEmptyCart();
+}
+
 function checknumber(inp) {
     inp.value = inp.value.replace(/[^0-9]/g, '');
 
@@ -39,7 +96,6 @@ function DinhDangSoThe(inputElement) {
     }
 }
 
-
 function DinhDangNgay(inp) {
     let value = inp.value.replace(/[^0-9]/g, ''); // Loại bỏ ký tự không phải số
     if (value.length > 2) {
@@ -73,13 +129,14 @@ function DinhDangNgay(inp) {
     return true; // Ngày tháng hợp lệ
 }
 
-
 function MoPopUpThanhtoan(icon) {
     if (icon_active) {
         icon_active.classList.remove('active');
     }
     icon_active = icon;
     icon_active.classList.add('active');
+
+    if (icon_active.classList.contains('fa-money-bill-1-wave')) return;
 
     payment_popup.classList.add('show');
     payment.classList.add('show');
@@ -179,6 +236,43 @@ document.getElementById('payment-form').addEventListener('submit', function (e) 
     }
 })
 
+function ThanhToan() {
+    if (!icon_active) return displayToast('Bạn phải chọn phương thức thanh toán trước');
+    if (totalQuantity == 0) return displayToast('Giỏ hàng của bạn đang trống');
+    if (icon_active) {
+        LuuHoaDon();
+        displayToast('Bạn đã đặt hàng thành công');
+    }
+}
+
+function TaoMaHD() {
+    let hoadon = JSON.parse(localStorage.getItem('hoadon')) || [];
+
+    return 'HD' + hoadon.length;
+}
+
+function LuuHoaDon() {
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    const HoaDon = {
+        id: TaoMaHD(), // ID hóa đơn duy nhất
+        items: cart,             // Sản phẩm trong giỏ hàng
+        total: totalPrice, // Tổng tiền
+        payment_method: icon_active,
+        date: new Date().toLocaleString() // Ngày tạo hóa đơn
+    };
+
+    let hoadon = JSON.parse(localStorage.getItem('hoadon')) || [];
+    hoadon.push(HoaDon);
+    localStorage.setItem('hoadon', JSON.stringify(hoadon));
+    localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi lưu
+    console.log(cart);
+
+    document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
+    loadCart(); // Cập nhật giao diện giỏ hàng
+
+}
+
 function displayToast(msg) {
     const toast = document.getElementById('toast');
     toast.style.display = 'block';
@@ -189,110 +283,77 @@ function displayToast(msg) {
     }, 2900);
 }
 
-let productArray = [
-    {
-        productid: 'DH1600', brandid: 'Senko', img: '../hinhanh/quatdien/fan1.jpg', name: 'Quạt đứng Senko DH1600',
-        size: 'Ngang 37.5cm - Cao 109 - 123cm - Sâu 41cm', power: '47W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 559000
-    },
+function EventListener() {
+    document.querySelectorAll('.increase').forEach(button => {
 
-    {
-        productid: 'VY628890', brandid: 'Asia ', img: '../hinhanh/quatdien/fan2.jpg', name: 'Quạt lửng Asia VY628890',
-        size: 'Ngang 45cm - Cao 80 - 98cm - Sâu 45cm', power: '75W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2024', price: 510000
-    },
-
-    {
-        productid: 'VY639990', brandid: 'Asia', img: '../hinhanh/quatdien/fan3.jpg', name: 'Quạt đứng Asia VY639990',
-        size: 'Ngang 52cm - Cao 100.5 - 119cm - Sâu 52cm', power: '80W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 790000
-    },
-
-    {
-        productid: 'TC1622', brandid: 'Senko', img: '../hinhanh/quatdien/fan4.jpg', name: 'Quạt treo tường Senko TC1622',
-        size: 'Ngang 45cm - Cao 47cm - Sâu 29cm', power: '65W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 540000
-    },
-
-    {
-        productid: 'VY377790', brandid: 'Asia', img: '../hinhanh/quatdien/fan5.jpg', name: 'Quạt treo tường Asia VY377790',
-        size: 'Ngang 47cm - Cao 69cm - Sâu 36.5cm', power: '55W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 720000
-    },
-
-    {
-        productid: 'B1612', brandid: 'Senko', img: '../hinhanh/quatdien/fan6.jpg', name: 'Quạt bàn Senko B1612',
-        size: 'Ngang 32cm - Cao 65.5cm - Sâu 32cm', power: '47W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 425000
-    },
-
-    {
-        productid: 'L1638', brandid: 'Senko', img: '../hinhanh/quatdien/fan7.jpg', name: 'Quạt lửng Senko L1638',
-        size: 'Ngang 36.8cm - Cao 75.6 - 91.5cm - Sâu 36cm', power: '47W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 470000
-    },
-
-    {
-        productid: 'LTS1636', brandid: 'Senko', img: '../hinhanh/quatdien/fan8.jpg', name: 'Quạt lửng Senko LTS1636',
-        size: 'Ngang 41cm - Cao 85 - 97cm - Sâu 41cm', power: '65W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 560000
-    },
-
-    {
-        productid: 'VY357690', brandid: 'Asia', img: '../hinhanh/quatdien/fan9.jpg', name: 'Quạt treo tường Asia VY357690',
-        size: 'Ngang 44.7cm - Cao 54.5cm - Sâu 33.8cm', power: '55W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 550000
-    },
-
-    {
-        productid: 'VY355790', brandid: 'Asia', img: '../hinhanh/quatdien/fan10.jpg', name: 'Quạt bàn Asia VY355790',
-        size: 'Ngang 29cm - Cao 60cm - Sâu 33cm', power: '55W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 550000
-    },
-
-    {
-        productid: 'B1213', brandid: 'Senko', img: '../hinhanh/quatdien/fan11.jpg', name: 'Quạt bàn Senko B1213',
-        size: 'Ngang 26.5cm - Cao 54cm - Sâu 27.5cm', power: '40W', brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 379000
-    },
-
-    {
-        productid: 'SHD7115', brandid: 'Sunhouse', img: '../hinhanh/quatdien/fan12.jpg', name: 'Quạt sạc điện Sunhouse SHD7115',
-        size: 'Ngang 26cm - Cao 50.5cm - Sâu 26cm', power: '15W', brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2021', price: 900000
-    },
-
-];
-
-let cart = [
-    {
-        productid: 'DH1600',
-        soluong: '1'
-    },
-    {
-        productid: 'B1213',
-        soluong: 2
-    }
-]
-
-document.querySelectorAll('.increase').forEach(button => {
-    button.addEventListener('click', function () {
-        const quantityElement = this.previousElementSibling;
-        let currentQuantity = parseInt(quantityElement.textContent);
-        quantityElement.textContent = currentQuantity + 1;
-
-        // Cập nhật giỏ hàng nếu cần
-        updateCart();
-    });
-});
-
-document.querySelectorAll('.decrease').forEach(button => {
-    button.addEventListener('click', function () {
-        const quantityElement = this.nextElementSibling;
-        let currentQuantity = parseInt(quantityElement.textContent);
-
-        if (currentQuantity > 1) {
-            quantityElement.textContent = currentQuantity - 1;
+        button.addEventListener('click', function () {
+            const quantityElement = this.previousElementSibling;
+            let currentQuantity = parseInt(quantityElement.textContent);
+            quantityElement.textContent = currentQuantity + 1;
 
             // Cập nhật giỏ hàng nếu cần
             updateCart();
-        }
+        });
     });
-});
+
+
+    document.querySelectorAll('.decrease').forEach(button => {
+        button.addEventListener('click', function () {
+            const quantityElement = this.nextElementSibling;
+            let currentQuantity = parseInt(quantityElement.textContent);
+
+            if (currentQuantity > 1) {
+                quantityElement.textContent = currentQuantity - 1;
+
+                // Cập nhật giỏ hàng nếu cần
+                updateCart();
+            }
+        });
+    });
+
+    document.querySelectorAll('.xoa').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const parentElement = this.parentElement.parentElement;
+            const maSanPham = parentElement.firstElementChild.textContent;
+
+            parentElement.remove();
+            removeFromCart(maSanPham);
+            updateCart();
+        })
+    });
+}
+
+// Hàm xóa sản phẩm khỏi localStorage
+function removeFromCart(id) {
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    cart = cart.filter(item => item.id !== id); // Lọc bỏ sản phẩm có id tương ứng
+    localStorage.setItem('cart', JSON.stringify(cart)); // Lưu lại giỏ hàng mới
+    // updateCart();
+    loadCart();
+
+    checkEmptyCart();
+}
+
+function saveCart() {
+    const cartItems = document.querySelectorAll('.cart-item');
+    let cart = [];
+
+    cartItems.forEach(item => {
+        const id = item.firstElementChild.textContent;
+        const quantity = item.querySelector('.quantity').textContent;
+        cart.push({ id, quantity });
+    });
+
+    localStorage.setItem('cart', JSON.stringify(cart));
+}
+
+let totalQuantity = 0;
+let totalPrice = 0;
 
 function updateCart() {
     const cartItems = document.querySelectorAll('.cart-item');
-    let totalQuantity = 0;
-    let totalPrice = 0;
-
+    totalPrice = 0;
+    totalQuantity = 0;
     cartItems.forEach(item => {
         const quantityElement = item.querySelector('.quantity');
         const price = parseFloat(item.querySelector('.item-price').textContent);
@@ -305,6 +366,7 @@ function updateCart() {
 
         // Cộng dồn số lượng và giá
         totalPrice += subtotal;
+        totalQuantity += quantity;
     });
 
     // Cập nhật tổng số lượng và tổng giá vào phần tóm tắt giỏ hàng
@@ -314,62 +376,14 @@ function updateCart() {
     saveCart();
 }
 
+function checkEmptyCart() {
+    // console.log(totalQuantity);
 
-function saveCart() {
-    const cartItems = document.querySelectorAll('.cart-item');
-    let cart = [];
-
-    cartItems.forEach(item => {
-        const id = item.dataset.id;
-        const quantity = item.querySelector('.quantity').textContent;
-        cart.push({ id, quantity });
-    });
-
-    localStorage.setItem('cart', JSON.stringify(cart));
-}
-
-function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart'));
-    if (cart) {
-        const container = document.getElementById('cart-container');
-        let s = "";
-        cart.forEach(item => {
-            s += `<tr class="cart-item">
-                            <td><img src="Logo-DH-Sai-Gon-SGU-flat.webp" alt="" style="height: 55px;"></td>
-                            <td>
-                                Quạt máy senko
-                            </td>
-                            <td>
-                                <p class="item-price">
-                                    200.000 VNĐ
-                                </p>
-                            </td>
-                            <td>
-                                <div id="chinhsoluong">
-                                    <button style="color: gray;" class="decrease">
-                                        -
-                                    </button>
-                                    <p class="quantity">${item.quantity}</p>
-                                    <button class="increase">
-                                        +
-                                    </button>
-                                </div>
-                            </td>
-                            <td>
-                                <p class="item-total">
-                                    200.000 VNĐ
-                                </p>
-                            </td>
-                            <td>
-                                <div id="xoa">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </div>
-                            </td>
-                        </tr>`
-        });
-        container.innerHTML += s;
-        updateCart();
+    if (totalQuantity == 0) {
+        document.getElementById('empty-cart').style.display = 'block';
+        document.getElementsByClassName('container')[0].style.display = 'none';
+    } else {
+        document.getElementById('empty-cart').style.display = 'none';
+        document.getElementsByClassName('container')[0].style.display = 'block';
     }
 }
-
-window.onload = loadCart;

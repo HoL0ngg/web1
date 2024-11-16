@@ -91,6 +91,14 @@
     </div>
     <div id="cart">
         <div class="left">
+            <div id="empty-cart" style="display: none; margin: 100px auto; width: max-content; user-select: none;">
+                <div style="width: max-content; margin: 10px auto;">
+                    <i class="fa-solid fa-cart-shopping fa-5x"></i>
+                </div>
+                <p style="text-align: center;">
+                    Giỏ hàng của bạn đang trống
+                </p>
+            </div>
             <div class="container">
                 <table>
                     <tbody id="cart-container">
@@ -102,7 +110,8 @@
                             <th>Tổng</th>
                             <th></th>
                         </tr>
-                        <!-- <tr class="cart-item">
+                        <tr class="cart-item">
+                            <td style="display: none;">msp1</td>
                             <td><img src="Logo-DH-Sai-Gon-SGU-flat.webp" alt="" style="height: 55px;"></td>
                             <td>
                                 Quạt máy senko
@@ -129,11 +138,110 @@
                                 </p>
                             </td>
                             <td>
-                                <div id="xoa">
+                                <div class="xoa">
                                     <i class="fa-solid fa-xmark"></i>
                                 </div>
                             </td>
-                        </tr> -->
+                        </tr>
+                        <tr class="cart-item">
+                            <td style="display: none;">msp2</td>
+                            <td><img src="Logo-DH-Sai-Gon-SGU-flat.webp" alt="" style="height: 55px;"></td>
+                            <td>
+                                Quạt máy senko
+                            </td>
+                            <td>
+                                <p class="item-price">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div id="chinhsoluong">
+                                    <button style="color: gray;" class="decrease">
+                                        -
+                                    </button>
+                                    <p class="quantity">1</p>
+                                    <button class="increase">
+                                        +
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="item-total">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div class="xoa">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="cart-item">
+                            <td style="display: none;">msp3</td>
+                            <td><img src="Logo-DH-Sai-Gon-SGU-flat.webp" alt="" style="height: 55px;"></td>
+                            <td>
+                                Quạt máy senko
+                            </td>
+                            <td>
+                                <p class="item-price">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div id="chinhsoluong">
+                                    <button style="color: gray;" class="decrease">
+                                        -
+                                    </button>
+                                    <p class="quantity">1</p>
+                                    <button class="increase">
+                                        +
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="item-total">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div class="xoa">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="cart-item">
+                            <td style="display: none;">msp4</td>
+                            <td><img src="Logo-DH-Sai-Gon-SGU-flat.webp" alt="" style="height: 55px;"></td>
+                            <td>
+                                Quạt máy senko
+                            </td>
+                            <td>
+                                <p class="item-price">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div id="chinhsoluong">
+                                    <button style="color: gray;" class="decrease">
+                                        -
+                                    </button>
+                                    <p class="quantity">1</p>
+                                    <button class="increase">
+                                        +
+                                    </button>
+                                </div>
+                            </td>
+                            <td>
+                                <p class="item-total">
+                                    200.000 VNĐ
+                                </p>
+                            </td>
+                            <td>
+                                <div class="xoa">
+                                    <i class="fa-solid fa-xmark"></i>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -156,21 +264,21 @@
                         </p>
                     </div>
                     <div style="text-align: right;">
-                        <p id="total-price">200.000 VNĐ</p>
+                        <p id="total-price">0 VNĐ</p>
                         <p style="font-size: 13px; font-weight: 100; color: grey;">(Đã bao gồm VAT nếu có)</p>
                     </div>
                 </div>
                 <div style="width: 90%; margin: 12 auto;">
                     <button
                         style="background-color: #0d5146; width: 100%; padding: 6px; font-weight: 700; color: white; cursor: pointer;"
-                        id="ThanhToanbtn" onclick="displayToast('Bạn phải chọn phương thức thanh toán trước')">THANH
+                        id="ThanhToanbtn" onclick="ThanhToan()">THANH
                         TOÁN</button>
                 </div>
                 <div id="payment">
                     <i class=" fa-brands fa-cc-visa fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
                     <i class="fa-brands fa-cc-mastercard fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
                     <i class="fa-regular fa-credit-card fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
-                    <i class="fa-solid fa-money-bill-1-wave payment-icon fa-xl"></i>
+                    <i class="fa-solid fa-money-bill-1-wave payment-icon fa-xl" onclick="MoPopUpThanhtoan(this)"></i>
                 </div>
             </div>
         </div>
