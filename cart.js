@@ -1,6 +1,9 @@
 const payment = document.getElementById('payment-method');
 const payment_popup = document.getElementById('payment-method-popup');
 let icon_active = null;
+let user = null;
+let totalQuantity = 0;
+let totalPrice = 0;
 
 window.onload = loadCart;
 
@@ -147,7 +150,7 @@ function DongPopUpThanhtoan() {
     document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
-    // document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
+
     payment_popup.classList.remove('show');
     payment.classList.remove('show');
     setTimeout(() => {
@@ -158,6 +161,7 @@ function DongPopUpThanhtoan() {
 // Đóng modal khi nhấn phím ESC
 document.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
+        document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
         DongPopUpThanhtoan();
     }
 });
@@ -165,6 +169,7 @@ document.addEventListener('keydown', function (event) {
 // Đóng modal khi click bên ngoài nội dung
 payment.addEventListener('click', function (event) {
     if (!payment_popup.contains(event.target)) {
+        document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
         DongPopUpThanhtoan();
     }
 });
@@ -256,10 +261,12 @@ function LuuHoaDon() {
 
     const HoaDon = {
         id: TaoMaHD(), // ID hóa đơn duy nhất
+        user: user,
+        date: new Date().toLocaleString(), // Ngày tạo hóa đơn
         items: cart,             // Sản phẩm trong giỏ hàng
         total: totalPrice, // Tổng tiền
-        payment_method: icon_active,
-        date: new Date().toLocaleString() // Ngày tạo hóa đơn
+        payment_method: icon_active,    // Phương thức thanh toán
+        trangthai: false    // Trạng thái đơn hàng
     };
 
     let hoadon = JSON.parse(localStorage.getItem('hoadon')) || [];
@@ -346,9 +353,6 @@ function saveCart() {
 
     localStorage.setItem('cart', JSON.stringify(cart));
 }
-
-let totalQuantity = 0;
-let totalPrice = 0;
 
 function updateCart() {
     const cartItems = document.querySelectorAll('.cart-item');
