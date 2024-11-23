@@ -708,7 +708,10 @@
 
         function exit() {
             var x = document.getElementById("find_wrap");
-            x.style.display = "none";
+            var y = document.getElementById('find').classList.remove('show');
+            setTimeout(() => {
+                x.style.display = "none";
+            }, 500);
         }
         function hien(y) {
             var element = document.getElementById(y);
@@ -716,6 +719,8 @@
                 if (y === 'find_wrap') {
                     element.style.display = 'block';
                     element.style.backdropFilter = "brightness(0.5)";
+                    document.getElementById('find').classList.add('show');
+
                 } else if (y === 'bar_wrap') {
                     element.style.display = 'block';
 
