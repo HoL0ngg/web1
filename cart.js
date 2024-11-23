@@ -187,7 +187,7 @@ document.addEventListener('keydown', function (event) {
 });
 
 // Đóng modal khi click bên ngoài nội dung
-payment.addEventListener('click', function (event) {
+if (payment) payment.addEventListener('click', function (event) {
     if (!payment_popup.contains(event.target)) {
         DongPopUpThanhtoan();
     }
@@ -236,7 +236,7 @@ function checkName(inp) {
     }
 }
 
-document.getElementById('payment-form').addEventListener('submit', function (e) {
+if (document.getElementById('payment-form')) document.getElementById('payment-form').addEventListener('submit', function (e) {
     e.preventDefault();
     let flag = true;
     flag &= checkName(document.getElementById('firstname'));

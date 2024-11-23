@@ -830,11 +830,13 @@
 
         function updateQuantity() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-            let totalQuantity = 0.0;
+            let totalQuantity = 0;
             cartItems.forEach(item => {
                 totalQuantity += Number(item.quantity);
             });
+
             if (totalQuantity != 0) {
+                document.getElementById('item-quantity').style.display = 'block';
                 document.getElementById('item-quantity').innerText = totalQuantity;
             }
             else
@@ -863,8 +865,8 @@
                 localStorage.setItem('cart', JSON.stringify(cart));
 
                 setTimeout(() => {
-                    updateQuantity();
                     document.getElementById('topmenu_icon--bag').classList.add('show');
+                    updateQuantity();
                     setTimeout(() => {
                         document.getElementById('topmenu_icon--bag').classList.remove('show');
                     }, 700);
