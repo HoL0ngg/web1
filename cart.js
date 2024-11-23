@@ -193,6 +193,12 @@ if (payment) payment.addEventListener('click', function (event) {
     }
 });
 
+if (document.getElementById('bar_wrap')) document.getElementById('bar_wrap').addEventListener('click', function (e) {
+    if (!document.getElementById('bar_list').contains(e.target)) {
+        document.getElementById('bar_wrap').style.display = 'none';
+    }
+});
+
 function checkInput(inp) {
     let val = inp.value;
     if (val.trim() == '') {
