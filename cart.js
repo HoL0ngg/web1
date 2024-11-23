@@ -40,6 +40,7 @@ function loadCart() {
                     break;
                 }
             }
+            gia = gia.toLocaleString('vi-VN');
             s += `<tr class="cart-item">
                             <td style="display: none;">${item.id}</td>
                             <td><img src="${imgsrc}" alt="" style="height: 55px;"></td>
@@ -381,7 +382,8 @@ function updateCart() {
 
     cartItems.forEach(item => {
         const quantityElement = item.querySelector('.quantity');
-        const price = parseInt(item.querySelector('.item-price').textContent);
+        const price = parseFloat(item.querySelector('.item-price').textContent);
+
         const quantity = parseInt(quantityElement.textContent);
         const subtotal = price * quantity * 1000;
 
