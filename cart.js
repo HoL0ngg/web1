@@ -411,6 +411,21 @@ function checkEmptyCart() {
     }
 }
 
+function hien(y) {
+    var element = document.getElementById(y);
+    console.log(element);
+    if (element) {
+        if (y === 'find_wrap') {
+            element.style.display = 'block';
+            element.style.backdropFilter = "brightness(0.5)";
+            document.getElementById('find').classList.add('show');
+
+        } else if (y === 'bar_wrap') {
+            element.style.display = 'block';
+        }
+    }
+}
+
 var productArray = [
 
     {

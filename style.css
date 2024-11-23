@@ -281,7 +281,7 @@ html {
     width: 100%;
 }
 
-h2 {
+#right-info h2 {
     border-bottom: 5px solid #0d5145;
     text-align: center;
     width: 94%;
@@ -691,7 +691,7 @@ img {
     top: 20px;
 }
 
-input::placeholder {
+#find_wrap input::placeholder {
     color: white;
     /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
     font-size: 1.3rem;
@@ -845,7 +845,7 @@ input[type="text"]::placeholder {
 }
 
 #order-history-table td,
-th {
+#order-history-table th {
     border: solid 2px;
 }
 
