@@ -5,13 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
-    <div id="header">
+    <div id="topmenu">
+        <div id="topmenu_text">
+            ONLY.FANS
+        </div>
+        <div id="topmenu_list">
+            <div id="topmenu_list_item">
+                <div onclick="window.location.href='index.html'">Trang Chủ</div>
+                <div>Liên Hệ</div>
+                <div>Cửa Hàng</div>
+                <div>Giới Thiệu</div>
+                <div>Lịch Sử Đặt Hàng</div>
+            </div>
+        </div>
+        <div id="topmenu_icon">
+            <div id="topmenu_icon--bar"><i class="fa-solid fa-bars-staggered" onclick="hien('bar_wrap');"></i></div>
+            <div id="topmenu_icon--find"><i class="fa-solid fa-magnifying-glass" onclick="hien('find_wrap');"></i></div>
+            <div id="topmenu_icon--user"><i class="fa-regular fa-user"></i></div>
+            <div id="topmenu_icon--bag">
+                <i class="fa-solid fa-bag-shopping" onclick="window.location.href='cart.html'"></i>
+                <p id="item-quantity"></p>
+            </div>
+        </div>
     </div>
     <div
         style="margin: 10px 0 0 100px; border-bottom: 5px solid black; display: inline-block; padding-bottom: 4px; font-size: 32px;">
@@ -102,15 +124,15 @@
             <div class="container">
                 <table>
                     <tbody id="cart-container">
-                        <tr>
+                        <!-- <tr>
                             <th></th>
                             <th>Tên sản phẩm</th>
                             <th>Đơn giá</th>
                             <th>Số lượng</th>
                             <th>Tổng</th>
                             <th></th>
-                        </tr>
-                        <tr class="cart-item">
+                        </tr> -->
+                        <!-- <tr class="cart-item">
                             <td style="display: none;">msp1</td>
                             <td><img src="Logo-DH-Sai-Gon-SGU-flat.webp" alt="" style="height: 55px;"></td>
                             <td>
@@ -241,7 +263,7 @@
                                     <i class="fa-solid fa-xmark"></i>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> -->
                     </tbody>
                 </table>
             </div>
@@ -321,6 +343,7 @@
             </div>
         </div>
     </div>
+
     <script src="cart.js"></script>
 </body>
 

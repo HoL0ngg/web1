@@ -28,7 +28,7 @@ body.dark-mode {
 
 #information {
     width: 100%;
-    height: 260px;
+    height: 280px;
     padding-top: 60px;
     text-align: center;
     display: flex;
@@ -74,7 +74,7 @@ body.dark-mode {
 
 #footer {
     background-color: var(--secondary-color);
-    /* height: 250px; */
+    padding-bottom: 20px;
 }
 
 #footer-container {
@@ -119,6 +119,7 @@ body.dark-mode {
 
 #cart {
     display: flex;
+    width: 100%;
 }
 
 #cart .left {
@@ -150,12 +151,16 @@ td {
     border-bottom: 1px black solid;
 }
 
-.container table td:not(:nth-child(2)) {
+.container table td:not(:nth-child(3)) {
     text-align: center;
 }
 
 .container table th:nth-child(2) {
     width: 32%;
+}
+
+.container table th:nth-child(5) {
+    width: 20%;
 }
 
 .container table th:nth-child(6) {
@@ -183,6 +188,10 @@ td #chinhsoluong {
 
     #cart {
         flex-direction: column;
+    }
+
+    .container table {
+        padding: 0;
     }
 
 }
