@@ -230,6 +230,7 @@
         }
         const productList = JSON.parse(localStorage.getItem("productList"));
         console.log(productList);
+
         function showDetailedInformation(productid, imgSrc, productName, productPower, productSize, brandId, madeIn, year, productPrice) {
             let leftInfo = document.getElementById("left-info");
             let rightInfo = document.getElementById("right-info");
@@ -253,6 +254,7 @@
                 <button class="add-to-cart">Thêm vào giỏ</button>
                 `;
             rightInfo.innerHTML = s;
+
             setupQuantity();
             showDetailedBrandInfo(productName, brandInfoList);
         }
@@ -327,6 +329,7 @@
                     displayTableDetail.style.display = 'block';
                     displayTableDetail.style.backdropFilter = 'brightness(0.5)';
                     addToCart();
+                    Exit(0, displayTableDetail);
                 });
             });
         }
@@ -335,9 +338,21 @@
 
         function Exit(x, element) {
             const btnExit = document.getElementsByClassName("btn-exit")[x];
+            const addCart = document.getElementsByClassName('add-to-cart')[x];
             // console.log(btnExit);
             btnExit.addEventListener("click", function () {
+                console.log(element);
+
                 element.style.display = 'none';
+            });
+
+            if (addCart) addCart.addEventListener("click", function () {
+
+                document.getElementById('info-product').classList.add('hide');
+                setTimeout(() => {
+                    element.style.display = 'none';
+                    document.getElementById('info-product').classList.remove('hide');
+                }, 1500);
             });
 
             // Hide product detail table when clicking outside the table
@@ -743,14 +758,12 @@
             }
         });
 
-
-
         const listProduct = 'productList';
 
         const findData = localStorage.getItem(listProduct);
-        // console.log(findData);
         function findItem(find, minprice, maxprice, selectedCategories, selectedBrands) {
             if (findData) {
+
                 const products = JSON.parse(findData);
                 const result = products.filter(product =>
                     product.name.toLowerCase().includes(find.toLowerCase()) &&
@@ -780,8 +793,9 @@
                     let minprice = document.getElementById('minprice').value;
                     let maxprice = document.getElementById('maxprice').value;
 
-                    if (isNaN(minprice)) minprice = 0;
-                    if (isNaN(maxprice)) maxprice = Infinity;
+                    if (minprice == '') minprice = 0;
+                    if (maxprice == '') maxprice = Infinity;
+
 
                     minprice = minprice.toString().replace(/\./g, '');
                     maxprice = maxprice.toString().replace(/\./g, '');
@@ -789,7 +803,7 @@
                     const selectedCategories = Array.from(document.querySelectorAll('input[name="loai"]:checked')).map(checkbox => checkbox.id);
                     const selectedBrands = Array.from(document.querySelectorAll('input[name="thuonghieu"]:checked')).map(checkbox => checkbox.id);
 
-                    if (!isNaN(minprice) && !isNaN(maxprice) && minprice <= maxprice) {
+                    if (minprice <= maxprice) {
                         findItem(find, minprice, maxprice, selectedCategories, selectedBrands);
                     }
                     else {
@@ -820,8 +834,9 @@
             cartItems.forEach(item => {
                 totalQuantity += Number(item.quantity);
             });
-            if (totalQuantity != 0)
+            if (totalQuantity != 0) {
                 document.getElementById('item-quantity').innerText = totalQuantity;
+            }
             else
                 document.getElementById('item-quantity').style.display = 'none';
         }
@@ -847,7 +862,13 @@
 
                 localStorage.setItem('cart', JSON.stringify(cart));
 
-                updateQuantity();
+                setTimeout(() => {
+                    updateQuantity();
+                    document.getElementById('topmenu_icon--bag').classList.add('show');
+                    setTimeout(() => {
+                        document.getElementById('topmenu_icon--bag').classList.remove('show');
+                    }, 700);
+                }, 1100);
             })
         }
 

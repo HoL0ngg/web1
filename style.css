@@ -194,6 +194,29 @@ html {
     flex-wrap: wrap;
 }
 
+#info-product.hide {
+    animation: hihi 1.5s ease;
+}
+
+@keyframes hihi {
+    0% {
+        scale: 1;
+    }
+
+    50% {
+        top: -20%;
+        left: 55%;
+        transform: rotate(180deg);
+    }
+
+    100% {
+        scale: 0;
+        top: -35%;
+        left: 60%;
+        transform: rotate(360deg);
+    }
+}
+
 #left-info {
     width: 48%;
     height: 320px;
@@ -870,6 +893,24 @@ th {
         position: absolute;
         left: -5%;
         display: block;
+    }
+}
+
+#topmenu_icon--bag.show {
+    animation: hehe 0.7s ease;
+}
+
+@keyframes hehe {
+    0% {
+        scale: 1;
+    }
+
+    50% {
+        scale: 1.2;
+    }
+
+    100% {
+        scale: 1;
     }
 }
 
