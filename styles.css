@@ -290,6 +290,10 @@ td #chinhsoluong {
     animation: slideUp 0.5s ease;
 }
 
+#display-detail-table.hide {
+    animation: glowDown 1.5s ease;
+}
+
 @keyframes slideUp {
     from {
         transform: translateY(50%);

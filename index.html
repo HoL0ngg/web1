@@ -327,7 +327,7 @@
                     detailedProductInformation(productName, productList);
                     document.querySelector(".num").value = 1;
                     displayTableDetail.style.display = 'block';
-                    displayTableDetail.style.backdropFilter = 'brightness(0.5)';
+                    displayTableDetail.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
                     addToCart();
                     Exit(0, displayTableDetail);
                 });
@@ -349,8 +349,10 @@
             if (addCart) addCart.addEventListener("click", function () {
 
                 document.getElementById('info-product').classList.add('hide');
+                element.classList.add('hide');
                 setTimeout(() => {
                     element.style.display = 'none';
+                    element.classList.remove('hide');
                     document.getElementById('info-product').classList.remove('hide');
                 }, 1500);
             });
