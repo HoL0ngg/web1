@@ -617,6 +617,10 @@ html {
     display: none;
 }
 
+#topmenu_icon--gear {
+    visibility: hidden;
+}
+
 img {
     max-width: 100%;
     height: 100%;
@@ -656,6 +660,10 @@ img {
 
 #find.show {
     animation: mo 0.5s ease;
+}
+
+#bar_wrap.hide {
+    animation: glowDown 0.5s ease;
 }
 
 @keyframes glowDown {
@@ -965,7 +973,7 @@ i#find_wrap [type="text"]::placeholder {
     border: solid 2px;
 }
 
-@media only screen and (max-width:1060px) {
+@media only screen and (max-width:1070px) {
     html {
         font-size: 14px;
     }
@@ -992,12 +1000,12 @@ i#find_wrap [type="text"]::placeholder {
 
     #topmenu_icon--user {
         position: absolute;
-        left: 30%;
+        left: 43%;
     }
 
     #topmenu_icon--find {
         position: absolute;
-        left: -33%;
+        left: -56%;
     }
 
     #topmenu_icon--bag {
@@ -1013,7 +1021,7 @@ i#find_wrap [type="text"]::placeholder {
 
     #topmenu_icon--gear {
         position: absolute;
-        left: 55%;
+        left: 56%;
         visibility: hidden;
 
     }
@@ -1035,12 +1043,12 @@ i#find_wrap [type="text"]::placeholder {
 
     #topmenu_icon--user {
         position: absolute;
-        left: 29%;
+        left: 44%;
     }
 
     #topmenu_icon--find {
         position: absolute;
-        left: -30%;
+        left: -55%;
     }
 
     #topmenu_icon--bag {
@@ -1050,8 +1058,14 @@ i#find_wrap [type="text"]::placeholder {
 
     #topmenu_icon--bar {
         position: absolute;
-        left: 2%;
         display: block;
+    }
+
+    #topmenu_icon--gear {
+        position: absolute;
+        left: 56%;
+        visibility: hidden;
+
     }
 
     .finditem {

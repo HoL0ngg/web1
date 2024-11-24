@@ -101,6 +101,21 @@ function checknumber(inp) {
     }
 }
 
+if (document.getElementById('find_wrap')) document.getElementById('find_wrap').addEventListener('mousedown', function (event) {
+    var find = document.getElementById("find");
+    var find_wrap = document.getElementById("find_wrap");
+
+    if (!find.contains(event.target)) {
+        find.classList.remove('show');
+        find_wrap.classList.add('hide');
+        setTimeout(() => {
+            find_wrap.classList.remove('hide');
+            find_wrap.style.display = 'none';
+        }, 400);
+
+    }
+});
+
 function DinhDangSoThe(inputElement) {
     // Lấy giá trị hiện tại và loại bỏ các ký tự không phải số
     let value = inputElement.value.replace(/[^0-9]/g, '');
@@ -186,7 +201,7 @@ function DongPopUpThanhtoan() {
 }
 
 // Đóng modal khi nhấn phím ESC
-payment.addEventListener('keydown', function (event) {
+if (payment) payment.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         DongPopUpThanhtoan();
     }
@@ -205,9 +220,16 @@ if (payment) payment.addEventListener('click', function (event) {
     }
 });
 
-if (document.getElementById('bar_wrap')) document.getElementById('bar_wrap').addEventListener('click', function (e) {
-    if (!document.getElementById('bar_list').contains(e.target)) {
-        document.getElementById('bar_wrap').style.display = 'none';
+if (document.getElementById('bar_wrap')) document.getElementById('bar_wrap').addEventListener('mousedown', function (event) {
+    let bar = document.getElementById("bar");
+    let bar_wrap = document.getElementById("bar_wrap");
+    if (!bar.contains(event.target)) {
+        bar_wrap.classList.add('hide');
+        bar.classList.remove('show');
+        setTimeout(() => {
+            bar_wrap.classList.remove('hide');
+            bar_wrap.style.display = 'none';
+        }, 400);
     }
 });
 
@@ -454,14 +476,50 @@ function hien(y) {
     if (element) {
         if (y === 'find_wrap') {
             element.style.display = 'block';
-            element.style.backdropFilter = "brightness(0.5)";
+            element.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
             document.getElementById('find').classList.add('show');
 
         } else if (y === 'bar_wrap') {
             element.style.display = 'block';
+            element.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+            document.getElementById('bar').classList.add('show');
         }
     }
 }
+
+function exit() {
+    var x = document.getElementById("find_wrap");
+    document.getElementById('find').classList.remove('show');
+    setTimeout(() => {
+        x.style.display = "none";
+    }, 500);
+}
+
+document.addEventListener('keydown', function (event) {
+
+    if (event.key === 'Escape') {
+        let find_wrap = document.getElementById('find_wrap');
+        let bar_wrap = document.getElementById('bar_wrap');
+
+        if (find_wrap) {
+            document.getElementById('find').classList.remove('show');
+            find_wrap.classList.add('hide');
+            setTimeout(() => {
+                find_wrap.style.display = 'none';
+                find_wrap.classList.remove('hide');
+            }, 400);
+
+        }
+        if (bar_wrap) {
+            document.getElementById('bar').classList.remove('show');
+            bar_wrap.classList.add('hide');
+            setTimeout(() => {
+                bar_wrap.style.display = 'none';
+                bar_wrap.classList.remove('hide');
+            }, 400);
+        }
+    }
+});
 
 var productArray = [
     {
