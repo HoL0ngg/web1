@@ -1,0 +1,20 @@
+function createAdminAccount() {
+    let accounts = localStorage.getItem("accounts");
+    if (!accounts) {
+        accounts = [];
+        accounts.push({
+            fullname: "None",
+            phone: "00000000",
+            password: "123456",
+            address: 'none',
+            email: 'để email của ông vào',
+            status: 1,
+            join: new Date(),
+            cart: [],
+            userType: 1
+        })
+        localStorage.setItem('accounts', JSON.stringify(accounts));
+    }
+}
+
+window.onload = createAdminAccount();
