@@ -379,7 +379,7 @@ i.active {
 }
 
 #toast {
-    position: absolute;
+    position: fixed;
     top: 5%;
     left: calc(50% - 15%);
     width: 30%;

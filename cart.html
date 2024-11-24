@@ -42,7 +42,7 @@
             </div>
             <div id="bar_list">
                 <ul>
-                    <li>Trang Chủ</li>
+                    <li onclick="window.location.href='index.html'">Trang Chủ</li>
                     <li>Liên Hệ</li>
                     <li>Cửa Hàng</li>
                     <li>Giới Thiệu</li>
@@ -305,7 +305,7 @@
                         </p>
                     </div>
                     <div style="text-align: right;">
-                        <p id="total-price" style="font-size: 1.2rem;"></p>
+                        <p id="total-price" style="font-size: 1.2rem;">0 VNĐ</p>
                         <p style="font-size: 13px; font-weight: 100; color: grey;">(Đã bao gồm VAT nếu có)</p>
                     </div>
                 </div>
@@ -329,7 +329,7 @@
         <p>Để lại email của bạn để nhận những thông tin khuyến mãi mới nhất từ chúng tôi</p>
         <div id="input-information">
             <input type="email" name="email-info" id="email-info" placeholder="Email của bạn">
-            <button>
+            <button onclick="checkEmailkhuyenmai()" id="emailkhuyenmai">
                 <i class="fa-solid fa-arrow-right" style="color: white;"></i>
             </button>
         </div>

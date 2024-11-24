@@ -24,6 +24,7 @@ function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart'));
     const container = document.getElementById('cart-container');
     let s = '';
+
     if (cart) {
         s = `<tr>
                             <th></th>
@@ -185,11 +186,17 @@ function DongPopUpThanhtoan() {
 }
 
 // Đóng modal khi nhấn phím ESC
-document.addEventListener('keydown', function (event) {
+payment.addEventListener('keydown', function (event) {
     if (event.key === 'Escape') {
         DongPopUpThanhtoan();
     }
 });
+
+document.getElementById('input-information').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        checkEmailkhuyenmai();
+    }
+})
 
 // Đóng modal khi click bên ngoài nội dung
 if (payment) payment.addEventListener('click', function (event) {
@@ -229,6 +236,24 @@ function checkEmail(inp) {
         inp.parentElement.classList.remove('valid');
         inp.focus();
         return false;
+    }
+}
+
+function checkEmail2(inp) {
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (emailRegex.test(inp.value)) return true;
+    return false;
+}
+
+function checkEmailkhuyenmai() {
+    // console.log(document.getElementById('email-info').value);
+    if (checkEmail2(document.getElementById('email-info'))) {
+        displayToast('Đã gửi thông tin khuyến mãi qua Email');
+        console.log('true');
+        document.getElementById('email-info').value = '';
+    } else {
+        displayToast('Địa chỉ Email không hợp lệ');
+        console.log('false');
     }
 }
 
@@ -306,6 +331,7 @@ function LuuHoaDon() {
 }
 
 function displayToast(msg) {
+    console.log('hihi');
     const toast = document.getElementById('toast');
     toast.style.display = 'block';
     const toastmsg = document.getElementById('toast-msg');
@@ -438,7 +464,6 @@ function hien(y) {
 }
 
 var productArray = [
-
     {
         productid: 'D16027-TV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan18-1.jpg', name: 'Quạt đứng Asia D16027-TV0',
         size: 'Ngang 42cm - Cao 93 - 130cm - Sâu 42cm', power: '45W', category: 'quatdung',
