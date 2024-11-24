@@ -793,6 +793,7 @@
                     let minprice = document.getElementById('minprice').value;
                     let maxprice = document.getElementById('maxprice').value;
 
+
                     if (minprice == '') minprice = 0;
                     if (maxprice == '') maxprice = Infinity;
 
@@ -836,6 +837,7 @@
             });
 
             if (totalQuantity != 0) {
+                if (totalQuantity > 9) totalQuantity = '9+';
                 document.getElementById('item-quantity').style.display = 'block';
                 document.getElementById('item-quantity').innerText = totalQuantity;
             }

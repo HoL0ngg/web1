@@ -739,8 +739,8 @@ input[type="checkbox"]:checked::before {
     /* font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; Font chữ */
 }
 
-input[type="text"]::placeholder {
-    color: white;
+#find-wrap input[type="text"]::placeholder {
+    /* color: white; */
     /* Màu chữ cho placeholder */
 }
 
@@ -919,10 +919,11 @@ input[type="text"]::placeholder {
     top: -4px;
     right: -12px;
     background-color: #F9D529;
-    width: 17px;
-    height: 17px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
-    font-size: 14px;
+    font-size: 13px;
     text-align: center;
     color: #0c673c;
+    padding: 1px;
 }
