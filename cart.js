@@ -11,11 +11,10 @@ window.onload = function () {
 }
 
 function updateQuantity() {
-
     if (totalQuantity != 0) {
-        if (totalQuantity > 9) totalQuantity = '9+';
-        document.getElementById('item-quantity').innerText = totalQuantity;
+        if (totalQuantity > 9) totalQuantity = '9+'
         document.getElementById('item-quantity').style.display = 'block';
+        document.getElementById('item-quantity').innerText = totalQuantity;
     }
     else
         document.getElementById('item-quantity').style.display = 'none';
@@ -55,7 +54,7 @@ function loadCart() {
                                 <span class="item-price">
                                     ${gia}
                                 </span>
-                                <span>VNĐ</span>
+                                <span> VNĐ</span>
                             </td>
                             <td>
                                 <div id="chinhsoluong">
@@ -388,9 +387,6 @@ function updateCart() {
     cartItems.forEach(item => {
         const quantityElement = item.querySelector('.quantity');
         const price = item.querySelector('.item-price').innerText.split('.').join('');
-        // console.log(parseInt(price));
-
-
         const quantity = parseInt(quantityElement.textContent);
         const subtotal = price * quantity;
 
@@ -428,7 +424,7 @@ function checkEmptyCart() {
 
 function hien(y) {
     var element = document.getElementById(y);
-    // console.log(element);
+    console.log(element);
     if (element) {
         if (y === 'find_wrap') {
             element.style.display = 'block';

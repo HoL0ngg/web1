@@ -16,8 +16,8 @@
 
     <div id="find_wrap">
         <div id="find">
-            <input type="text" id="findspace" placeholder="Tìm kiếm sản phẩm...">
-            <button id="exit" onclick="exit();"><i class="fa-solid fa-xmark"></i></button>
+            <input type="text" id="findspace" class="searchInput" placeholder="Tìm kiếm sản phẩm...">
+            <button id="find-icon"><i class="fa-solid fa-magnifying-glass"></i></button>
             <div class="finditem">
                 <h4>Thương hiệu</h4>
                 <input type="checkbox" name="thuonghieu" id="Asia"><label for="Asia">Asia</label> <br>
@@ -35,9 +35,19 @@
             </div>
             <div class="finditem">
                 <h4>Theo Giá Sản Phẩm</h4>
-                <input type="text" id="minprice" placeholder="Giá tối thiểu" oninput="dinhdangso(this)">
-                <input type="text" id="maxprice" placeholder="Nhập giá tối đa" oninput="dinhdangso(this)">
+                <input type="text" id="minprice" class="searchInput" placeholder="Giá tối thiểu"
+                    oninput="dinhdangso(this)">
+                <input type="text" id="maxprice" class="searchInput" placeholder="Nhập giá tối đa"
+                    oninput="dinhdangso(this)">
+                <div id="reset">
+                    <button id="reset-button" onclick="resetFilter();">Đặt lại</button>
+                </div>
             </div>
+        </div>
+        <!-- Inform product not found -->
+        <div id="toast">
+            <div style="text-align: center; font-size: 20px; margin-top: 10px; font-weight: 700;">Thông báo</div>
+            <div id="toast-msg" style="margin-top: 20px; text-align: center;"></div>
         </div>
     </div>
     <div id="bar_wrap">
@@ -75,12 +85,10 @@
                    
                 </tbody>
             </thead>
-
     </div>  -->
 
-
     <div id="topmenu">
-        <div id="topmenu_text">
+        <div id="topmenu_text" onclick="window.location.href='index.html'">
             ONLY.FANS
         </div>
         <div id="topmenu_list">
@@ -102,6 +110,7 @@
             </div>
         </div>
     </div>
+
     <!-- CONTENT -->
     <div class="banner">
         <img src="hinhanh/banner/img1.jpg" />
@@ -126,10 +135,9 @@
 
     <!-- BRAND DETAIL TABLE -->
     <div id="wrapBrandInfo">
-        <div id="brandInfo">
-
-        </div>
+        <div id="brandInfo"></div>
     </div>
+
     <div id="information">
         <h2>Nhận thông tin khuyến mãi mới nhất</h2>
         <p>Để lại email của bạn để nhận những thông tin khuyến mãi mới nhất từ chúng tôi</p>
@@ -327,7 +335,8 @@
                     detailedProductInformation(productName, productList);
                     document.querySelector(".num").value = 1;
                     displayTableDetail.style.display = 'block';
-                    displayTableDetail.style.backgroundColor = 'rgba(0, 0, 0, 0.4)';
+                    displayTableDetail.style.backgroundColor = 'rgb(0, 0, 0, 0.4)';
+
                     addToCart();
                     Exit(0, displayTableDetail);
                 });
@@ -736,7 +745,7 @@
             if (element) {
                 if (y === 'find_wrap') {
                     element.style.display = 'block';
-                    element.style.backdropFilter = "brightness(0.5)";
+                    element.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
                     document.getElementById('find').classList.add('show');
 
                 } else if (y === 'bar_wrap') {
@@ -752,14 +761,46 @@
                 find_wrap.style.display = 'none';
             }
 
-
             var bar = document.getElementById("bar");
             var bar_wrap = document.getElementById("bar_wrap");
             if (!bar.contains(event.target)) {
                 bar_wrap.style.display = 'none';
             }
+            var element = document.getElementById('find-icon');
+            if (element.contains(event.target)) {
+                const find = document.getElementById('findspace').value.trim();
+                let minprice = document.getElementById('minprice').value;
+                let maxprice = document.getElementById('maxprice').value;
+
+                if (minprice == '') minprice = 0;
+                if (maxprice == '') maxprice = Infinity;
+
+
+                minprice = Number(minprice.toString().replace(/\./g, ''));
+                maxprice = Number(maxprice.toString().replace(/\./g, ''));
+
+                const selectedCategories = Array.from(document.querySelectorAll('input[name="loai"]:checked')).map(checkbox => checkbox.id);
+                const selectedBrands = Array.from(document.querySelectorAll('input[name="thuonghieu"]:checked')).map(checkbox => checkbox.id);
+
+                if (minprice <= maxprice) {
+                    findItem(find, minprice, maxprice, selectedCategories, selectedBrands);
+                }
+                else {
+                    displayToast('Vui lòng nhập giá trị hợp lệ.');
+                    console.log('Vui lòng nhập đúng từ khóa và giá trị hợp lệ.');
+                }
+            }
         });
 
+        document.addEventListener('keydown', function (event) {
+            if (event.key === 'Escape') {
+                var find_wrap = document.getElementById('find_wrap');
+                var bar_wrap = document.getElementById('bar_wrap');
+
+                if (find_wrap) find_wrap.style.display = 'none';
+                if (bar_wrap) bar_wrap.style.display = 'none';
+            }
+        });
         const listProduct = 'productList';
 
         const findData = localStorage.getItem(listProduct);
@@ -774,14 +815,16 @@
                     (selectedCategories.length === 0 || selectedCategories.includes(product.category)) &&
                     (selectedBrands.length === 0 || selectedBrands.includes(product.brandid))
                 );
-                console.log(result);
+                // console.log(result);
                 if (result.length === productList.length) {
                     phantrang(productList, itemsPerPage);
                 }
-                else {
+                else if (result.length > 0) {
                     phantrang(result, 8);
                 }
-
+                else {
+                    displayToast('Không tìm thấy sản phẩm!');
+                }
             }
             else {
                 console.log('Không có dữ liệu trong localStorage.');
@@ -795,13 +838,12 @@
                     let minprice = document.getElementById('minprice').value;
                     let maxprice = document.getElementById('maxprice').value;
 
-
                     if (minprice == '') minprice = 0;
                     if (maxprice == '') maxprice = Infinity;
 
 
-                    minprice = minprice.toString().replace(/\./g, '');
-                    maxprice = maxprice.toString().replace(/\./g, '');
+                    minprice = Number(minprice.toString().replace(/\./g, ''));
+                    maxprice = Number(maxprice.toString().replace(/\./g, ''));
 
                     const selectedCategories = Array.from(document.querySelectorAll('input[name="loai"]:checked')).map(checkbox => checkbox.id);
                     const selectedBrands = Array.from(document.querySelectorAll('input[name="thuonghieu"]:checked')).map(checkbox => checkbox.id);
@@ -810,6 +852,7 @@
                         findItem(find, minprice, maxprice, selectedCategories, selectedBrands);
                     }
                     else {
+                        displayToast('Vui lòng nhập giá trị hợp lệ.');
                         console.log('Vui lòng nhập đúng từ khóa và giá trị hợp lệ.');
                     }
                 }
@@ -830,7 +873,24 @@
             // return Math.sign(num) * parseInt(reversed);
             return reversed;
         }
-
+        //Inform about find products
+        function displayToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.style.display = 'block';
+            const toastmsg = document.getElementById('toast-msg');
+            toastmsg.innerText = msg;
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2900);
+        }
+        //Button reset filter
+        function resetFilter() {
+            const searchInput = document.querySelectorAll(".searchInput");
+            const chkboxs = document.querySelectorAll("input[type = checkbox]");
+            searchInput.forEach(input => input.value = '');
+            chkboxs.forEach(chkbox => chkbox.checked = false);
+            phantrang(productList, itemsPerPage);
+        }
         function updateQuantity() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             let totalQuantity = 0;
@@ -839,7 +899,7 @@
             });
 
             if (totalQuantity != 0) {
-                if (totalQuantity > 9) totalQuantity = '9+';
+                if (totalQuantity > 9) totalQuantity = '9+'
                 document.getElementById('item-quantity').style.display = 'block';
                 document.getElementById('item-quantity').innerText = totalQuantity;
             }
@@ -878,6 +938,45 @@
             })
         }
 
+
+        //ORDERHISTORY
+        // const orders = 'orders';
+        // localStorage.setItem(orders, JSON.stringify(ordersList));
+
+        // function displayOrders() {
+        //     const ordersTable = document.getElementById('orders-table-body');
+
+        //     ordersTable.innerHTML = '';
+
+        //     const orderData = JSON.parse(localStorage.getItem('orders')) || [];
+
+        //     orderData.forEach(order => {
+        //         const row = document.createElement('tr');
+
+        //         let itemsTotal = 0;
+        //         order.items.forEach(item => {
+        //             itemsTotal += item.price * item.quantity;
+        //         });
+
+        //         row.innerHTML = `
+        //             <td>${order.orderId}</td>
+        //             <td>${order.orderDate}</td>
+        //             <td>${order.items.length}</td>
+        //             <td>${order.status}</td>
+        //             <td>${order.shippingAddress}</td>
+        //             <td>
+        //                 ${order.items.map(item => {
+        //                     return `<div>${item.name}: ${item.price} x ${item.quantity} = ${item.price * item.quantity}</div>`;
+        //                 }).join('')}
+        //             </td>
+        //             <td>${itemsTotal}</td>
+        //         `;
+
+        //         ordersTable.appendChild(row);
+        //     });
+        // }
+
+        // document.addEventListener('DOMContentLoaded', displayOrders);
         window.onload = function () {
             startAnimation();
             setUpData();
@@ -885,6 +984,7 @@
             Exit(0, displayTableDetail);
             displayProductDetailTable();
             updateQuantity();
+            // displayOrders();
         };
 
     </script>

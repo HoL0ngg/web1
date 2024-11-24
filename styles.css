@@ -172,7 +172,7 @@ td {
 }
 
 .container table th:nth-child(6) {
-    width: 4%;
+    width: 5%;
 }
 
 td #chinhsoluong {
@@ -185,7 +185,7 @@ td #chinhsoluong {
     align-items: center;
     user-select: none;
     border: 1px solid black;
-    width: 75%;
+    width: 72%;
 }
 
 @media only screen and (max-width: 1200px) {
