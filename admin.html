@@ -4,13 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href='./assets/img/icon_logo.jpg' rel='icon' type='image/x-icon' />
+    <link href='./assets/img/favicon.png' rel='icon' type='image/x-icon' />
     <link rel="stylesheet" href="assets/css/admin.css">
     <link rel="stylesheet" href="./assets/css/toast-message.css">
+    <link href="./assets/cssicon/all.min.css"rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="./assets/css/admin-responsive.css">
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
-    <link rel="stylesheet" href="./assets/cssicon/all.min.css">
-    <!-- <link rel="stylesheet" href="./assets/webfonts/"> -->
     <title>Quản lý cửa hàng</title>
 </head>
 
@@ -25,8 +23,8 @@
     <div class="container">
         <aside class="sidebar open">
             <div class="top-sidebar">
-                <a href="#" class="channel-logo"><img src="./assets/img/icon_logo.jpg" alt="Channel Logo"></a>
-                <div class="hidden-sidebar your-channel"><img src="assets/img/admin/only_fan.jpg"
+                <a href="#" class="channel-logo"><img src="assets/img/logo.jpg" alt="Channel Logo"></a>
+                <div class="hidden-sidebar your-channel"><img src=""
                         style="height: 30px;" alt="">
                 </div>
             </div>
@@ -52,7 +50,7 @@
                     </li>
                     <li class="sidebar-list-item tab-content">
                         <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-regular fa-rectangle-list"></i></div>
+                            <div class="sidebar-icon"><i class="fa-solid fa-rectangle-list"></i></div>
                             <div class="hidden-sidebar">Đơn hàng</div>
                         </a>
                     </li>
@@ -74,7 +72,7 @@
                     </li>
                     <li class="sidebar-list-item user-logout">
                         <a href="#" class="sidebar-link">
-                            <div class="sidebar-icon"><i class="fa-light fa-circle-user"></i></div>
+                            <div class="sidebar-icon"><i class="fa-solid fa-circle-user"></i></div>
                             <div class="hidden-sidebar" id="name-acc"></div>
                         </a>
                     </li>
@@ -87,6 +85,8 @@
                 </ul>
             </div>
         </aside>
+
+
         <main class="content">
             <div class="section active">
                 <h1 class="page-title">Trang tổng quát của cửa hàng</h1>
@@ -95,28 +95,32 @@
                         <div class="box">
                             <h2 id="amount-user">0</h2>
                             <div class="on-box">
+                                <img src="assets/img/admin/s1.png" alt="" style=" width: 200px;">
                                 <h3>Khách hàng</h3>
                                 <p>Khách hàng mục tiêu là một nhóm đối tượng khách hàng trong phân khúc thị trường mục
-                                    tiêu mà doanh nghiệp bạn đang hướng tới. </p>
-                            </div>
+                                        tiêu mà doanh nghiệp bạn đang hướng tới. </p>
+                                </div>
 
                         </div>
                     </div>
                     <div class="card-single">
                         <div class="box">
                             <div class="on-box">
+                                <img src="assets/img/admin/s2.png" alt="" style=" width: 200px;">
                                 <h2 id="amount-product">0</h2>
                                 <h3>Sản phẩm</h3>
                                 <p>Sản phẩm là bất cứ cái gì có thể đưa vào thị trường để tạo sự chú ý, mua sắm, sử dụng
                                     hay tiêu dùng nhằm thỏa mãn một nhu cầu hay ước muốn. Nó có thể là những vật thể,
                                     dịch vụ, con người, địa điểm, tổ chức hoặc một ý tưởng.</p>
+                                    
                             </div>
                         </div>
                     </div>
                     <div class="card-single">
                         <div class="box">
-                            <h2 id="doanh-thu">$</h2>
+                            <h2 id="doanh-thu">$5020</h2>
                             <div class="on-box">
+                                <img src="assets/img/admin/s3.png" alt="" style=" width: 200px;">
                                 <h3>Doanh thu</h3>
                                 <p>Doanh thu của doanh nghiệp là toàn bộ số tiền sẽ thu được do tiêu thụ sản phẩm, cung
                                     cấp dịch vụ với sản lượng.</p>
@@ -131,23 +135,23 @@
                     <div class="admin-control-left">
                         <select name="the-loai" id="the-loai" onchange="showProduct()">
                             <option>Tất cả</option>
-                            <option>Quạt cầm tay mini</option>
-                            <option>Quạt để bàn mini</option>
-                            <option>Quạt cây</option>
-                            <option>Quạt treo tường</option>
+                            <option>Quạt đứng</option>
+                            <option>Quạt treo</option>
                             <option>Quạt trần</option>
+                            <option>Quạt hút</option>
+                            <option>Quạt cầm tay</option>
                             <option>Đã xóa</option>
                         </select>
                     </div>
                     <div class="admin-control-center">
                         <form action="" class="form-search">
                             <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="showProduct()">
+                            <input id="form-search-product" type="text" class="form-search-input" placeholder="Tìm kiếm sản phẩm..." oninput="showProduct()">
                         </form>
                     </div>
                     <div class="admin-control-right">
-<!--                        <button class="btn-control-large" id="btn-cancel-product" onclick="cancelSearchProduct()"><i class="fa-light fa-rotate-right"></i> Làm mới</button>-->
-                        <button class="btn-control-large" id="btn-add-product"><i class="fa-light fa-plus"></i> Thêm sản phẩm mới</button>
+                        <!-- <button class="btn-control-large" id="btn-cancel-product" onclick="cancelSearchProduct()"><i class="fa-solid fa-rotate-right"></i> Làm mới</button> -->
+                        <button class="btn-control-large" id="btn-add-product"><i class="fa-solid fa-plus"></i> Thêm sản phẩm</button>                  
                     </div>
                 </div>
                 <div id="show-product"></div>
@@ -168,7 +172,7 @@
                     </div>
                     <div class="admin-control-center">
                         <form action="" class="form-search">
-                            <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></i></span>
+                            <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
                             <input id="form-search-user" type="text" class="form-search-input" placeholder="Tìm kiếm khách hàng..." oninput="showUser()">
                         </form>
                     </div>
@@ -183,8 +187,8 @@
                                 <input type="date" class="form-control-date" id="time-end-user" onchange="showUser()">
                             </div>
                         </form>      
-<!--                        <button class="btn-reset-order" onclick="cancelSearchUser()"><i class="fa-light fa-arrow-rotate-right"></i></button>     -->
-                        <button id="btn-add-user" class="btn-control-large" onclick="openCreateAccount()"><i class="fa-solid fa-plus"></i> <span>Thêm khách hàng</span></button>
+                        <!-- <button class="btn-reset-order" onclick="cancelSearchUser()"><i class="fa-solid fa-arrow-rotate-right"></i></button>      -->
+                        <button id="btn-add-user" class="btn-control-large" onclick="openCreateAccount()"><i class="fa-solid fa-plus"></i> <span>Thêm khách hàng</span></button>          
                     </div>
                 </div>
                 <div class="table">
@@ -232,7 +236,7 @@
                                 <input type="date" class="form-control-date" id="time-end" onchange="findOrder()">
                             </div>
                         </form>      
-                        <button class="btn-reset-order" onclick="cancelSearchOrder()"><i class="fa-solid fa-delete-left"></i></button>
+                        <!-- <button class="btn-reset-order" onclick="cancelSearchOrder()"><i class="fa-solid fa-arrow-rotate-right"></i></button>                -->
                     </div>
                 </div>
                 <div class="table">
@@ -257,17 +261,18 @@
                     <div class="admin-control-left">
                         <select name="the-loai-tk" id="the-loai-tk" onchange="thongKe()">
                             <option>Tất cả</option>
-                            <option>Quạt cầm tay mini</option>
-                            <option>Quạt để bàn mini</option>
-                            <option>Quạt cây</option>
-                            <option>Quạt treo tường</option>
+                            <option>Quạt đứng</option>
+                            <option>Quạt treo</option>
                             <option>Quạt trần</option>
+                            <option>Quạt hút</option>
+                            <option>Quạt cầm tay</option>
+                            <option>Sản phẩm khác</option>
                         </select>
                     </div>
                     <div class="admin-control-center">
                         <form action="" class="form-search">
                             <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
-                            <input id="form-search-tk" type="text" class="form-search-input" placeholder="Tìm kiếm tên sản phẩm..." oninput="thongKe()">
+                            <input id="form-search-tk" type="text" class="form-search-input" placeholder="Tìm kiếm sản phẩm..." oninput="thongKe()">
                         </form>
                     </div>
                     <div class="admin-control-right">
@@ -281,9 +286,9 @@
                                 <input type="date" class="form-control-date" id="time-end-tk" onchange="thongKe()">
                             </div>
                         </form> 
-                        <button class="btn-reset-order" onclick="thongKe(1)"><i class="fa-solid fa-arrow-up-wide-short"></i></button>
-                        <button class="btn-reset-order" onclick="thongKe(2)"><i class="fa-solid fa-arrow-up-wide-short fa-rotate-180"></i></button>
-                        <button class="btn-reset-order" onclick="thongKe(0)"><i class="fa-solid fa-arrow-rotate-left"></i></button>
+                        <button class="btn-reset-order" onclick="thongKe(1)"><i class="fa-solid fa-arrow-up-short-wide"></i></i></button>
+                        <button class="btn-reset-order" onclick="thongKe(2)"><i class="fa-solid fa-arrow-down-wide-short"></i></button>
+                        <!-- <button class="btn-reset-order" onclick="thongKe(0)"><i class="fa-solid fa-arrow-rotate-right"></i></button>                     -->
                     </div>
                 </div>
                 <div class="order-statistical" id="order-statistical">
@@ -293,7 +298,7 @@
                             <h4 class="order-statistical-item-content-h" id="quantity-product"></h4>
                         </div>
                         <div class="order-statistical-item-icon">
-                            <i class="fa-brands fa-slack"></i>
+                            <i class="fa-solid fa-fan"></i>
                         </div>
                     </div>
                     <div class="order-statistical-item">
@@ -302,7 +307,7 @@
                             <h4 class="order-statistical-item-content-h" id="quantity-order"></h4>
                         </div>
                         <div class="order-statistical-item-icon">
-                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-box"></i>
                         </div>
                     </div>
                     <div class="order-statistical-item">
@@ -315,6 +320,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="table">
                     <table width="100%">
                         <thead>
@@ -341,7 +347,7 @@
             <div class="modal-content">
                 <form action="" class="add-product-form">
                     <div class="modal-content-left">
-                        <img src="./assets/img/blank-image.png" alt="" class="upload-image-preview">
+                        <img src="./assets/img/ADD_img.jpg" alt="" class="upload-image-preview">
                         <div class="form-group file">
                             <label for="up-hinh-anh" class="form-label-file"><i class="fa-solid fa-cloud-arrow-up"></i>Chọn hình ảnh</label>
                             <input accept="image/jpeg, image/png, image/jpg" id="up-hinh-anh" name="up-hinh-anh" type="file" class="form-control" onchange="uploadImage(this)">
@@ -349,20 +355,19 @@
                     </div>
                     <div class="modal-content-right">
                         <div class="form-group">
-                            <label for="product-name" class="form-label">Tên sản phẩm</label>
-                            <input id="product-name" name="productName" type="text" placeholder="Nhập tên sản phầm"
-                                   class="form-control">
+                            <label for="ten-sanPham" class="form-label">Tên sản phẩm</label>
+                            <input id="ten-sanPham" name="ten-sanPham" type="text" placeholder="Nhập tên sản phẩm"
+                                class="form-control">
                             <span class="form-message"></span>
                         </div>
                         <div class="form-group">
                             <label for="category" class="form-label">Chọn sản phẩm</label>
                             <select name="category" id="chon-sanPham">
-                                <option>Tất cả</option>
-                                <option>Quạt cầm tay mini</option>
-                                <option>Quạt để bàn mini</option>
-                                <option>Quạt cây</option>
-                                <option>Quạt treo tường</option>
+                                <option>Quạt đứng</option>
+                                <option>Quạt treo</option>
                                 <option>Quạt trần</option>
+                                <option>Quạt hút</option>
+                                <option>Quạt cầm tay</option>
                             </select>
                             <span class="form-message"></span>
                         </div>
@@ -431,7 +436,7 @@
                 <form action="" class="signup-form">
                     <div class="form-group">
                         <label for="fullname" class="form-label">Tên đầy đủ</label>
-                        <input id="fullname" name="fullname" type="text" placeholder="VD: Văn A" class="form-control">
+                        <input id="fullname" name="fullname" type="text" placeholder="VD: Nhật Sinh" class="form-control">
                         <span class="form-message-name form-message"></span>
                     </div>
                     <div class="form-group">

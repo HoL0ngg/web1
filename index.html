@@ -7,12 +7,53 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css"
         integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/css/login.css">
 </head>
 
 <body>
     <!-- TOPMENU -->
+
+    <div class="login" id="container-login" style="display: none;">
+        <div class="login-content">
+            <span class="close-login" id="CloseFormLogin">&times;</span>
+            <div class="form-container sign-in-container">
+                <form action="#">
+                    <h1>Đăng nhập</h1>
+                    <div class="social-container">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+
+                    <span>Hoặc sử dụng tài khoản đã có</span>
+                    <input type="text" placeholder="Số điện thoại hoặc Tên tài khoản" />
+                    <input type="password" placeholder="Mật khẩu" />
+                    <button class="block-item">Đăng nhập</button>
+                    <a>Chưa có tài khoản?</a>
+                    <div class="register">
+                        <a id="GoToSignUp">Đăng kí</a>
+                    </div>
+                </form>
+            </div>
+
+            <div class="form-container sign-up-container">
+                <form action="#">
+                    <h1>Đăng kí</h1>
+                    <span>Điền các thông tin sau:</span>
+                    <input type="text" placeholder="Số điện thoại" />
+                    <input type="text" placeholder="Tên tài khoản" />
+                    <input type="password" placeholder="Mật khẩu" />
+                    <input type="password" placeholder="Nhập lại mật khẩu" />
+                    <button class="block-item">Đăng kí</button>
+                    <div class="register">
+                        <a id="SignUpBackToSignIn">Quay lại</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <div id="find_wrap">
         <div id="find">
@@ -102,8 +143,17 @@
         </div>
         <div id="topmenu_icon">
             <div id="topmenu_icon--bar"><i class="fa-solid fa-bars-staggered" onclick="hien('bar_wrap');"></i></div>
-            <div id="topmenu_icon--gear"><i class="fa-solid fa-gear"></i></div>
-            <div id="topmenu_icon--user"><i class="fa-regular fa-user"></i></div>
+            <div id="topmenu_icon--gear" onclick="window.location.href='admin.html'"><i class="fa-solid fa-gear"></i>
+            </div>
+            <div id="user--logout">
+                <button id="user--name">admin</button>
+                <button id="logout--button">LOGOUT</button>
+            </div>
+            <div id="topmenu_icon--user">
+                <div id="icon--user">
+                    <i class="fa-regular fa-user"></i>
+                </div>
+            </div>
             <div id="topmenu_icon--find"><i class="fa-solid fa-magnifying-glass" onclick="hien('find_wrap');"></i></div>
             <div id="topmenu_icon--bag">
                 <i class="fa-solid fa-bag-shopping" onclick="window.location.href='cart.html'"></i>
@@ -177,7 +227,8 @@
             </div>
         </div>
     </div>
-    <script src="cart.js"></script>
+    <script src="./js/login.js"></script>
+    <script src="./js/cart.js"></script>
     <script>
         const images = document.querySelectorAll('.banner img');
         let currentIndex = 0;

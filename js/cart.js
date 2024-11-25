@@ -8,7 +8,9 @@ let totalPrice = 0;
 window.onload = function () {
     loadCart();
     updateQuantity();
+    updateUser();
 }
+
 
 function updateQuantity() {
     if (totalQuantity != 0) {
@@ -314,6 +316,8 @@ if (document.getElementById('payment-form')) document.getElementById('payment-fo
 })
 
 function ThanhToan() {
+    // console.log(isLogin);
+    if (!isLogin) return displayToast('Bạn phải đăng nhập để thanh toán');
     if (!icon_active) return displayToast('Bạn phải chọn phương thức thanh toán trước');
     if (totalQuantity == 0) return displayToast('Giỏ hàng của bạn đang trống');
     if (icon_active) {

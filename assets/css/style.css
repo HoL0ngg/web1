@@ -617,9 +617,9 @@ html {
     display: none;
 }
 
-#topmenu_icon--gear {
+/* #topmenu_icon--gear {
     visibility: hidden;
-}
+} */
 
 img {
     max-width: 100%;
@@ -672,6 +672,16 @@ img {
     }
 }
 
+@keyframes glowUp {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
 #find_wrap {
     position: fixed;
     top: 0;
@@ -680,6 +690,7 @@ img {
     bottom: 0;
     display: none;
     z-index: 5;
+    animation: glowUp 0.5s ease forwards;
 }
 
 #find_wrap.hide {
@@ -888,6 +899,7 @@ i#find_wrap [type="text"]::placeholder {
     bottom: 0;
     display: none;
     z-index: 5;
+    animation: glowUp 0.5s ease forwards;
 }
 
 #bar_text {
@@ -1022,7 +1034,7 @@ i#find_wrap [type="text"]::placeholder {
     #topmenu_icon--gear {
         position: absolute;
         left: 56%;
-        visibility: hidden;
+        /* visibility: hidden; */
 
     }
 }

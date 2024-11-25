@@ -7,7 +7,7 @@
     color: var(--lightest-gray);
     background-color: var(--blue);
     text-align: center;
-    border-radius: 2rem;
+    border-radius: 5px;
     padding: 0.5rem;
     text-transform: uppercase;
 }
