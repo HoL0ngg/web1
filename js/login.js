@@ -143,6 +143,7 @@ function logout() {
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
     localStorage.removeItem('userlogin');
+    updateUser();
     showAlert("Bạn đã đăng xuất thành công.");
 }
 // ----------------------------------------------------------------------------------------------------------------------//

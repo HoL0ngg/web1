@@ -13,11 +13,13 @@ window.onload = function () {
 
 function updateUser() {
     if (userlogin == undefined) {
+        if (document.getElementById('not_payment-info')) document.getElementById('not_payment-info').style.display = 'none';
+        if (document.getElementById('payment-info')) document.getElementById('payment-info').style.display = 'none';
         document.getElementById('not_login').style.display = 'block';
         return;
     }
 
-    document.getElementById('not_login').style.display = 'none';
+    if (document.getElementById('not_login')) document.getElementById('not_login').style.display = 'none';
     const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
     let user = accountsInfo.find(acc => acc.username == userlogin.username);
     if (user == undefined) {
@@ -25,9 +27,8 @@ function updateUser() {
         return;
     }
     updatePersonalInfo(user);
-    document.getElementById('not_payment-info').style.display = 'none';
-    document.getElementById('payment-info').style.display = 'block';
-
+    if (document.getElementById('not_payment-info')) document.getElementById('not_payment-info').style.display = 'none';
+    if (document.getElementById('payment-info')) document.getElementById('payment-info').style.display = 'block';
 }
 
 function updatePersonalInfo(user) {
@@ -35,7 +36,7 @@ function updatePersonalInfo(user) {
             <p>Họ và tên: ${user.username}</p>
             <p>Địa chỉ: ${user.diachi}</p>
             <p>SĐT: ${user.sdt}</p>`
-    document.getElementById('info').innerHTML = s;
+    if (document.getElementById('info')) document.getElementById('info').innerHTML = s;
 }
 
 function updateQuantity() {
