@@ -22,9 +22,9 @@
                 <form action="#">
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-google-plus-g"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href=""><i class="fab fa-facebook-f"></i></a>
+                        <a href=""><i class="fab fa-google-plus-g"></i></a>
+                        <a href=""><i class="fab fa-linkedin-in"></i></a>
                     </div>
 
                     <span>Hoặc sử dụng tài khoản đã có</span>
@@ -129,36 +129,89 @@
     </div>  -->
 
     <div id="topmenu">
-        <div id="topmenu_text" onclick="window.location.href='index.html'">
-            ONLY.FANS
-        </div>
-        <div id="topmenu_list">
-            <div id="topmenu_list_item">
-                <div onclick="window.location.href='index.html'">Trang Chủ</div>
-                <div>Liên Hệ</div>
-                <div>Cửa Hàng</div>
-                <div>Giới Thiệu</div>
-                <div>Lịch Sử Đặt Hàng</div>
+        <div id="topmenu-left">
+            <div id="topmenu_text" onclick="window.location.href='index.html'">
+                ONLY.FANS
             </div>
-        </div>
-        <div id="topmenu_icon">
-            <div id="topmenu_icon--bar"><i class="fa-solid fa-bars-staggered" onclick="hien('bar_wrap');"></i></div>
-            <div id="topmenu_icon--gear" onclick="window.location.href='admin.html'"><i class="fa-solid fa-gear"></i>
-            </div>
-            <div id="user--logout">
-                <button id="user--name">admin</button>
-                <button id="logout--button">LOGOUT</button>
-            </div>
-            <div id="topmenu_icon--user">
-                <div id="icon--user">
-                    <i class="fa-regular fa-user"></i>
+            <div id="topmenu_list">
+                <div id="topmenu_list_item">
+                    <div onclick="window.location.href='index.html'">Trang Chủ</div>
+                    <div>Liên Hệ</div>
+                    <div>Cửa Hàng</div>
+                    <div>Giới Thiệu</div>
+                    <div>Lịch Sử Đặt Hàng</div>
                 </div>
             </div>
-            <div id="topmenu_icon--find"><i class="fa-solid fa-magnifying-glass" onclick="hien('find_wrap');"></i></div>
-            <div id="topmenu_icon--bag">
-                <i class="fa-solid fa-bag-shopping" onclick="window.location.href='cart.html'"></i>
-                <p id="item-quantity"></p>
+        </div>
+        <div id="topmenu-right" style="display: flex; align-items: center;">
+            <div id="topmenu_icon">
+                <div id="topmenu_icon--bar"><i class="fa-solid fa-bars-staggered" onclick="hien('bar_wrap');"></i></div>
+                <div id="topmenu_icon--gear" onclick="window.location.href='admin.html'"><i
+                        class="fa-solid fa-gear"></i>
+                </div>
+                <div id="user--info" style="width: max-content;">
+                    <div id="user--name"></div>
+                    <div class=" user--selection hidden">
+                        <div>
+                            <div class=" user-information">Thông tin cá nhân</div>
+                            <div class="changePass">Đổi mật khẩu</div>
+                            <div class="logout">Đăng xuất</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="topmenu_icon--user">
+                    <div id="icon--user" style="position: relative;">
+                        <i class="fa-regular fa-user"></i>
+                        <div class="user--selection hidden">
+                            <div>
+                                <div class="user-information">Thông tin cá nhân</div>
+                                <div class="changePass">Đổi mật khẩu</div>
+                                <div class="logout">Đăng xuất</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="topmenu_icon--find"><i class="fa-solid fa-magnifying-glass" onclick="hien('find_wrap');"></i>
+                </div>
+                <div id="topmenu_icon--bag" style="position: relative;">
+                    <i class="fa-solid fa-bag-shopping" onclick="window.location.href='cart.html'"></i>
+                    <p id="item-quantity"></p>
+                </div>
             </div>
+        </div>
+    </div>
+    <div id="display-personal-info">
+        <div id="wrap-personal-info">
+            <div class="payment-title">
+                Thông tin cá nhân
+                <button id="closePersonalInfo" onclick="closePersonalInfoTable();">x</button>
+            </div>
+            <form id="personal-form">
+                <div class="payment-input">
+                    <label for="namePersonal">Họ</label>
+                    <input type=" text" name="hotentxt" id="namePersonal" placeholder="Nguyễn Văn A"
+                        oninput="checkName(this)">
+                </div>
+                <div style="display: flex; width: 100%;" id="personal-form-2">
+                    <div class="payment-input" style="margin-right: 10px; flex: 2;" id="personal-form-2-email">
+                        <label for="emailPersonal">Email</label>
+                        <input type=" text" name="email" id="emailPersonal" placeholder="nguyenvana@gmail.com"
+                            oninput="checkEmail(this)">
+                    </div>
+                    <div class="payment-input" style="flex: 1;">
+                        <label for="phonePersonal">Số điện thoại</label>
+                        <input type="text" name="phone" id="phonePersonal" placeholder="0987654321"
+                            oninput="checkSDT(this)" maxlength="10">
+                    </div>
+                </div>
+
+                <div class="payment-input">
+                    <label for="addressPersonal">Địa chỉ</label>
+                    <input type=" text" name="address" id="addressPersonal"
+                        placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkName(this)">
+                </div>
+                <button type="submit" id="confirmPersonalInfo">Xác nhận</button>
+            </form>
         </div>
     </div>
 

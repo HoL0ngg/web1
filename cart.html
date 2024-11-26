@@ -14,26 +14,54 @@
 
 <body>
     <div id="topmenu">
-        <div id="topmenu_text">
-            ONLY.FANS
-        </div>
-        <div id="topmenu_list">
-            <div id="topmenu_list_item">
-                <div onclick="window.location.href='index.html'">Trang Chủ</div>
-                <div>Liên Hệ</div>
-                <div>Cửa Hàng</div>
-                <div>Giới Thiệu</div>
-                <div>Lịch Sử Đặt Hàng</div>
+        <div id="topmenu-left">
+            <div id="topmenu_text" onclick="window.location.href='index.html'">
+                ONLY.FANS
+            </div>
+            <div id="topmenu_list">
+                <div id="topmenu_list_item">
+                    <div onclick="window.location.href='index.html'">Trang Chủ</div>
+                    <div>Liên Hệ</div>
+                    <div>Cửa Hàng</div>
+                    <div>Giới Thiệu</div>
+                    <div>Lịch Sử Đặt Hàng</div>
+                </div>
             </div>
         </div>
-        <div id="topmenu_icon">
-            <div id="topmenu_icon--bar"><i class="fa-solid fa-bars-staggered" onclick="hien('bar_wrap');"></i></div>
-            <div id="topmenu_icon--gear"><i class="fa-solid fa-gear"></i></div>
-            <div id="topmenu_icon--user"><i class="fa-regular fa-user"></i></div>
-            <div id="topmenu_icon--find"><i class="fa-solid fa-magnifying-glass" onclick="hien('find_wrap');"></i></div>
-            <div id="topmenu_icon--bag">
-                <i class="fa-solid fa-bag-shopping" onclick="window.location.href='cart.html'"></i>
-                <p id="item-quantity"></p>
+        <div id="topmenu-right" style="display: flex; align-items: center;">
+            <div id="topmenu_icon">
+                <div id="topmenu_icon--bar"><i class="fa-solid fa-bars-staggered" onclick="hien('bar_wrap');"></i></div>
+                <div id="topmenu_icon--gear" onclick="window.location.href='admin.html'"><i
+                        class="fa-solid fa-gear"></i>
+                </div>
+                <div id="user--info" style="width: max-content;">
+                    <div id="user--name"></div>
+                    <div class=" user--selection hidden">
+                        <div>
+                            <div class="user-information">Thông tin cá nhân</div>
+                            <div class="changePass">Đổi mật khẩu</div>
+                            <div class="logout">Đăng xuất</div>
+                        </div>
+                    </div>
+                </div>
+                <div id="topmenu_icon--user">
+                    <div id="icon--user" style="position: relative;">
+                        <i class="fa-regular fa-user"></i>
+                        <div class="user--selection hidden">
+                            <div>
+                                <div class="user-information">Thông tin cá nhân</div>
+                                <div class="changePass">Đổi mật khẩu</div>
+                                <div class="logout">Đăng xuất</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="topmenu_icon--find"><i class="fa-solid fa-magnifying-glass" onclick="hien('find_wrap');"></i>
+                </div>
+                <div id="topmenu_icon--bag" style="position: relative;">
+                    <i class="fa-solid fa-bag-shopping" onclick="window.location.href='cart.html'"></i>
+                    <p id="item-quantity"></p>
+                </div>
             </div>
         </div>
     </div>
@@ -99,6 +127,40 @@
         style="margin: 10px 0 0 100px; border-bottom: 5px solid black; display: inline-block; padding-bottom: 4px; font-size: 32px;">
         Giỏ hàng
     </div>
+    <div id="display-personal-info">
+        <div id="wrap-personal-info">
+            <div class="payment-title">
+                Thông tin cá nhân
+                <button id="closePersonalInfo" onclick="closePersonalInfoTable();">x</button>
+            </div>
+            <form id="personal-form">
+                <div class="payment-input">
+                    <label for="namePersonal">Họ</label>
+                    <input type=" text" name="hotentxt" id="namePersonal" placeholder="Nguyễn Văn A"
+                        oninput="checkName(this)">
+                </div>
+                <div style="display: flex; width: 100%;" id="personal-form-2">
+                    <div class="payment-input" style="margin-right: 10px; flex: 2;" id="personal-form-2-email">
+                        <label for="emailPersonal">Email</label>
+                        <input type=" text" name="email" id="emailPersonal" placeholder="nguyenvana@gmail.com"
+                            oninput="checkEmail(this)">
+                    </div>
+                    <div class="payment-input" style="flex: 1;">
+                        <label for="phonePersonal">Số điện thoại</label>
+                        <input type="text" name="phone" id="phonePersonal" placeholder="0987654321"
+                            oninput="checkSDT(this)" maxlength="10">
+                    </div>
+                </div>
+
+                <div class="payment-input">
+                    <label for="addressPersonal">Địa chỉ</label>
+                    <input type=" text" name="address" id="addressPersonal"
+                        placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkName(this)">
+                </div>
+                <button type="submit" id="confirmPersonalInfo">Xác nhận</button>
+            </form>
+        </div>
+    </div>
     <div id="payment-method">
         <div id="payment-method-popup">
             <div style="position: relative; padding: 10px; border-bottom: 1px black solid; background-color: #0d5146;">
@@ -108,9 +170,9 @@
             <div style="width: 80%; margin: 14px auto;">
                 <form action="" id="payment-form">
                     <div style="padding-top: 4px;">
-                        <p style="text-align: center;">THÔNG TIN CÁ NHÂN</p>
-                        <div style="display: flex; width: 100%;">
-                            <div class="payment-input" style="margin-right: 10px;">
+                        <p class="payment-title">THÔNG TIN CÁ NHÂN</p>
+                        <div style="display: flex; width: 100%;" id="payment-input-1">
+                            <div class="payment-input" style="margin-right: 10px;" id="payment-input-1-firstname">
                                 <label for="firstname">Họ</label>
                                 <input type="text" name="firstname" id="firstname" class="" placeholder="Hồ"
                                     oninput="checkName(this)">
@@ -122,18 +184,18 @@
                             </div>
                         </div>
                         <div class="payment-input">
-                            <label for="email">Email:</label>
+                            <label for="email">Email</label>
                             <input type="email" name="email" id="email" placeholder="hohoanglong@gmail.com"
                                 oninput="checkEmail(this)">
                         </div>
                         <div class="payment-input">
-                            <label for="diachi">Địa chỉ:</label>
+                            <label for="diachi">Địa chỉ</label>
                             <input type="text" name="diachi" id="diachi" placeholder="273 An Dương Vương Quận 5 TP.HCM"
                                 oninput="checkInput(this)">
                         </div>
                     </div>
                     <div style="padding-top: 20px;">
-                        <p style="text-align: center;">THÔNG TIN TÀI KHOẢN</p>
+                        <p class="payment-title">THÔNG TIN TÀI KHOẢN</p>
                         <div style="display: flex; width: 100%;">
                             <div class="payment-input" style="margin-right: 10px; flex: 7;">
                                 <label for="sothe">Số thẻ</label>
@@ -334,33 +396,58 @@
                     style="border-bottom: 1px black solid; text-align: center; padding: 14px; font-size: 18px; font-weight: 600;">
                     HÓA ĐƠN
                 </div>
-                <div id="info">
-                    <p>Họ và tên: Hồ Hoàng Long</p>
-                    <p>Địa chỉ: hihihihi</p>
-                    <p>SĐT: hihihi</p>
-                </div>
-                <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
-                    <div>
-                        <p>
-                            TỔNG CỘNG:
-                        </p>
+                <div id="payment-info">
+                    <div id="info">
+                        <!-- <p>Họ và tên: Hồ Hoàng Long</p>
+                        <p>Địa chỉ: hihihihi</p>
+                        <p>SĐT: hihihi</p> -->
                     </div>
-                    <div style="text-align: right;">
-                        <p id="total-price" style="font-size: 1.2rem;">0 VNĐ</p>
-                        <p style="font-size: 13px; font-weight: 100; color: grey;">(Đã bao gồm VAT nếu có)</p>
+                    <div style="display: flex; justify-content: space-between; width: 90%; margin: 0 auto;">
+                        <div>
+                            <p>
+                                TỔNG CỘNG:
+                            </p>
+                        </div>
+                        <div style="text-align: right;">
+                            <p id="total-price" style="font-size: 1.2rem;">0 VNĐ</p>
+                            <p style="font-size: 13px; font-weight: 100; color: grey;">(Đã bao gồm VAT nếu có)</p>
+                        </div>
+                    </div>
+                    <div style="width: 90%; margin: 12 auto;">
+                        <button
+                            style="background-color: #0d5146; width: 100%; padding: 6px; font-weight: 700; color: white; cursor: pointer;"
+                            id="ThanhToanbtn" onclick="ThanhToan()">THANH
+                            TOÁN</button>
+                    </div>
+                    <div id="payment">
+                        <i class=" fa-brands fa-cc-visa fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
+                        <i class="fa-brands fa-cc-mastercard fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
+                        <i class="fa-regular fa-credit-card fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
+                        <i class="fa-solid fa-money-bill-1-wave payment-icon fa-xl"
+                            onclick="MoPopUpThanhtoan(this)"></i>
                     </div>
                 </div>
-                <div style="width: 90%; margin: 12 auto;">
-                    <button
-                        style="background-color: #0d5146; width: 100%; padding: 6px; font-weight: 700; color: white; cursor: pointer;"
-                        id="ThanhToanbtn" onclick="ThanhToan()">THANH
-                        TOÁN</button>
+                <div id="not_payment-info">
+                    <div style="width: max-content; margin: 10px auto">
+                        <i class=" fa-regular fa-address-card fa-4x"></i>
+                    </div>
+                    <p style="text-align: center;">Bạn phải nhập thông tin cá nhân trước khi mua hàng</p>
+                    <div style="width: 80%; margin: 40px auto;">
+                        <div style="width: max-content; margin: 0 auto; background-color: #0d5146; padding: 20px; color: white; border-radius: 10px; cursor: pointer;"
+                            onclick="openPersonalInfoTable()">
+                            Nhập thông tin</div>
+                    </div>
                 </div>
-                <div id="payment">
-                    <i class=" fa-brands fa-cc-visa fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
-                    <i class="fa-brands fa-cc-mastercard fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
-                    <i class="fa-regular fa-credit-card fa-xl payment-icon" onclick="MoPopUpThanhtoan(this)"></i>
-                    <i class="fa-solid fa-money-bill-1-wave payment-icon fa-xl" onclick="MoPopUpThanhtoan(this)"></i>
+                <div id="not_login">
+                    <div style="width: max-content; margin: 10px auto">
+                        <i class=" fa-regular fa-address-card fa-4x"></i>
+                    </div>
+                    <p style="text-align: center;">Bạn phải đăng nhập trước khi mua hàng</p>
+                    <div style="width: 80%; margin: 40px auto;">
+                        <div style="width: max-content; margin: 0 auto; background-color: #0d5146; padding: 20px; color: white; border-radius: 10px; cursor: pointer;"
+                            onclick="showLogin()">
+                            Đăng nhập</div>
+                    </div>
                 </div>
             </div>
         </div>

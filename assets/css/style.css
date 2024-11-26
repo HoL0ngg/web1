@@ -88,6 +88,10 @@ html {
     line-height: 2.1rem;
 }
 
+.hidden {
+    display: none;
+}
+
 .detail {
     cursor: pointer;
     background-color: #0d5145;
@@ -525,16 +529,18 @@ html {
 #topmenu {
     height: 70px;
     width: 100%;
-    position: relative;
+    display: flex;
+    /* position: relative; */
     /* position: sticky; */
     background-color: #0c673c;
     /* z-index: 3; */
+    justify-content: space-between;
+    padding: 0 20px;
+    user-select: none;
 }
 
 #topmenu_text {
-    position: absolute;
-    left: 45px;
-    top: 9px;
+    /* position: absolute; */
     font-size: 2.8rem;
     /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
     font-weight: bolder;
@@ -543,9 +549,8 @@ html {
 }
 
 #topmenu_list {
-    position: absolute;
-    bottom: 22px;
-    left: 260px;
+    /* position: absolute; */
+    padding-left: 10px;
 }
 
 #topmenu_list_item {
@@ -590,9 +595,7 @@ html {
 }
 
 #topmenu_icon {
-    position: absolute;
-    right: 20px;
-    top: 25px;
+    /* position: absolute; */
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -604,13 +607,12 @@ html {
     font-size: 1.64rem;
     width: 20px;
     margin: 0 20px;
-    position: relative;
 }
 
 #topmenu_icon>div:hover {
-    transition: 0.5s all ease;
+    /* transition: 0.5s all ease; */
     cursor: pointer;
-    transform: translateY(-5px);
+    /* transform: translateY(-5px); */
 }
 
 #topmenu_icon--bar {
@@ -936,10 +938,13 @@ i#find_wrap [type="text"]::placeholder {
 
 #bar ul {
     width: 100%;
-    margin-left: -40px;
+    /* margin-left: -40px; */
+    padding-left: 0;
+    list-style-type: none;
 }
 
 #bar li {
+    width: 100%;
     border-bottom: solid 1px;
     cursor: pointer;
     transition: transform 0.4s;
@@ -980,6 +985,11 @@ i#find_wrap [type="text"]::placeholder {
     table-layout: fixed;
 }
 
+#topmenu-left {
+    display: flex;
+    align-items: center;
+}
+
 #order-history-table td,
 #order-history-table th {
     border: solid 2px;
@@ -995,89 +1005,59 @@ i#find_wrap [type="text"]::placeholder {
         /* Ẩn danh sách menu */
     }
 
-    #topmenu_text {
-        position: absolute;
-        left: 50%;
-        /* Đưa chữ vào giữa */
-        transform: translateX(-50%);
-        /* Căn giữa chữ */
+    #topmenu-left {
+        width: 100%;
+        display: block;
+        padding: 0;
     }
 
-    #topmenu_icon {
+    #topmenu_text {
+        width: 100%;
+        text-align: center;
+        /* margin: 0 auto; */
+        line-height: 70px;
+    }
+
+    /* #topmenu_icon {
         position: relative;
         top: 0;
         height: 70px;
         width: 100%;
-    }
-
-    #topmenu_icon--user {
-        position: absolute;
-        left: 43%;
-    }
-
-    #topmenu_icon--find {
-        position: absolute;
-        left: -56%;
-    }
-
-    #topmenu_icon--bag {
-        position: absolute;
-        right: -10%;
-    }
+    } */
 
     #topmenu_icon--bar {
         position: absolute;
-        left: -3%;
+        left: 0%;
         display: block;
-    }
-
-    #topmenu_icon--gear {
-        position: absolute;
-        left: 56%;
-        /* visibility: hidden; */
-
     }
 }
 
-@media screen and (max-width: 680px) {
+@media screen and (max-width: 710px) {
     #bar_text {
         font-size: 2.36rem;
     }
 
-    /* #topmenu_icon--user{
+    #user--info {
         display: none;
-    } */
+    }
+
+    #topmenu_icon--user.hidden {
+        display: block;
+    }
+
     #bar_bottom {
         font-size: 1rem;
         text-align: center;
         line-height: 20px;
     }
 
-    #topmenu_icon--user {
-        position: absolute;
-        left: 44%;
-    }
-
-    #topmenu_icon--find {
-        position: absolute;
-        left: -55%;
-    }
-
-    #topmenu_icon--bag {
-        position: absolute;
-        right: -11%;
-    }
+    /* #user--info {
+        display: none;
+    } */
 
     #topmenu_icon--bar {
         position: absolute;
         display: block;
-    }
-
-    #topmenu_icon--gear {
-        position: absolute;
-        left: 56%;
-        visibility: hidden;
-
     }
 
     .finditem {
@@ -1098,6 +1078,12 @@ i#find_wrap [type="text"]::placeholder {
         height: 40px;
         width: 135px;
         top: 7px
+    }
+}
+
+@media screen and (max-width: 500px) {
+    #topmenu_text {
+        text-align: right;
     }
 }
 
@@ -1130,4 +1116,35 @@ i#find_wrap [type="text"]::placeholder {
     font-size: 14px;
     text-align: center;
     color: #0c673c;
+}
+
+#user--info {
+    /* display: none; */
+    width: max-content;
+    position: relative;
+}
+
+.user--selection {
+    display: flex;
+    font-size: 16px;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: white;
+    color: black;
+    flex-direction: column;
+    width: 160px;
+    border-radius: 20px;
+}
+
+.user--selection.hidden {
+    display: none;
+}
+
+.user--selection>div {
+    padding: 0 4px
+}
+
+.user--selection>div>div {
+    padding: 5%;
 }

@@ -11,6 +11,32 @@ window.onload = function () {
     updateUser();
 }
 
+function updateUser() {
+    if (userlogin == undefined) {
+        document.getElementById('not_login').style.display = 'block';
+        return;
+    }
+
+    document.getElementById('not_login').style.display = 'none';
+    const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
+    let user = accountsInfo.find(acc => acc.username == userlogin.username);
+    if (user == undefined) {
+        document.getElementById('not_payment-info').style.display = 'block';
+        return;
+    }
+    updatePersonalInfo(user);
+    document.getElementById('not_payment-info').style.display = 'none';
+    document.getElementById('payment-info').style.display = 'block';
+
+}
+
+function updatePersonalInfo(user) {
+    let s = `
+            <p>Họ và tên: ${user.username}</p>
+            <p>Địa chỉ: ${user.diachi}</p>
+            <p>SĐT: ${user.sdt}</p>`
+    document.getElementById('info').innerHTML = s;
+}
 
 function updateQuantity() {
     if (totalQuantity != 0) {
@@ -103,6 +129,23 @@ function checknumber(inp) {
     }
 }
 
+function checkSDT(inp) {
+    inp.value = inp.value.replace(/[^0-9]/g, '');
+
+    const regex = /^0\d{9,10}$/;
+
+    if (!regex.test(inp.value)) {
+        inp.parentElement.classList.add('invalid');
+        inp.parentElement.classList.remove('valid');
+        inp.focus();
+        return false; // Sai định dạng
+    }
+
+    inp.parentElement.classList.remove('invalid');
+    inp.parentElement.classList.add('valid');
+    return true; // Ngày tháng hợp lệ
+}
+
 if (document.getElementById('find_wrap')) document.getElementById('find_wrap').addEventListener('mousedown', function (event) {
     var find = document.getElementById("find");
     var find_wrap = document.getElementById("find_wrap");
@@ -188,13 +231,11 @@ function MoPopUpThanhtoan(icon) {
 }
 
 function DongPopUpThanhtoan() {
-    document.getElementById('payment-form').reset();
-    document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
-    document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
+    // document.getElementById('payment-form').reset();
 
-    // if (user.sothe == null) {
-    //     document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
-    // }
+    if (userlogin.sothe == undefined) {
+        document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
+    }
     payment_popup.classList.remove('show');
     payment.classList.remove('show');
     setTimeout(() => {
@@ -310,16 +351,16 @@ if (document.getElementById('payment-form')) document.getElementById('payment-fo
     // console.log(flag);
     if (flag) {
         icon_active.classList.add('active');
-        user.sothe = true;
+        userlogin.sothe = true;
         DongPopUpThanhtoan();
     }
 })
 
 function ThanhToan() {
     // console.log(isLogin);
-    if (!isLogin) return displayToast('Bạn phải đăng nhập để thanh toán');
-    if (!icon_active) return displayToast('Bạn phải chọn phương thức thanh toán trước');
+    // if (!isLogin) return displayToast('Bạn phải đăng nhập để thanh toán');
     if (totalQuantity == 0) return displayToast('Giỏ hàng của bạn đang trống');
+    if (!icon_active) return displayToast('Bạn phải chọn phương thức thanh toán trước');
     if (icon_active) {
         LuuHoaDon();
         displayToast('Bạn đã đặt hàng thành công');
@@ -337,27 +378,25 @@ function LuuHoaDon() {
 
     const HoaDon = {
         id: TaoMaHD(), // ID hóa đơn duy nhất
-        user: user,
+        user: userlogin,
         date: new Date().toLocaleString(), // Ngày tạo hóa đơn
         items: cart,             // Sản phẩm trong giỏ hàng
         total: totalPrice, // Tổng tiền
         payment_method: icon_active,    // Phương thức thanh toán
         trangthai: false    // Trạng thái đơn hàng
     };
+    console.log(HoaDon);
 
     let hoadon = JSON.parse(localStorage.getItem('hoadon')) || [];
     hoadon.push(HoaDon);
     localStorage.setItem('hoadon', JSON.stringify(hoadon));
     localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi lưu
-    console.log(cart);
 
     document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
     loadCart(); // Cập nhật giao diện giỏ hàng
-
 }
 
 function displayToast(msg) {
-    console.log('hihi');
     const toast = document.getElementById('toast');
     toast.style.display = 'block';
     const toastmsg = document.getElementById('toast-msg');
