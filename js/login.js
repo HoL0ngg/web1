@@ -3,8 +3,16 @@
 let userlogin = undefined;
 
 // Tài khoản admin
-const adminAccount = "admin";
-const adminPassword = "admin";
+let adminArr = [
+    {
+        username: 'admin1',
+        password: 'hihi'
+    },
+    {
+        username: 'admin',
+        password: 'admin'
+    }
+]
 
 const openSignIn = document.getElementById('topmenu_icon--user');
 const goToSignUp = document.getElementById('GoToSignUp');
@@ -17,39 +25,40 @@ const signUpForm = signUpContainer.querySelector('form');
 const nameUser = document.getElementById('user--name');
 const iconUser = document.getElementById('topmenu_icon--user');
 const loginContainer = document.getElementById('container-login');
+const adminContainer = document.getElementById('topmenu_icon--gear');
 
 // window.onload = checklogin;
 checklogin();
 
 function checklogin() {
+    hideAdmin();
     const user = JSON.parse(localStorage.getItem('userlogin'));
     if (user == null) return;
 
     const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
     // kieemr tra
     userlogin = accounts.find(account => account.username === user.username);
-
-    if (userlogin == undefined) return;
-
-    if ((userlogin.username === adminAccount) && (userlogin.password === adminPassword)) {
-        // showAlert("Đăng nhập thành công với tài khoản admin!");
-        isLogin = true;
-        // hideLogin();
-        // hideUser();
-        showAdmin();
-        nameUser.innerText = 'admin';
-        showNameUser();
-        userNameElement.style.display = 'flex';
-    }
-    else {
+    if (userlogin) {
         // showAlert("Đăng nhập thành công!");
         isLogin = true;
         // hideLogin();
         hideUser();
         showNameUser();
         nameUser.innerText = userlogin.username;
+        return;
     }
+    userlogin = adminArr.find(admin => admin.username == user.username && admin.password == user.password)
+    if (userlogin) {
 
+        // showAlert("Đăng nhập thành công với tài khoản admin!");
+        isLogin = true;
+        // hideLogin();
+        hideUser();
+        showAdmin();
+        nameUser.innerText = 'admin';
+        showNameUser();
+        // userNameElement.style.display = 'flex';
+    }
 }
 
 // Hiển thị hộp thoại
@@ -130,7 +139,7 @@ function logout() {
     hideUserSelection();
     showUser();
     document.getElementById('personal-form').reset();
-    document.getElementById('payment-form').reset();
+    if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
     localStorage.removeItem('userlogin');
@@ -180,12 +189,9 @@ function hideLogin() {
     loginContainer.style.display = 'none';
 }
 
-
-const adminContainer = document.getElementById('topmenu_icon--gear');
-adminContainer.style.display = 'none';
 // Hiển thị 
 function showAdmin() {
-    adminContainer.style.display = 'flex';
+    adminContainer.style.display = 'block';
 }
 // Ẩn nút chuyển tới trang Admin
 function hideAdmin() {
@@ -276,15 +282,17 @@ signInForm.addEventListener("submit", function (event) {
         return;
     }
 
-    if ((numberphoneOrUsername === adminAccount) && (password === adminPassword)) {
+    if (adminArr.find(admin => admin.username == numberphoneOrUsername && admin.password == password)) {
         showAlert("Đăng nhập thành công với tài khoản admin!");
         isLogin = true;
         hideLogin();
         hideUser();
         showAdmin();
         nameUser.textContent = 'admin';
+        userlogin = adminArr.find(admin => admin.username == numberphoneOrUsername);
         showNameUser();
-        userNameElement.style.display = 'flex';
+        localStorage.setItem('userlogin', JSON.stringify(userlogin));
+        // userNameElement.style.display = 'flex';
     }
     else if (findAccount(numberphoneOrUsername, password)) {
         showAlert("Đăng nhập thành công!");

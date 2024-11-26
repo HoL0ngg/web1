@@ -391,6 +391,7 @@ function LuuHoaDon() {
     hoadon.push(HoaDon);
     localStorage.setItem('hoadon', JSON.stringify(hoadon));
     localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi lưu
+    console.log(hoadon);
 
     document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
     loadCart(); // Cập nhật giao diện giỏ hàng
