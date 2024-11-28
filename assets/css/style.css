@@ -958,9 +958,8 @@ i#find_wrap [type="text"]::placeholder {
 }
 
 #order_history {
-    position: absolute;
-    top: 70px;
-    height: 500px;
+    
+    height: fit-content;
     width: 100%;
     background-color: #D3D3D3;
     z-index: 1;
@@ -985,15 +984,17 @@ i#find_wrap [type="text"]::placeholder {
     table-layout: fixed;
 }
 
+#order-history-table td,
+#order-history-table th {
+    border: solid 2px;
+}
+
 #topmenu-left {
     display: flex;
     align-items: center;
 }
 
-#order-history-table td,
-#order-history-table th {
-    border: solid 2px;
-}
+
 
 @media only screen and (max-width:1070px) {
     html {

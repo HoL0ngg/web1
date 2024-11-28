@@ -590,3 +590,29 @@ i.active {
 #not_login {
     display: none;
 }
+
+.nhapdiachi-input {
+    flex: 1;
+    margin: 16px;
+    /* display: flex; */
+    /* flex-direction: column; */
+    justify-content: space-between;
+}
+
+#nhapdiachi_wrap {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+
+#nhapdiachi-form {
+    width: 50%;
+    margin: 10% auto;
+    background-color: white;
+    height: max-content;
+}

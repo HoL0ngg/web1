@@ -112,41 +112,4 @@ var productArray = [
 
 
     
-//     const orders = 'orders';
-//     localStorage.setItem(orders, JSON.stringify(ordersList));
-    
-// function displayOrders() {
-//     const ordersTable = document.getElementById('orders-table-body');
-
-//     ordersTable.innerHTML = '';
-
-//     const orderData = JSON.parse(localStorage.getItem('orders')) || [];
-
-//     orderData.forEach(order => {
-//         const row = document.createElement('tr');
-
-//         let itemsTotal = 0;
-//         order.items.forEach(item => {
-//             itemsTotal += item.price * item.quantity;
-//         });
-
-//         row.innerHTML = `
-//             <td>${order.orderId}</td>
-//             <td>${order.orderDate}</td>
-//             <td>${order.items.length}</td>
-//             <td>${order.status}</td>
-//             <td>${order.shippingAddress}</td>
-//             <td>
-//                 ${order.items.map(item => {
-//                     return `<div>${item.name}: ${item.price} x ${item.quantity} = ${item.price * item.quantity}</div>`;
-//                 }).join('')}
-//             </td>
-//             <td>${itemsTotal}</td>
-//         `;
-        
-//         ordersTable.appendChild(row);
-//     });
-// }
-
-// document.addEventListener('DOMContentLoaded', displayOrders);
-
+   

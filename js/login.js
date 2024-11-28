@@ -14,7 +14,7 @@ let adminArr = [
     }
 ]
 
-const openSignIn = document.getElementById('topmenu_icon--user');
+const openSignIn = document.getElementById('icon--user');
 const goToSignUp = document.getElementById('GoToSignUp');
 const signUpBackToSignIn = document.getElementById('SignUpBackToSignIn');
 const closeFormLogin = document.getElementById('CloseFormLogin');
@@ -119,6 +119,8 @@ function findAccount(numberphoneOrUsername, password) {
 
 document.querySelectorAll('.logout').forEach(logoutbtn => {
     logoutbtn.addEventListener('click', function () {
+        console.log('hehe');
+
         logout();
     })
 })
@@ -134,17 +136,18 @@ function logout() {
     isLogin = false;
     userlogin = undefined;
     hideAdmin();
-    // bug o day
     hideNameUser();
     hideUserSelection();
     showUser();
+    document.getElementById('dangnhap-form').reset();
+    document.getElementById('dangky-form').reset();
     document.getElementById('personal-form').reset();
     if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
     localStorage.removeItem('userlogin');
     updateUser();
-    showAlert("Bạn đã đăng xuất thành công.");
+    // showAlert("Bạn đã đăng xuất thành công.");
 }
 // ----------------------------------------------------------------------------------------------------------------------//
 
@@ -170,17 +173,6 @@ nameUser.addEventListener('click', function (e) {
     userSelection[0].classList.toggle('hidden');
 });
 
-const logoutButton = document.getElementById('logout--button');
-if (logoutButton) logoutButton.style.display = 'none';
-//ham an nut logout
-function hideLogoutButton() {
-    logoutButton.style.display = 'none';
-}
-//ham hien nut logout
-function showLogoutButton() {
-    logoutButton.style.display = 'none';
-}
-
 // Hàm hiển thị cửa sổ Login
 function showLogin() {
     loginContainer.style.display = 'block';
@@ -199,12 +191,20 @@ function hideAdmin() {
     adminContainer.style.display = 'none';
 }
 
-const userSelection = document.getElementsByClassName('user--selection');
+const userSelection = document.querySelectorAll('.user--selection');
+
+userSelection.forEach(select => {
+    select.addEventListener('click', (e) => e.stopPropagation());
+})
 
 //mở trang đăng nhập
 openSignIn.addEventListener('click', (e) => {
-    if (userlogin == undefined)
+    console.log('hihi');
+    console.log(userSelection);
+
+    if (userlogin == undefined && openSignIn.contains(e.target)) {
         showLogin();
+    }
     else {
         // show thông tin để chọn
         userSelection[1].classList.toggle('hidden');
@@ -363,7 +363,7 @@ if (document.getElementById('personal-form')) document.getElementById('personal-
     flag &= checkName(document.getElementById('namePersonal'));
     flag &= checkEmail(document.getElementById('emailPersonal'));
     flag &= checkSDT(document.getElementById('phonePersonal'));
-    flag &= checkName(document.getElementById('addressPersonal'));
+    flag &= checkDiaChi(document.getElementById('addressPersonal'));
     // console.log(flag);
     if (flag) {
         const userInfoArray = JSON.parse(localStorage.getItem('userInfo')) || [];

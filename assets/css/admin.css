@@ -9,7 +9,7 @@
 }
 
 :root {
-    --blue: #4ad6d0;
+    --green: #098d1f;
     --lightest-gray: rgb(249, 249, 249);
     --lighter-gray: rgb(240, 240, 240);
     --light-gray: rgb(144, 144, 144);
@@ -106,7 +106,7 @@ pre {
 }
 
 .switch-input:checked+.switch {
-    background-color: var(--blue);
+    background-color: var(--green);
 }
 
 .switch-input:checked+.switch:after {
@@ -277,7 +277,7 @@ pre {
 }
 
 .user .profile-cropdown li:hover a {
-    color: blue;
+    color: var(--green);
 }
 
 .sidebar {
@@ -318,17 +318,25 @@ pre {
     ;
     margin-bottom: 0.5rem;
     width: 100%;
+    align-items: center;  
+    position: relative;  
 }
 
 .sidebar .channel-logo {
-    display: block;
-
+    
+   
     transition: var(--animation-duration) var(--animation-timing-curve);
 }
 
 .sidebar.open .channel-logo {
     width: 100px;
     height: 100px;
+    
+   
+}
+.your-channel{
+    position: absolute;
+    top: 45px;
 }
 
 .sidebar .channel-logo>img {
@@ -392,18 +400,19 @@ pre {
 }
 
 .sidebar-link:hover {
-    color: var(--blue);
+    color: var(--green);
 }
 
 .sidebar-list-item {
     position: relative;
     width: 100%;
     color: var(--light-gray);
-}
+} 
 
 .sidebar-list-item.active {
-    color: var(--blue);
+    color: var(--green);
     background-color: var(--lightest-gray);
+    border-radius: 5px;
 }
 
 .sidebar-list-item:hover {
@@ -411,13 +420,9 @@ pre {
 }
 
 .sidebar-list-item.active::before {
-    content: "";
-    background-color: var(--blue);
     height: 100%;
-    top: 0;
-    left: 0;
-    width: 5px;
-    position: absolute;
+    background-color: var(--medium-gray);
+    
 }
 
 .sidebar.open {
@@ -460,6 +465,11 @@ pre {
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 24px;
+    width:30%;
+    
+}
+.page-title-bottom{
+   margin-top: 100px;
 }
 
 .content {
@@ -484,12 +494,17 @@ pre {
 }
 
 .cards .card-single {
-    background: #fff;
-    height: 500px;
+    background: linear-gradient(
+    to top right, 
+    #013220 0%, /* Xanh đậm bắt đầu từ 0% */
+    rgba(2, 106, 25, 0.2) 95%, 
+    #3d8102 99% 
+  );
+    height: 300px;
     width: 31%;
-    /* max-width: 500px;*/
     min-width: 290px;
     position: relative;
+    top: 50px;
     box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.05),
         inset -5px -5px 5px rgba(255, 255, 255, 0.5),
         5px 5px 5px rgba(0, 0, 0, 0.05), -5px -5px 5px rgba(255, 255, 255, 0.5);
@@ -515,7 +530,6 @@ pre {
 .cards .card-single:hover .box {
     transform: translateY(-10px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(45deg, var(--blue), orange);
 }
 
 .cards .card-single .box .on-box {
@@ -524,35 +538,34 @@ pre {
 
 .cards .card-single .box h2 {
     position: absolute;
-    top: 5px;
-    right: 30px;
-    font-size: 2rem;
+    bottom: 20px;
+    left: 45%;
+    font-size: 3rem;
     color: var(--dark-gray);
     transition: 0.3s;
     pointer-events: none;
+    margin-top: 30px;
+    
+
 }
 
 .cards .card-single .box h3 {
+    text-transform: uppercase;
     font-size: 1.5rem;
     color: var(--dark-gray);
     z-index: 1;
     transition: 0.3s;
-    margin-bottom: 10px;
+   padding-bottom: 20px;
+    
 }
 
-.cards .card-single .box p {
-    font-size: 0.9em;
-    font-weight: 400;
-    color: var(--dark-gray);
-    z-index: 1;
-    transition: 0.3s;
-    text-align: left;
-}
 
-.cards .card-single .box:hover h2,
-.cards .card-single .box:hover h3,
-.cards .card-single .box:hover p {
-    color: #fff;
+
+
+.cards .card-single .box .on-box i{
+    
+    font-size: 75px;
+    
 }
 
 /* customer */
@@ -607,7 +620,7 @@ tbody tr td {
 }
 
 .btn-control-large {
-    background-color: var(--blue);
+    background-color: var(--green);
     height: 40px;
     color: #fff;
     border-radius: 5px;
@@ -701,7 +714,7 @@ tbody tr td {
 }
 
 .list-current-price {
-    color: var(--blue);
+    color: var(--green);
     font-weight: 500;
 }
 
@@ -744,7 +757,7 @@ tbody tr td {
 }
 
 .btn-delete {
-    background-color: var(--blue);
+    background-color: var(--green);
     color: white;
 }
 
@@ -863,18 +876,18 @@ tbody tr td {
 }
 
 .form-control:focus {
-    border-color: var(--blue);
+    border-color: var(--green);
 }
 
 .form-message {
-    color: blue;
+    color: var(--green);
     font-size: 13px;
     margin-top: 10px;
 }
 
 .form-submit {
     height: 40px;
-    background-color: var(--blue);
+    background-color: var(--green);
     color: #fff;
     padding: 10px 30px;
     border-radius: 5px;
@@ -897,7 +910,7 @@ input[type="file"] {
 }
 
 .form-label-file {
-    background-color: var(--blue);
+    background-color: var(--green);
     color: #fff;
     padding: 8px 40px;
     text-align: center;
@@ -959,11 +972,11 @@ input[type="file"] {
 }
 
 label a {
-    color: var(--blue);
+    color: var(--green);
 }
 
 #btn-add-account {
-    background-color: var(--blue);
+    background-color: var(--green);
     height: 30px;
     color: #fff;
     border-radius: 5px;
@@ -995,7 +1008,7 @@ label a {
 }
 
 .admin-control-right button:hover {
-    background-color: var(--blue);
+    background-color: var(--green);
     color: #fff
 }
 
@@ -1146,7 +1159,7 @@ label a {
 }
 
 .order-product-current-price {
-    color: var(--blue);
+    color: var(--green);
     font-weight: 500;
 }
 
@@ -1190,7 +1203,7 @@ label a {
 }
 
 .detail-order-item i {
-    color: var(--blue);
+    color: var(--green);
     margin-right: 5px;
 }
 
@@ -1213,7 +1226,7 @@ label a {
 }
 
 .price-total .price {
-    color: var(--blue);
+    color: var(--green);
     font-weight: 500;
     font-size: 16px;
 }
@@ -1246,7 +1259,7 @@ label a {
 }
 
 .btn-chuaxuly {
-    background-color: var(--blue);
+    background-color: var(--green);
 }
 
 .btn-chuaxuly::before {
@@ -1298,9 +1311,9 @@ label a {
 
 .page-nav-item.active a,
 .page-nav-item a:hover {
-    background-color: var(--blue);
+    background-color: var(--green);
     color: #fff;
-    border: 2px solid var(--blue);
+    border: 2px solid var(--green);
 }
 
 /* order-statistical */
@@ -1323,7 +1336,7 @@ label a {
 .order-statistical-item-icon i {
     font-size: 45px;
     margin-right: 25px;
-    color: var(--blue);
+    color: var(--green);
 }
 
 .order-statistical-item-content-desc {

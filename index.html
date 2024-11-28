@@ -110,23 +110,7 @@
             </div>
         </div>
     </div>
-    <!-- <div id="order_history">
-        <h1>Lịch sử đặt hàng</h1>
-        <table id="order-history-table">
-            <thead>
-                <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày đặt</th>
-                    <th>Số lượng</th>
-                    <th>Tổng tiền</th>
-                    <th>Địa chỉ nhận hàng</th>
-                    <th>Trạng thái</th>
-                </tr>
-                <tbody id="orders-table-body">
-                   
-                </tbody>
-            </thead>
-    </div>  -->
+
 
     <div id="topmenu">
         <div id="topmenu-left">
@@ -139,7 +123,7 @@
                     <div>Liên Hệ</div>
                     <div>Cửa Hàng</div>
                     <div>Giới Thiệu</div>
-                    <div>Lịch Sử Đặt Hàng</div>
+                    <div onclick="window.location.href='OrderHistory.html'">Lịch Sử Đặt Hàng</div>
                 </div>
             </div>
         </div>
@@ -208,7 +192,7 @@
                 <div class="payment-input">
                     <label for="addressPersonal">Địa chỉ</label>
                     <input type=" text" name="address" id="addressPersonal"
-                        placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkName(this)">
+                        placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkDiaChi(this)">
                 </div>
                 <button type="submit" id="confirmPersonalInfo">Xác nhận</button>
             </form>

@@ -24,7 +24,7 @@
                     <div>Liên Hệ</div>
                     <div>Cửa Hàng</div>
                     <div>Giới Thiệu</div>
-                    <div>Lịch Sử Đặt Hàng</div>
+                    <div onclick="window.location.href='OrderHistory.html'">Lịch Sử Đặt Hàng</div>
                 </div>
             </div>
         </div>
@@ -44,8 +44,8 @@
                         </div>
                     </div>
                 </div>
-                <div id="topmenu_icon--user">
-                    <div id="icon--user" style="position: relative;">
+                <div id="topmenu_icon--user" style="position: relative;">
+                    <div id="icon--user">
                         <i class="fa-regular fa-user"></i>
                         <div class="user--selection hidden">
                             <div>
@@ -69,7 +69,7 @@
         <div class="login-content">
             <span class="close-login" id="CloseFormLogin">&times;</span>
             <div class="form-container sign-in-container">
-                <form action="#">
+                <form action="#" id="dangnhap-form">
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
                         <a href="#"><i class="fab fa-facebook-f"></i></a>
@@ -89,7 +89,7 @@
             </div>
 
             <div class="form-container sign-up-container">
-                <form action="#">
+                <form action="#" id="dangky-form">
                     <h1>Đăng kí</h1>
                     <span>Điền các thông tin sau:</span>
                     <input type="text" placeholder="Số điện thoại" />
@@ -155,7 +155,7 @@
                 <div class="payment-input">
                     <label for="addressPersonal">Địa chỉ</label>
                     <input type=" text" name="address" id="addressPersonal"
-                        placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkName(this)">
+                        placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkDiaChi(this)">
                 </div>
                 <button type="submit" id="confirmPersonalInfo">Xác nhận</button>
             </form>
@@ -191,7 +191,7 @@
                         <div class="payment-input">
                             <label for="diachi">Địa chỉ</label>
                             <input type="text" name="diachi" id="diachi" placeholder="273 An Dương Vương Quận 5 TP.HCM"
-                                oninput="checkInput(this)">
+                                oninput="checkDiaChi(this)">
                         </div>
                     </div>
                     <div style="padding-top: 20px;">
@@ -451,6 +451,45 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div id="nhapdiachi_wrap">
+        <div id="nhapdiachi-form">
+            <div
+                style="text-align: center; padding: 12px; background-color: #0d5146; color: white; position: relative;;">
+                CHỌN ĐỊA CHỈ GIAO HÀNG
+                <div style="position: absolute; right: 2%; top: 36%; cursor: pointer;" id="diachi-btn">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div style="display: flex; height: 80%;">
+                <div class="nhapdiachi-input">
+                    <div style="text-align: center; padding-top: 12px; font-weight: 700; font-size: larger;">
+                        Chọn địa chỉ giao hàng mặc định
+                    </div>
+                    <div class="payment-input valid">
+                        <label for="diachicuaban">Địa chỉ</label>
+                        <p id="diachicuaban" style="margin: 4px 2px; user-select: none;"></p>
+                    </div>
+                    <div id="diachicuaban-btn" style=" text-align: center; padding: 12px; width: 100%; color: white; background-color:
+                        #0d5146; margin: 16px auto; cursor: pointer;">
+                        CHỌN</div>
+                </div>
+                <div class="nhapdiachi-input">
+                    <div style="text-align: center; padding-top: 12px; font-weight: 700; font-size: larger;">
+                        Chọn địa chỉ giao hàng khác
+                    </div>
+                    <div class="payment-input">
+                        <label for="addressPersonal">Địa chỉ</label>
+                        <input type=" text" id="diachinhap" placeholder="273 An Dương Vương P3 Quận 5 TPHCM"
+                            oninput="checkDiaChi(this)">
+                    </div>
+                    <div id="diachinhap-btn"
+                        style="text-align: center; padding: 12px; width: 100%; color: white; background-color: #0d5146; margin: 16px auto; cursor: pointer;">
+                        CHỌN</div>
+                </div>
+            </div>
+        </div>
+    </div>
     </div>
     <div id="information">
         <h2>Nhận thông tin khuyến mãi mới nhất</h2>

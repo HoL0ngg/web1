@@ -1,15 +1,29 @@
 :root {
-    --blue: #2145b3;
+    --green: #0a701d;
     --lightest-gray: rgb(249, 249, 249);
 }
 
 .page-title {
     color: var(--lightest-gray);
-    background-color: var(--blue);
+    background-color: var(--green);
     text-align: center;
     border-radius: 5px;
     padding: 0.5rem;
+    padding-left: 0;
     text-transform: uppercase;
+    clip-path: polygon(0 0, calc(100% - 50px) 0, 100% 50px, 100% 100%, 0% 100%);
+    
+}
+.page-title-bottom{
+    color: var(--lightest-gray);
+    background-color: var(--green);
+    text-align: center;
+    border-radius: 5px;
+    padding: 0.5rem;
+    padding-left: 0;
+    text-transform: uppercase;
+    
+    
 }
 
 @media only screen and (max-width: 1200px) {
@@ -104,18 +118,30 @@
     .sidebar .channel-logo {
         margin-top: -2rem;
         width: 100%;
+
+        position: absolute;
+        top:50px;
+        left:20px;
     }
     
     
     .sidebar .channel-logo >img {
-        width: 100px;
-        height: 100px;
+        width: 60px;
+        height: 60px;
     }
     
     .your-channel {
-        margin-top: 4.5rem;
+         /* margin-top: 4.5rem;
+          */
+          position: absolute;
+          top: 20px;
+          left: 5px;
     }
-    
+    .your-channel img {
+        /* margin-top: 4.5rem;
+         */
+         height:50px;
+   }
     .sidebar .middle-sidebar {
         margin-top: 5rem;
     }

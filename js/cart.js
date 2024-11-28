@@ -15,7 +15,7 @@ function updateUser() {
     if (userlogin == undefined) {
         if (document.getElementById('not_payment-info')) document.getElementById('not_payment-info').style.display = 'none';
         if (document.getElementById('payment-info')) document.getElementById('payment-info').style.display = 'none';
-        document.getElementById('not_login').style.display = 'block';
+        if (document.getElementById('not_login')) document.getElementById('not_login').style.display = 'block';
         return;
     }
 
@@ -23,7 +23,7 @@ function updateUser() {
     const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
     let user = accountsInfo.find(acc => acc.username == userlogin.username);
     if (user == undefined) {
-        document.getElementById('not_payment-info').style.display = 'block';
+        if (document.getElementById('not_payment-info')) document.getElementById('not_payment-info').style.display = 'block';
         return;
     }
     updatePersonalInfo(user);
@@ -54,7 +54,7 @@ function loadCart() {
     const container = document.getElementById('cart-container');
     let s = '';
 
-    if (cart) {
+    if (cart && container) {
         s = `<tr>
                             <th></th>
                             <th>Tên sản phẩm</th>
@@ -338,13 +338,27 @@ function checkName(inp) {
     }
 }
 
+function checkDiaChi(inp) {
+    const diachiRegex = /^\d+(\/\d+)*\s+([\p{L}\s]+)$/u;
+    if (!diachiRegex.test(inp.value)) {
+        inp.parentElement.classList.add('invalid');
+        inp.parentElement.classList.remove('valid');
+        inp.focus();
+        return false;
+    } else {
+        inp.parentElement.classList.remove('invalid');
+        inp.parentElement.classList.add('valid');
+        return true;
+    }
+}
+
 if (document.getElementById('payment-form')) document.getElementById('payment-form').addEventListener('submit', function (e) {
     e.preventDefault();
     let flag = true;
     flag &= checkName(document.getElementById('firstname'));
     flag &= checkName(document.getElementById('lastname'));
     flag &= checkEmail(document.getElementById('email'));
-    flag &= checkInput(document.getElementById('diachi'));
+    flag &= checkDiaChi(document.getElementById('diachi'));
     flag &= DinhDangSoThe(document.getElementById('sothe'));
     flag &= checknumber(document.getElementById('ccv'));
     flag &= DinhDangNgay(document.getElementById('hanthe'));
@@ -357,16 +371,58 @@ if (document.getElementById('payment-form')) document.getElementById('payment-fo
     }
 })
 
+function moPopUpNhapdiachi() {
+    document.getElementById('nhapdiachi_wrap').style.display = 'block';
+}
+
+function dongPopUpNhapdiachi() {
+    document.getElementById('nhapdiachi_wrap').style.display = 'none';
+}
+
+function chondiachi(callback) {
+    moPopUpNhapdiachi();
+    const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
+    let user = accountsInfo.find(acc => acc.username == userlogin.username);
+    document.getElementById('diachicuaban').innerText = user.diachi;
+    const nhapdiachiform = document.getElementById('nhapdiachi-form');
+    const closebtn = document.getElementById('diachi-btn');
+
+    const diachi1 = document.getElementById('diachicuaban');
+    const diachi2 = document.getElementById('diachinhap');
+
+    const diachi1_btn = document.getElementById('diachicuaban-btn');
+    const diachi2_btn = document.getElementById('diachinhap-btn');
+
+    nhapdiachiform.addEventListener('click', (e) => {
+        if (closebtn.contains(e.target)) {
+            dongPopUpNhapdiachi();
+            callback(""); // Không chọn địa chỉ
+        } else if (diachi1_btn.contains(e.target)) {
+            dongPopUpNhapdiachi();
+            callback(diachi1.innerText); // Chọn địa chỉ 1
+        } else if (diachi2_btn.contains(e.target)) {
+            if (checkDiaChi(diachi2)) {
+                dongPopUpNhapdiachi();
+                callback(diachi2.value); // Chọn địa chỉ 2
+            }
+        }
+    });
+}
+
 function ThanhToan() {
-    // console.log(isLogin);
-    // if (!isLogin) return displayToast('Bạn phải đăng nhập để thanh toán');
     if (totalQuantity == 0) return displayToast('Giỏ hàng của bạn đang trống');
     if (!icon_active) return displayToast('Bạn phải chọn phương thức thanh toán trước');
-    if (icon_active) {
-        LuuHoaDon();
-        displayToast('Bạn đã đặt hàng thành công');
-    }
+
+    chondiachi((diachi) => {
+        if (diachi) {
+            LuuHoaDon(diachi);
+            displayToast('Bạn đã đặt hàng thành công');
+        } else {
+            displayToast('Bạn chưa chọn địa chỉ');
+        }
+    });
 }
+
 
 function TaoMaHD() {
     let hoadon = JSON.parse(localStorage.getItem('hoadon')) || [];
@@ -374,7 +430,7 @@ function TaoMaHD() {
     return 'HD' + hoadon.length;
 }
 
-function LuuHoaDon() {
+function LuuHoaDon(diachigiaohang) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
     const HoaDon = {
@@ -384,7 +440,8 @@ function LuuHoaDon() {
         items: cart,             // Sản phẩm trong giỏ hàng
         total: totalPrice, // Tổng tiền
         payment_method: icon_active,    // Phương thức thanh toán
-        trangthai: false    // Trạng thái đơn hàng
+        trangthai: false,    // Trạng thái đơn hàng
+        diachi: diachigiaohang         // Địa chỉ giao hàng
     };
     console.log(HoaDon);
 
