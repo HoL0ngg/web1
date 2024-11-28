@@ -121,11 +121,13 @@ function checknumber(inp) {
     if (inp.value.trim().length != inp.maxLength) {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         inp.focus();
         return false;
     } else {
         inp.parentElement.classList.remove('invalid');
         inp.parentElement.classList.add('valid');
+        inp.parentElement.querySelector('.error-input').classList.remove('invalid');
         return true;
     }
 }
@@ -139,11 +141,13 @@ function checkSDT(inp) {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
         inp.focus();
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         return false; // Sai định dạng
     }
 
     inp.parentElement.classList.remove('invalid');
     inp.parentElement.classList.add('valid');
+    inp.parentElement.querySelector('.error-input').classList.remove('invalid');
     return true; // Ngày tháng hợp lệ
 }
 
@@ -175,11 +179,13 @@ function DinhDangSoThe(inputElement) {
     if (inputElement.value.trim().length != 19) {
         inputElement.parentElement.classList.add('invalid');
         inputElement.parentElement.classList.remove('valid');
+        inputElement.parentElement.querySelector('.error-input').classList.add('invalid');
         inputElement.focus();
         return false;
     } else {
         inputElement.parentElement.classList.remove('invalid');
         inputElement.parentElement.classList.add('valid');
+        inputElement.parentElement.querySelector('.error-input').classList.remove('invalid');
         return true;
     }
 }
@@ -197,6 +203,7 @@ function DinhDangNgay(inp) {
     if (!regex.test(inp.value)) {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         inp.focus();
         return false; // Sai định dạng
     }
@@ -209,11 +216,13 @@ function DinhDangNgay(inp) {
     if (year < currentYear || (year == currentYear && month < currentMonth)) {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         inp.focus();
         return false; // Ngày tháng đã qua
     }
     inp.parentElement.classList.remove('invalid');
     inp.parentElement.classList.add('valid');
+    inp.parentElement.querySelector('.error-input').classList.remove('invalid');
     return true; // Ngày tháng hợp lệ
 }
 
@@ -282,11 +291,13 @@ function checkInput(inp) {
     if (val.trim() == '') {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         inp.focus();
         return false;
     } else {
         inp.parentElement.classList.remove('invalid');
         inp.parentElement.classList.add('valid');
+        inp.parentElement.querySelector('.error-input').classList.remove('invalid');
         return true;
     }
 }
@@ -296,10 +307,12 @@ function checkEmail(inp) {
     if (emailRegex.test(inp.value)) {
         inp.parentElement.classList.remove('invalid');
         inp.parentElement.classList.add('valid');
+        inp.parentElement.querySelector('.error-input').classList.remove('invalid');
         return true;
     } else {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         inp.focus();
         return false;
     }
@@ -329,11 +342,13 @@ function checkName(inp) {
     if (value.trim() == '') {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         inp.focus();
         return false;
     } else {
         inp.parentElement.classList.remove('invalid');
         inp.parentElement.classList.add('valid');
+        inp.parentElement.querySelector('.error-input').classList.remove('invalid');
         return true;
     }
 }
@@ -343,11 +358,13 @@ function checkDiaChi(inp) {
     if (!diachiRegex.test(inp.value)) {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');
+        inp.parentElement.querySelector('.error-input').classList.add('invalid');
         inp.focus();
         return false;
     } else {
         inp.parentElement.classList.remove('invalid');
         inp.parentElement.classList.add('valid');
+        inp.parentElement.querySelector('.error-input').classList.remove('invalid');
         return true;
     }
 }

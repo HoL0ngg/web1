@@ -135,20 +135,23 @@
             </div>
             <form id="personal-form">
                 <div class="payment-input">
-                    <label for="namePersonal">Họ</label>
+                    <label for="namePersonal">Họ và tên</label>
                     <input type=" text" name="hotentxt" id="namePersonal" placeholder="Nguyễn Văn A"
                         oninput="checkName(this)">
+                    <span class="error-input">Họ tên không hợp lệ</span>
                 </div>
                 <div style="display: flex; width: 100%;" id="personal-form-2">
                     <div class="payment-input" style="margin-right: 10px; flex: 2;" id="personal-form-2-email">
                         <label for="emailPersonal">Email</label>
                         <input type=" text" name="email" id="emailPersonal" placeholder="nguyenvana@gmail.com"
                             oninput="checkEmail(this)">
+                        <span class="error-input">Email không hợp lệ</span>
                     </div>
                     <div class="payment-input" style="flex: 1;">
                         <label for="phonePersonal">Số điện thoại</label>
                         <input type="text" name="phone" id="phonePersonal" placeholder="0987654321"
                             oninput="checkSDT(this)" maxlength="10">
+                        <span class="error-input">SĐT không hợp lệ</span>
                     </div>
                 </div>
 
@@ -156,6 +159,7 @@
                     <label for="addressPersonal">Địa chỉ</label>
                     <input type=" text" name="address" id="addressPersonal"
                         placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkDiaChi(this)">
+                    <span class="error-input">Địa chỉ không hợp lệ</span>
                 </div>
                 <button type="submit" id="confirmPersonalInfo">Xác nhận</button>
             </form>
@@ -176,36 +180,42 @@
                                 <label for="firstname">Họ</label>
                                 <input type="text" name="firstname" id="firstname" class="" placeholder="Hồ"
                                     oninput="checkName(this)">
+                                <span class="error-input">Không được để trống</span>
                             </div>
                             <div class="payment-input">
                                 <label for="lastname">Tên</label>
                                 <input type="text" name="lastname" id="lastname" placeholder="Hoàng Long"
                                     oninput="checkName(this)">
+                                <span class="error-input">Không được để trống</span>
                             </div>
                         </div>
                         <div class="payment-input">
                             <label for="email">Email</label>
                             <input type="email" name="email" id="email" placeholder="hohoanglong@gmail.com"
                                 oninput="checkEmail(this)">
+                            <span class="error-input">Email không hợp lệ</span>
                         </div>
                         <div class="payment-input">
                             <label for="diachi">Địa chỉ</label>
                             <input type="text" name="diachi" id="diachi" placeholder="273 An Dương Vương Quận 5 TP.HCM"
                                 oninput="checkDiaChi(this)">
+                            <span class="error-input">Địa chỉ không hợp lệ</span>
                         </div>
                     </div>
                     <div style="padding-top: 20px;">
                         <p class="payment-title">THÔNG TIN TÀI KHOẢN</p>
                         <div style="display: flex; width: 100%;">
-                            <div class="payment-input" style="margin-right: 10px; flex: 7;">
+                            <div class="payment-input" style="margin-right: 10px; flex: 3;">
                                 <label for="sothe">Số thẻ</label>
                                 <input type="text" name="sothe" id="sothe" placeholder="XXXX - XXXX - XXXX - XXXX"
                                     maxlength="19" oninput="DinhDangSoThe(this)">
+                                <span class="error-input">Số thẻ phải đủ 16 số</span>
                             </div>
                             <div class="payment-input" style="flex: 1;">
                                 <label for="ccv">CVC</label>
                                 <input type="password" name="ccv" id="ccv" placeholder="XXX" maxlength="3"
                                     oninput="checknumber(this)">
+                                <span class="error-input">Không hợp lệ</span>
                             </div>
                         </div>
                         <div style="display: flex; width: 100%;">
@@ -213,11 +223,13 @@
                                 <label for="hanthe">Hạn thẻ</label>
                                 <input type="text" name="hanthe" id="hanthe" placeholder="MM / YY" maxlength="5"
                                     oninput="DinhDangNgay(this)">
+                                <span class="error-input">Hạn thẻ không hợp lệ</span>
                             </div>
                             <div class="payment-input" style="flex: 1;">
                                 <label for="zipcode">Mã ZIP</label>
                                 <input type="text" name="zipcode" id="zipcode" placeholder="XXXXX" maxlength="5"
                                     oninput="checknumber(this)">
+                                <span class="error-input">Phải đủ 5 số</span>
                             </div>
                         </div>
 

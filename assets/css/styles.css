@@ -616,3 +616,16 @@ i.active {
     background-color: white;
     height: max-content;
 }
+
+.error-input {
+    display: none;
+    margin-left: 2px;
+    padding-top: 2px;
+    user-select: none;
+}
+
+.error-input.invalid {
+    color: red;
+    display: block;
+    font-size: 13px;
+}
