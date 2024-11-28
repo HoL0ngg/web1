@@ -55,7 +55,7 @@ function checklogin() {
         // hideLogin();
         hideUser();
         showAdmin();
-        nameUser.innerText = 'admin';
+        nameUser.innerText = userlogin.username;
         showNameUser();
         // userNameElement.style.display = 'flex';
     }
