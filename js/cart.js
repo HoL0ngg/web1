@@ -392,11 +392,17 @@ if (document.getElementById('payment-form')) document.getElementById('payment-fo
 })
 
 function moPopUpNhapdiachi() {
+    document.getElementById('nhapdiachi_wrap').classList.add('show');
+    document.getElementById('nhapdiachi-form').classList.add('show');
     document.getElementById('nhapdiachi_wrap').style.display = 'block';
 }
 
 function dongPopUpNhapdiachi() {
-    document.getElementById('nhapdiachi_wrap').style.display = 'none';
+    document.getElementById('nhapdiachi_wrap').classList.remove('show');
+    document.getElementById('nhapdiachi-form').classList.remove('show');
+    setTimeout(() => {
+        document.getElementById('nhapdiachi_wrap').style.display = 'none';
+    }, 500);
 }
 
 function chondiachi(callback) {
@@ -512,13 +518,19 @@ function updateXacNhanDonHang(diachi) {
 }
 
 function HienXacNhanDonHang(diachi) {
+    document.getElementById('hoadon').classList.add('show');
+    document.getElementById('hoadon-container').classList.add('show');
     document.getElementById('hoadon').style.display = 'block';
     updateXacNhanDonHang(diachi);
     loadBill();
 }
 
 function DongXacNhanDonHang() {
-    document.getElementById('hoadon').style.display = 'none';
+    document.getElementById('hoadon').classList.remove('show');
+    document.getElementById('hoadon-container').classList.remove('show');
+    setTimeout(() => {
+        document.getElementById('hoadon').style.display = 'none';
+    }, 500);
 }
 
 if (document.getElementById('xacnhandonhang-btn')) document.getElementById('xacnhandonhang-btn').addEventListener('click', function () {

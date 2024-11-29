@@ -292,6 +292,14 @@ td #chinhsoluong {
     animation: slideDown 0.5s ease forwards;
 }
 
+#hoadon.show {
+    animation: glowUp 0.5s ease;
+}
+
+#hoadon-container.show {
+    animation: slideUp 0.5s ease forwards;
+}
+
 #payment-method.show {
     animation: glowUp 0.5s ease;
 }
@@ -623,6 +631,15 @@ i.active {
     width: 100%;
     height: 100%;
     z-index: 2;
+    animation: glowDown 0.5s ease forwards;
+}
+
+#nhapdiachi_wrap.show {
+    animation: glowUp 0.5s ease;
+}
+
+#nhapdiachi-form.show {
+    animation: slideUp 0.5s ease forwards;
 }
 
 #nhapdiachi-form {
@@ -630,6 +647,7 @@ i.active {
     margin: 10% auto;
     background-color: white;
     height: max-content;
+    animation: slideDown 0.5s ease forwards;
 }
 
 .error-input {
@@ -658,6 +676,7 @@ i.active {
     width: 100%;
     z-index: 5;
     display: none;
+    animation: glowDown 0.5s ease forwards;
 }
 
 #hoadon-container {
@@ -667,6 +686,7 @@ i.active {
     margin: 10% auto;
     display: block;
     z-index: 6;
+    animation: slideDown 0.5s ease forwards;
 }
 
 #hoadon-center {
