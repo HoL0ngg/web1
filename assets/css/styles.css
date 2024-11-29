@@ -701,4 +701,13 @@ i.active {
 
 .input-hihi {
     margin: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#hoadon-product {
+    width: 90%;
+    height: calc(100% - 50px);
+    margin: 2% auto;
+    overflow-y: scroll;
 }

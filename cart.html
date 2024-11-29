@@ -494,6 +494,7 @@
                         <label for="addressPersonal">Địa chỉ</label>
                         <input type=" text" id="diachinhap" placeholder="273 An Dương Vương P3 Quận 5 TPHCM"
                             oninput="checkDiaChi(this)">
+                        <span class="error-input">Địa chỉ không hợp lệ</span>
                     </div>
                     <div id="diachinhap-btn"
                         style="text-align: center; padding: 12px; width: 100%; color: white; background-color: #0d5146; margin: 16px auto; cursor: pointer;">
@@ -507,25 +508,52 @@
             <div id="hoadon-header"
                 style="position: relative; background-color: #0d5146; height: 50px; z-index: inherit; border-bottom: 2px black solid;">
                 <p style="text-align: center; padding: 10px; color: white; line-height: 30px;">XÁC NHẬN ĐƠN HÀNG</p>
-                <div style="position: absolute; top: 18px; right: 20px; color: white;" onclick="DongXacNhanDonHang()">
+                <div style="position: absolute; top: 18px; right: 20px; color: white; cursor: pointer;"
+                    onclick="DongXacNhanDonHang()">
                     <i class="fa-solid fa-xmark"></i>
                 </div>
             </div>
             <div id="hoadon-center">
                 <div id="hoadon-left">
                     <div id="hoadon-product">
-                        Bên đây là những món hàng nè
+                        <table style="border-spacing: 0;">
+                            <tbody id="hoadon-container-2">
+
+                            </tbody>
+                        </table>
                     </div>
                 </div>
                 <div id="hoadon-right">
                     <div id="hoadon-info">
-                        <p class="ten input-hihi">Tên: </p> <!--Ten -->
-                        <p class="diachi input-hihi">Địa chỉ: </p> <!--Dia chi -->
-                        <p class="sdt input-hihi">SĐT: </p> <!--SDT -->
-                        <p class="tamtinh input-hihi">Tạm tính: 10.000 VNĐ</p> <!--Tam tinh -->
-                        <p class="tienship input-hihi">Tiền ship: 12.000 VNĐ</p> <!--Tien ship -->
-                        <p class="tong input-hihi">Tổng cộng: 22.000 VNĐ</p> <!--Tong -->
-                        <p class="method input-hihi">Phương thức thanh toán: tiền mặt</p> <!--Phương thức thanh toán -->
+                        <div class="input-hihi">
+                            <p>Họ và tên: </p> <!--Ten -->
+                            <p class="ten" style="text-align: right;"></p>
+                        </div>
+                        <div class="input-hihi">
+                            <p>Địa chỉ: </p>
+                            <p class="diachi" style="text-align: right;"></p> <!--Dia chi -->
+                        </div>
+                        <div class="input-hihi">
+                            <p>SĐT: </p>
+                            <p class="sdt" style="text-align: right;"></p> <!--SDT -->
+                        </div>
+                        <div class="input-hihi">
+                            <p>Tạm tính: </p>
+                            <p class="tamtinh" style="text-align: right;"></p> <!--Tam tinh -->
+                        </div>
+                        <div class="input-hihi">
+                            <p>Tiền ship: </p>
+                            <p class="tienship" style="text-align: right;"></p> <!--Tien ship -->
+                        </div>
+                        <div class="input-hihi">
+                            <p>Tổng: </p>
+                            <p class="tong" style="text-align: right; background-color: pink;"></p> <!--Tong -->
+                        </div>
+                        <div class="input-hihi">
+                            <p>Phương thức thanh toán:</p>
+                            <p class="method" style="text-align: right;"></p> <!--Phương thức thanh toán -->
+
+                        </div>
                     </div>
                     <div id="xacnhandonhang-btn">XÁC NHẬN</div>
                 </div>

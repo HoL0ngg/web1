@@ -49,11 +49,13 @@ function updateQuantity() {
 }
 
 function loadCart() {
-    const cart = JSON.parse(localStorage.getItem('cart'));
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log(cart);
+
     const container = document.getElementById('cart-container');
     let s = '';
 
-    if (cart && container) {
+    if (cart.length > 0 && container) {
         s = `<tr>
                             <th></th>
                             <th>Tên sản phẩm</th>
@@ -108,10 +110,11 @@ function loadCart() {
                         </tr>`
         });
     }
-    if (container) container.innerHTML = s;
+    if (container)
+        container.innerHTML = s;
     updateCart();
     EventListener();
-    if (totalQuantity == 0) checkEmptyCart();
+    checkEmptyCart();
 }
 
 function checknumber(inp) {
@@ -426,7 +429,67 @@ function chondiachi(callback) {
     });
 }
 
-function updateXacNhanDonHang() {
+function loadBill() {
+    const cart = JSON.parse(localStorage.getItem('cart'));
+    const container = document.getElementById('hoadon-container-2');
+    let s = '';
+
+    if (cart && container) {
+        s = `<tr>
+                            <th></th>
+                            <th>Tên sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Tổng</th>
+                        </tr>`;
+        cart.forEach(item => {
+            let imgsrc, ten, gia;
+            for (let i = 0; i < productArray.length; i++) {
+                if (item.id == productArray[i].productid) {
+                    imgsrc = productArray[i].img;
+                    ten = productArray[i].name;
+                    gia = productArray[i].price;
+                    break;
+                }
+            }
+            gia = gia.toLocaleString('vi-VN');
+            const price = gia.split('.').join('');
+            const quantity = parseInt(item.quantity);
+            let subtotal = price * quantity;
+            subtotal = subtotal.toLocaleString('vi-VN');
+            s += `<tr>
+                            <td style="display: none;">${item.id}</td>
+                            <td><img src="${imgsrc}" alt="" style="height: 55px;"></td>
+                            <td>
+                                ${ten}
+                            </td>
+                            <td>
+                                <span class="item-price">
+                                    ${gia}
+                                </span>
+                                <span> VNĐ</span>
+                            </td>
+                            <td>
+                                <p class="quantity" style="text-align: center;">${quantity}</p>
+                            </td>
+                            <td>
+                                <p class="item-total">${subtotal} VNĐ
+                                </p>
+                            </td>
+                        </tr>`
+        });
+    }
+    if (container) container.innerHTML = s;
+}
+
+if (document.getElementById('xacnhandonhang-btn'))
+    (document.getElementById('xacnhandonhang-btn')).addEventListener('click', () => {
+        LuuHoaDon();
+        displayToast('Bạn đã đặt hàng thành công');
+        // dongPopUpNhapdiachi();
+    })
+
+function updateXacNhanDonHang(diachi) {
     const info = document.getElementById('hoadon-info');
     const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
     let info_user = accountsInfo.find(account => account.username == userlogin.username)
@@ -434,18 +497,24 @@ function updateXacNhanDonHang() {
     let tong = parseFloat(tamtinh) + 12000;
     tong = tong.toLocaleString('vi-VN');
     tamtinh = tamtinh.toLocaleString('vi-VN');
+    let payment = "";
 
-    info.querySelector('.ten').innerText = `Tên: ${info_user.hoten}`
-    info.querySelector('.diachi').innerText = `Địa chỉ: ${info_user.diachi}`
-    info.querySelector('.sdt').innerText = `SĐT: ${info_user.sdt}`
-    info.querySelector('.tamtinh').innerText = `Tạm tính: ${tamtinh} VNĐ`
-    info.querySelector('.tienship').innerText = `Tiền ship: 12.000 VNĐ`
-    info.querySelector('.tong').innerText = `Tạm tính: ${tong} VNĐ`
+    if (icon_active.classList.contains('fa-money-bill-1-wave')) payment = 'Tiền mặt'
+    else payment = 'Chuyển khoản';
+
+    info.querySelector('.ten').innerText = `${info_user.hoten}`
+    info.querySelector('.diachi').innerText = `${diachi}`
+    info.querySelector('.sdt').innerText = `${info_user.sdt}`
+    info.querySelector('.tamtinh').innerText = `${tamtinh} VNĐ`
+    info.querySelector('.tienship').innerText = `12.000 VNĐ`
+    info.querySelector('.tong').innerText = `${tong} VNĐ`
+    info.querySelector('.method').innerText = `${payment}`
 }
 
-function HienXacNhanDonHang() {
+function HienXacNhanDonHang(diachi) {
     document.getElementById('hoadon').style.display = 'block';
-    updateXacNhanDonHang();
+    updateXacNhanDonHang(diachi);
+    loadBill();
 }
 
 function DongXacNhanDonHang() {
@@ -462,9 +531,9 @@ function ThanhToan() {
 
     chondiachi((diachi) => {
         if (diachi) {
-            if (HienXacNhanDonHang()) {
-                LuuHoaDon(diachi);
-                displayToast('Bạn đã đặt hàng thành công');
+            if (HienXacNhanDonHang(diachi)) {
+                // LuuHoaDon(diachi);
+                // displayToast('Bạn đã đặt hàng thành công');
             } else return;
         } else {
             displayToast('Bạn chưa chọn địa chỉ');
@@ -479,16 +548,16 @@ function TaoMaHD() {
     return 'HD' + hoadon.length;
 }
 
-function LuuHoaDon(diachigiaohang) {
+function LuuHoaDon() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
     let payment = "";
 
     if (icon_active.classList.contains('fa-money-bill-1-wave')) payment = 'Tiền mặt'
     else payment = 'Chuyển khoản';
-    console.log(icon_active);
 
-    console.log(payment);
-
+    const info = document.getElementById('hoadon-info');
+    const diachigiaohang = info.querySelector('.diachi').innerText;
 
     const HoaDon = {
         id: TaoMaHD(), // ID hóa đơn duy nhất
@@ -500,13 +569,11 @@ function LuuHoaDon(diachigiaohang) {
         trangthai: false,    // Trạng thái đơn hàng
         diachi: diachigiaohang         // Địa chỉ giao hàng
     };
-    console.log(HoaDon);
 
     let hoadon = JSON.parse(localStorage.getItem('hoadon')) || [];
     hoadon.push(HoaDon);
     localStorage.setItem('hoadon', JSON.stringify(hoadon));
     localStorage.removeItem('cart'); // Xóa giỏ hàng sau khi lưu
-    console.log(hoadon);
 
     document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
     loadCart(); // Cập nhật giao diện giỏ hàng
@@ -618,8 +685,6 @@ function updateCart() {
 }
 
 function checkEmptyCart() {
-    console.log(totalQuantity);
-
     if (totalQuantity == 0) {
         if (document.getElementById('empty-cart')) {
             document.getElementById('empty-cart').style.display = 'block';
