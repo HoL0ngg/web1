@@ -147,7 +147,7 @@ function logout() {
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
     localStorage.removeItem('userlogin');
     updateUser();
-    // showAlert("Bạn đã đăng xuất thành công.");
+    showAlert("Bạn đã đăng xuất thành công.");
 }
 // ----------------------------------------------------------------------------------------------------------------------//
 
@@ -331,6 +331,9 @@ function updatePersonalForm() {
 }
 
 function closePersonalInfoTable() {
+    document.querySelectorAll('.error-input').forEach(error => {
+        error.classList.remove('invalid');
+    })
     const displayPersonalInfo = document.getElementById("display-personal-info");
     displayPersonalInfo.style.display = 'none';
 

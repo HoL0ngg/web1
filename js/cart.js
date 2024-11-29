@@ -244,6 +244,7 @@ function DongPopUpThanhtoan() {
     // document.getElementById('payment-form').reset();
 
     if (userlogin.sothe == undefined) {
+        document.querySelectorAll('.error-input').forEach(error => error.classList.remove('invalid'));
         document.querySelectorAll('.payment-icon').forEach(icon => icon.classList.remove('active'));
     }
     payment_popup.classList.remove('show');

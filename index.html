@@ -87,7 +87,7 @@
         </div>
         <!-- Inform product not found -->
     </div>
-    <div id="toast">
+    <div id="toast1">
         <div style="text-align: center; font-size: 20px; margin-top: 10px; font-weight: 700;">Thông báo</div>
         <div id="toast-msg" style="margin-top: 20px; text-align: center;"></div>
     </div>
@@ -171,20 +171,23 @@
             </div>
             <form id="personal-form">
                 <div class="payment-input">
-                    <label for="namePersonal">Họ</label>
+                    <label for="namePersonal">Họ và tên</label>
                     <input type=" text" name="hotentxt" id="namePersonal" placeholder="Nguyễn Văn A"
                         oninput="checkName(this)">
+                    <span class="error-input">Không được để trống</span>
                 </div>
                 <div style="display: flex; width: 100%;" id="personal-form-2">
                     <div class="payment-input" style="margin-right: 10px; flex: 2;" id="personal-form-2-email">
                         <label for="emailPersonal">Email</label>
                         <input type=" text" name="email" id="emailPersonal" placeholder="nguyenvana@gmail.com"
                             oninput="checkEmail(this)">
+                        <span class="error-input">Email không hợp lệ</span>
                     </div>
                     <div class="payment-input" style="flex: 1;">
                         <label for="phonePersonal">Số điện thoại</label>
                         <input type="text" name="phone" id="phonePersonal" placeholder="0987654321"
                             oninput="checkSDT(this)" maxlength="10">
+                        <span class="error-input">SĐT không hợp lệ</span>
                     </div>
                 </div>
 
@@ -192,6 +195,7 @@
                     <label for="addressPersonal">Địa chỉ</label>
                     <input type=" text" name="address" id="addressPersonal"
                         placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkDiaChi(this)">
+                    <span class="error-input">Địa chỉ không hợp lế</span>
                 </div>
                 <button type="submit" id="confirmPersonalInfo">Xác nhận</button>
             </form>
@@ -271,16 +275,15 @@
 
         function showImage(index) {
             if (index >= 0 && index < images.length) {
-                images.forEach(img => img.style.display = 'none');// Ẩn tất cả hình ảnh    
-                images[index].style.display = 'block'; // Hiển thị hình ảnh theo chỉ số hiện tại
+                images.forEach(img => img.style.display = 'none');
+                images[index].style.display = 'block';
             }
         }
         function startAnimation() {
             showImage(currentIndex);
 
-            // Cứ mỗi 4 giây sẽ chuyển sang hình ảnh tiếp theo
             setInterval(() => {
-                currentIndex = (currentIndex + 1) % images.length; // Chuyển chỉ số, quay lại đầu nếu hết ảnh
+                currentIndex = (currentIndex + 1) % images.length;
                 showImage(currentIndex);
             }, 4000); // 4 giây
         }
@@ -374,7 +377,7 @@
         ];
 
         const brandInfoList = JSON.parse(localStorage.getItem("brandInfo"));
-        console.log(brandInfoList);
+        // console.log(brandInfoList);
         function showDetailedBrandInfo(name, brandArr) {
             let brandInfo = document.getElementById("brandInfo");
             let brandInfoSpan = document.getElementById("brandInfoSpan");
@@ -841,11 +844,13 @@
 
                 if (minprice <= maxprice) {
                     findItem(find, minprice, maxprice, selectedCategories, selectedBrands);
+                    document.getElementById("find_wrap").style.display = 'none';
                 }
                 else {
-                    displayToast('Vui lòng nhập giá trị hợp lệ.');
+                    displayToastSearch('Vui lòng nhập giá trị hợp lệ.');
                     console.log('Vui lòng nhập đúng từ khóa và giá trị hợp lệ.');
                 }
+
             }
         });
 
@@ -871,7 +876,7 @@
                     phantrang(result, 8);
                 }
                 else {
-                    displayToast('Không tìm thấy sản phẩm!');
+                    displayToastSearch('Không tìm thấy sản phẩm!');
                 }
             }
             else {
@@ -898,11 +903,13 @@
 
                     if (minprice <= maxprice) {
                         findItem(find, minprice, maxprice, selectedCategories, selectedBrands);
+                        document.getElementById("find_wrap").style.display = 'none';
                     }
                     else {
-                        displayToast('Vui lòng nhập giá trị hợp lệ.');
+                        displayToastSearch('Vui lòng nhập giá trị hợp lệ.');
                         console.log('Vui lòng nhập đúng từ khóa và giá trị hợp lệ.');
                     }
+
                 }
             });
         });
@@ -921,7 +928,15 @@
             // return Math.sign(num) * parseInt(reversed);
             return reversed;
         }
-
+        function displayToastSearch(msg) {
+            const toast1 = document.getElementById('toast1');
+            toast1.style.display = 'block';
+            const toastmsg = document.getElementById('toast-msg');
+            toastmsg.innerText = msg;
+            setTimeout(() => {
+                toast1.style.display = 'none';
+            }, 2500);
+        }
         //Button reset filter
         function resetFilter() {
             const searchInput = document.querySelectorAll(".searchInput");
@@ -978,44 +993,6 @@
         }
 
 
-        //ORDERHISTORY
-        // const orders = 'orders';
-        // localStorage.setItem(orders, JSON.stringify(ordersList));
-
-        // function displayOrders() {
-        //     const ordersTable = document.getElementById('orders-table-body');
-
-        //     ordersTable.innerHTML = '';
-
-        //     const orderData = JSON.parse(localStorage.getItem('orders')) || [];
-
-        //     orderData.forEach(order => {
-        //         const row = document.createElement('tr');
-
-        //         let itemsTotal = 0;
-        //         order.items.forEach(item => {
-        //             itemsTotal += item.price * item.quantity;
-        //         });
-
-        //         row.innerHTML = `
-        //             <td>${order.orderId}</td>
-        //             <td>${order.orderDate}</td>
-        //             <td>${order.items.length}</td>
-        //             <td>${order.status}</td>
-        //             <td>${order.shippingAddress}</td>
-        //             <td>
-        //                 ${order.items.map(item => {
-        //                     return `<div>${item.name}: ${item.price} x ${item.quantity} = ${item.price * item.quantity}</div>`;
-        //                 }).join('')}
-        //             </td>
-        //             <td>${itemsTotal}</td>
-        //         `;
-
-        //         ordersTable.appendChild(row);
-        //     });
-        // }
-
-        // document.addEventListener('DOMContentLoaded', displayOrders);
         window.onload = function () {
             startAnimation();
             setUpData();
