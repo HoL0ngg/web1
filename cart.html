@@ -115,7 +115,7 @@
                     <li>Liên Hệ</li>
                     <li>Cửa Hàng</li>
                     <li>Giới Thiệu</li>
-                    <li>Lịch Sử Đặt Hàng</li>
+                    <li onclick="window.location.href='OrderHistory.html'">Lịch Sử Đặt Hàng</li>
                 </ul>
             </div>
             <div id="bar_bottom">
@@ -502,7 +502,37 @@
             </div>
         </div>
     </div>
+    <div id="hoadon">
+        <div id="hoadon-container">
+            <div id="hoadon-header"
+                style="position: relative; background-color: #0d5146; height: 50px; z-index: inherit; border-bottom: 2px black solid;">
+                <p style="text-align: center; padding: 10px; color: white; line-height: 30px;">XÁC NHẬN ĐƠN HÀNG</p>
+                <div style="position: absolute; top: 18px; right: 20px; color: white;" onclick="DongXacNhanDonHang()">
+                    <i class="fa-solid fa-xmark"></i>
+                </div>
+            </div>
+            <div id="hoadon-center">
+                <div id="hoadon-left">
+                    <div id="hoadon-product">
+                        Bên đây là những món hàng nè
+                    </div>
+                </div>
+                <div id="hoadon-right">
+                    <div id="hoadon-info">
+                        <p class="ten input-hihi">Tên: </p> <!--Ten -->
+                        <p class="diachi input-hihi">Địa chỉ: </p> <!--Dia chi -->
+                        <p class="sdt input-hihi">SĐT: </p> <!--SDT -->
+                        <p class="tamtinh input-hihi">Tạm tính: 10.000 VNĐ</p> <!--Tam tinh -->
+                        <p class="tienship input-hihi">Tiền ship: 12.000 VNĐ</p> <!--Tien ship -->
+                        <p class="tong input-hihi">Tổng cộng: 22.000 VNĐ</p> <!--Tong -->
+                        <p class="method input-hihi">Phương thức thanh toán: tiền mặt</p> <!--Phương thức thanh toán -->
+                    </div>
+                    <div id="xacnhandonhang-btn">XÁC NHẬN</div>
+                </div>
+            </div>
+        </div>
     </div>
+
     <div id="information">
         <h2>Nhận thông tin khuyến mãi mới nhất</h2>
         <p>Để lại email của bạn để nhận những thông tin khuyến mãi mới nhất từ chúng tôi</p>

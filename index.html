@@ -945,6 +945,7 @@
             chkboxs.forEach(chkbox => chkbox.checked = false);
             phantrang(productList, itemsPerPage);
         }
+
         function updateQuantity() {
             const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
             let totalQuantity = 0;
@@ -992,16 +993,15 @@
             })
         }
 
-
         window.onload = function () {
             startAnimation();
             setUpData();
+
             phantrang(productList, itemsPerPage);
             Exit(0, displayTableDetail);
             displayProductDetailTable();
             updateQuantity();
-            // displayOrders();
-        };
+        }
 
     </script>
 </body>

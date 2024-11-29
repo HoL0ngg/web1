@@ -142,6 +142,8 @@ function logout() {
     document.getElementById('dangnhap-form').reset();
     document.getElementById('dangky-form').reset();
     document.getElementById('personal-form').reset();
+    localStorage.removeItem('cart');
+    loadCart();
     if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
@@ -356,7 +358,7 @@ document.querySelectorAll('.user-information').forEach(element => {
     element.addEventListener('click', openPersonalInfoTable)
 });
 
-document.getElementById('display-personal-info').addEventListener('submit', function (e) {
+if (document.getElementById('display-personal-info')) document.getElementById('display-personal-info').addEventListener('submit', function (e) {
     e.preventDefault();
 })
 

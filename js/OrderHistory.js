@@ -42,14 +42,16 @@ function displayOrders() {
         // Tìm thông tin người dùng từ `userInfo` dựa trên username
         let user = userInfoArray.find(user => user.username == order.user.username);
         let userAddress = user ? user.diachi : 'Không có địa chỉ'; // Nếu không tìm thấy, dùng giá trị mặc định
+        let total = order.total.toLocaleString('vi-VN');
 
         // Thêm hàng vào bảng
         row.innerHTML = `
             <td>${order.id}</td> <!-- Mã đơn hàng -->
             <td>${order.date}</td> <!-- Ngày đặt hàng -->
-            <td>${order.total}</td> <!-- Tổng tiền -->
+            <td>${total} VNĐ</td> <!-- Tổng tiền -->
             <td>${order.items.map(item => `${item.id} (x${item.quantity})`).join(', ')}</td> <!-- Các sản phẩm trong đơn hàng -->
             <td>${order.diachi}</td> <!-- Địa chỉ lấy từ userInfo -->
+            <td>${order.payment_method}</td>
             <td>${order.trangthai ? 'Đã xử lý' : 'Chưa xử lý'}</td> <!-- Trạng thái -->
             
         `;
@@ -58,10 +60,25 @@ function displayOrders() {
     });
 }
 
-window.onload = function () {
-    updateQuantity();
+function updateQuantity() {
+    const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    let totalQuantity = 0;
+    cartItems.forEach(item => {
+        totalQuantity += Number(item.quantity);
+    });
+
+    if (totalQuantity != 0) {
+        if (totalQuantity > 9) totalQuantity = '9+'
+        document.getElementById('item-quantity').style.display = 'block';
+        document.getElementById('item-quantity').innerText = totalQuantity;
+    }
+    else
+        document.getElementById('item-quantity').style.display = 'none';
 }
 
 
 // Hiển thị dữ liệu khi tải trang
-document.addEventListener('DOMContentLoaded', displayOrders);
+document.addEventListener('DOMContentLoaded', function () {
+    displayOrders();
+    updateQuantity();
+});

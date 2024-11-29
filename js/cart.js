@@ -7,7 +7,6 @@ let totalPrice = 0;
 
 window.onload = function () {
     loadCart();
-    updateQuantity();
     updateUser();
 }
 
@@ -109,10 +108,10 @@ function loadCart() {
                         </tr>`
         });
     }
-    container.innerHTML = s;
+    if (container) container.innerHTML = s;
     updateCart();
     EventListener();
-    checkEmptyCart();
+    if (totalQuantity == 0) checkEmptyCart();
 }
 
 function checknumber(inp) {
@@ -427,14 +426,46 @@ function chondiachi(callback) {
     });
 }
 
+function updateXacNhanDonHang() {
+    const info = document.getElementById('hoadon-info');
+    const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
+    let info_user = accountsInfo.find(account => account.username == userlogin.username)
+    let tamtinh = parseFloat(document.getElementById('total-price').innerText.split('.').join(''));
+    let tong = parseFloat(tamtinh) + 12000;
+    tong = tong.toLocaleString('vi-VN');
+    tamtinh = tamtinh.toLocaleString('vi-VN');
+
+    info.querySelector('.ten').innerText = `Tên: ${info_user.hoten}`
+    info.querySelector('.diachi').innerText = `Địa chỉ: ${info_user.diachi}`
+    info.querySelector('.sdt').innerText = `SĐT: ${info_user.sdt}`
+    info.querySelector('.tamtinh').innerText = `Tạm tính: ${tamtinh} VNĐ`
+    info.querySelector('.tienship').innerText = `Tiền ship: 12.000 VNĐ`
+    info.querySelector('.tong').innerText = `Tạm tính: ${tong} VNĐ`
+}
+
+function HienXacNhanDonHang() {
+    document.getElementById('hoadon').style.display = 'block';
+    updateXacNhanDonHang();
+}
+
+function DongXacNhanDonHang() {
+    document.getElementById('hoadon').style.display = 'none';
+}
+
+if (document.getElementById('xacnhandonhang-btn')) document.getElementById('xacnhandonhang-btn').addEventListener('click', function () {
+    DongXacNhanDonHang();
+})
+
 function ThanhToan() {
     if (totalQuantity == 0) return displayToast('Giỏ hàng của bạn đang trống');
     if (!icon_active) return displayToast('Bạn phải chọn phương thức thanh toán trước');
 
     chondiachi((diachi) => {
         if (diachi) {
-            LuuHoaDon(diachi);
-            displayToast('Bạn đã đặt hàng thành công');
+            if (HienXacNhanDonHang()) {
+                LuuHoaDon(diachi);
+                displayToast('Bạn đã đặt hàng thành công');
+            } else return;
         } else {
             displayToast('Bạn chưa chọn địa chỉ');
         }
@@ -450,6 +481,14 @@ function TaoMaHD() {
 
 function LuuHoaDon(diachigiaohang) {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    let payment = "";
+
+    if (icon_active.classList.contains('fa-money-bill-1-wave')) payment = 'Tiền mặt'
+    else payment = 'Chuyển khoản';
+    console.log(icon_active);
+
+    console.log(payment);
+
 
     const HoaDon = {
         id: TaoMaHD(), // ID hóa đơn duy nhất
@@ -457,7 +496,7 @@ function LuuHoaDon(diachigiaohang) {
         date: new Date().toLocaleString(), // Ngày tạo hóa đơn
         items: cart,             // Sản phẩm trong giỏ hàng
         total: totalPrice, // Tổng tiền
-        payment_method: icon_active,    // Phương thức thanh toán
+        payment_method: payment,    // Phương thức thanh toán
         trangthai: false,    // Trạng thái đơn hàng
         diachi: diachigiaohang         // Địa chỉ giao hàng
     };
@@ -579,14 +618,18 @@ function updateCart() {
 }
 
 function checkEmptyCart() {
-    // console.log(totalQuantity);
+    console.log(totalQuantity);
 
     if (totalQuantity == 0) {
-        document.getElementById('empty-cart').style.display = 'block';
-        document.getElementsByClassName('container')[0].style.display = 'none';
+        if (document.getElementById('empty-cart')) {
+            document.getElementById('empty-cart').style.display = 'block';
+            document.getElementsByClassName('container')[0].style.display = 'none';
+        }
     } else {
-        document.getElementById('empty-cart').style.display = 'none';
-        document.getElementsByClassName('container')[0].style.display = 'block';
+        if (document.getElementById('empty-cart')) {
+            document.getElementById('empty-cart').style.display = 'none';
+            document.getElementsByClassName('container')[0].style.display = 'block';
+        }
     }
 }
 
@@ -641,7 +684,26 @@ document.addEventListener('keydown', function (event) {
     }
 });
 
-var productArray = [
+var brandArray = [
+    {
+        brandid: 'Panasonic',
+        brandintro: '<br>- Thương hiệu Nhật Bản.<br>- Thành lập năm 1918.<br>- Panasonic nổi tiếng với các sản phẩm tủ lạnh, máy lạnh, tivi và các thiết bị gia dụng như lò vi sóng, quạt, máy xay sinh tố,...<br>- Các sản phẩm Panasonic nổi tiếng với độ bền cao, tiết kiệm điện, mẫu mã đẹp.'
+    },
+    {
+        brandid: 'Asia',
+        brandintro: '<br>- Thương hiệu Việt Nam.<br>- Thành lập 1990.<br>- Được vinh danh nằm trong top 20 "Nhãn hiệu hàng đầu Việt Nam - Sản phẩm vàng, Dịch vụ vàng Việt Nam năm 2017".<br>- Được biết đến các sản phẩm quạt điện, quạt sưởi chất lượng, giá thành phù hợp với đại đa số người tiêu dùng Việt.'
+    },
+    {
+        brandid: 'Senko',
+        brandintro: '<br>- Thương hiệu Việt Nam.<br>- Thành lập năm 1998.<br>- Với sứ mệnh "Làm mát cho cuộc sống" quạt điện SENKO đáp ứng mọi nhu cầu của khách hàng và là sự lựa chọn hoàn hảo của mọi nhà về quạt bàn, quạt treo, quạt lửng, quạt đứng, quạt trần,...<br>- Chất lượng cao, mẫu mã đẹp, tiết kiệm năng lượng là những tiêu chí cốt lõi trong mỗi sản phẩm của quạt điện Senko.'
+    },
+    {
+        brandid: 'Kangaroo',
+        brandintro: '<br>- Thương hiệu Việt Nam.<br>- Thành lập 2003. Các sản phẩm Kangaroo hướng đến phục vụ sức khỏe và tiện nghi cuộc sống như máy lọc nước, hàng gia dụng - nhà bếp và các thiết bị điện tiêu dùng khác.<br>- "Không đối đầu mà luôn đi trước đón đầu" là tiêu chí trong hoạt động sản xuất và kinh doanh của Kangaroo.'
+    },
+];
+
+let productArray = [
     {
         productid: 'D16027-TV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan18-1.jpg', name: 'Quạt đứng Asia D16027-TV0',
         size: 'Ngang 42cm - Cao 93 - 130cm - Sâu 42cm', power: '45W', category: 'quatdung',
