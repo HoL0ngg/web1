@@ -466,10 +466,10 @@ function loadBill() {
             s += `<tr>
                             <td style="display: none;">${item.id}</td>
                             <td><img src="${imgsrc}" alt="" style="height: 55px;"></td>
-                            <td>
+                            <td style="width: 36%;">
                                 ${ten}
                             </td>
-                            <td>
+                            <td style="width: 20%">
                                 <span class="item-price">
                                     ${gia}
                                 </span>
@@ -478,7 +478,7 @@ function loadBill() {
                             <td>
                                 <p class="quantity" style="text-align: center;">${quantity}</p>
                             </td>
-                            <td>
+                            <td style="width: 20%";>
                                 <p class="item-total">${subtotal} VNĐ
                                 </p>
                             </td>
