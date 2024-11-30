@@ -719,6 +719,11 @@ i.active {
     opacity: 0.9;
 }
 
+#diachicuaban-btn:hover,
+#diachinhap-btn:hover {
+    opacity: 0.9;
+}
+
 .input-hihi {
     margin: 12px;
     display: flex;
@@ -726,7 +731,7 @@ i.active {
 }
 
 #hoadon-product {
-    width: 90%;
+    width: 100%;
     height: calc(100% - 50px);
     margin: 2% auto;
     overflow-y: scroll;

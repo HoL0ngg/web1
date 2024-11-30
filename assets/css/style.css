@@ -606,7 +606,7 @@ html {
 #topmenu_icon>div {
     font-size: 1.64rem;
     width: 20px;
-    margin: 0 10px;
+    margin: 0 18px;
 }
 
 #topmenu_icon>div:hover {
@@ -958,7 +958,7 @@ i#find_wrap [type="text"]::placeholder {
 }
 
 #order_history {
-    
+
     height: fit-content;
     width: 100%;
     background-color: #D3D3D3;
