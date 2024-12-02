@@ -74,13 +74,13 @@
                     <li class="sidebar-list-item user-logout">
                         <a href="#" class="sidebar-link">
                             <div class="sidebar-icon"><i class="fa-solid fa-circle-user"></i></div>
-                            <div class="hidden-sidebar" id="name-acc"></div>
+                            <div class="hidden-sidebar" id="name-acc" onc></div>
                         </a>
                     </li>
                     <li class="sidebar-list-item user-logout">
                         <a href="#" class="sidebar-link" id="logout-acc">
                             <div class="sidebar-icon"><i class="fa-solid fa-right-from-bracket fa-rotate-180"></i></div>
-                            <div class="hidden-sidebar">Đăng xuất</div>
+                            <div class="hidden-sidebar" onclick="logout()">Đăng xuất</div>
                         </a>
                     </li>
                 </ul>
@@ -131,17 +131,17 @@
             <!-- Product  -->
             <div class="section product-all">
                 <div class="admin-control">
-                    <div class="admin-control-left">
+                    <sạc class="admin-control-left">
                         <select name="the-loai" id="the-loai" onchange="showProduct()">
                             <option>Tất cả</option>
                             <option>Quạt đứng</option>
-                            <option>Quạt treo</option>
+                            <option>Quạt treo tuờng</option>
                             <option>Quạt trần</option>
-                            <option>Quạt hút</option>
-                            <option>Quạt cầm tay</option>
+                            <option>Quạt sạc điện</option>
+                            <option>Quạt bàn</option>
                             <option>Đã xóa</option>
                         </select>
-                    </div>
+                    </sạc điện>
                     <div class="admin-control-center">
                         <form action="" class="form-search">
                             <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -155,7 +155,8 @@
                             phẩm</button>
                     </div>
                 </div>
-                <div id="show-product"></div>
+                <div id="show-product">
+                </div>
                 <div class="page-nav">
                     <ul class="page-nav-list">
                     </ul>
@@ -179,7 +180,7 @@
                         </form>
                     </div>
                     <div class="admin-control-right">
-                        <form action="" class="fillter-date">
+                        <!-- <form action="" class="fillter-date">
                             <div>
                                 <label for="time-start">Từ</label>
                                 <input type="date" class="form-control-date" id="time-start-user" onchange="showUser()">
@@ -188,7 +189,7 @@
                                 <label for="time-end">Đến</label>
                                 <input type="date" class="form-control-date" id="time-end-user" onchange="showUser()">
                             </div>
-                        </form>
+                        </form> -->
                         <!-- <button class="btn-reset-order" onclick="cancelSearchUser()"><i class="fa-solid fa-arrow-rotate-right"></i></button>      -->
                         <button id="btn-add-user" class="btn-control-large" onclick="openCreateAccount()"><i
                                 class="fa-solid fa-plus"></i> <span>Thêm khách hàng</span></button>
@@ -201,7 +202,6 @@
                                 <td>STT</td>
                                 <td>Họ và tên</td>
                                 <td>Liên hệ</td>
-                                <td>Ngày tham gia</td>
                                 <td>Tình trạng</td>
                                 <td></td>
                             </tr>
@@ -266,10 +266,10 @@
                         <select name="the-loai-tk" id="the-loai-tk" onchange="thongKe()">
                             <option>Tất cả</option>
                             <option>Quạt đứng</option>
-                            <option>Quạt treo</option>
+                            <option>Quạt treo tuờng</option>
                             <option>Quạt trần</option>
-                            <option>Quạt hút</option>
-                            <option>Quạt cầm tay</option>
+                            <option>Quạt sạc điện</option>
+                            <option>Quạt bàn</option>
                             <option>Sản phẩm khác</option>
                         </select>
                     </div>
@@ -346,7 +346,8 @@
             </div>
         </main>
     </div>
-    <div class="modal add-product">
+
+    <div class="modal add-product" >
         <div class="modal-container">
             <h3 class="modal-container-title add-product-e">THÊM MỚI SẢN PHẨM</h3>
             <h3 class="modal-container-title edit-product-e">CHỈNH SỬA SẢN PHẨM</h3>
@@ -373,10 +374,10 @@
                             <label for="category" class="form-label">Chọn sản phẩm</label>
                             <select name="category" id="chon-sanPham">
                                 <option>Quạt đứng</option>
-                                <option>Quạt treo</option>
+                                <option>Quạt treo tuờng</option>
                                 <option>Quạt trần</option>
-                                <option>Quạt hút</option>
-                                <option>Quạt cầm tay</option>
+                                <option>Quạt sạc điện</option>
+                                <option>Quạt bàn</option>
                             </select>
                             <span class="form-message"></span>
                         </div>
@@ -387,10 +388,40 @@
                             <span class="form-message"></span>
                         </div>
                         <div class="form-group">
-                            <label for="mo-ta" class="form-label">Mô tả</label>
-                            <textarea class="product-desc" id="mo-ta" placeholder="Nhập mô tả sản phẩm..."></textarea>
+                            <label for="power" class="form-label">Kích thước</label>
+                            <input id="power" name="power" type="text" placeholder="Kích thước của quạt"
+                                class="form-control">
                             <span class="form-message"></span>
                         </div>
+                        <div class="form-group">
+                            <label for="size" class="form-label">Công Xuất</label>
+                            <input id="size" name="size" type="text" placeholder="Công xuất của quạt"
+                                class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hang" class="form-label">Hãng sản xuất</label>
+                            <select id="hang" name="hang">
+                                <option value="Asia">Asia</option>
+                                <option value="Panasonic">Panasonic</option>
+                                <option value="Senko">Senko</option>
+                                <option value="Kangaroo">Kangaroo</option>
+                                
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="madeIn" class="form-label">Xuất xứ</label>
+                            <input id="madeIn" name="madeIn" type="text" placeholder="Nơi Xuất Xứ"
+                                class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="year" class="form-label">Năm sản xuất</label>
+                            <input id="year" name="year" type="text" placeholder="Năm sản xuất"
+                                class="form-control">
+                            <span class="form-message"></span>
+                        </div>
+
                         <button class="form-submit btn-add-product-form add-product-e" id="add-product-button">
                             <i class="fa-solid fa-plus"></i>
                             <span>THÊM SẢN PHẨM</span>
@@ -444,8 +475,8 @@
             <div class="form-content sign-up">
                 <form action="" class="signup-form">
                     <div class="form-group">
-                        <label for="fullname" class="form-label">Tên tài khoản</label>
-                        <input id="fullname" name="fullname" type="text" placeholder="VD: HoangSon"
+                        <label for="name-account" class="form-label">Tên tài khoản</label>
+                        <input id="name-account" name="name-account" type="text" placeholder="VD: HoangSon"
                             class="form-control">
                         <span class="form-message-name form-message"></span>
                     </div>
@@ -476,8 +507,8 @@
     </div>
     <div id="toast"></div>
     <!-- <script src="./js/login.js"></script> -->
-    <script src="./js/admin.js"></script>
-    <script src="./js/toast-message.js"></script>
+    <script src="./js/admin_js/admin.js"></script>
+    <script src="./js/admin_js/toast-message.js"></script>
 </body>
 
 </html>

@@ -30,32 +30,32 @@ if (!bar.contains(event.target)) {
 });
 
 
-var productArray = [
-    {productid:'DH1600', brandid:'Senko', img:'../hinhanh/quatdien/fan1.jpg', 
-        name:'Quạt đứng Senko 3 cánh DH1600 47W', price: 559000 , category: 'quatdien'},
-    {productid:'VY628890', brandid:'Asia ', img:'../hinhanh/quatdien/fan2.jpg', 
-        name:'Quạt lửng Asia VY628890 75W', price: 510000,  category: 'quatcongnghiep'},
-    {productid:'VY639990', brandid:'Asia', img:'../hinhanh/quatdien/fan3.jpg', 
-        name:'Quạt đứng Asia 6 cánh VY639990 80W', price: 790000,  category: 'quathoinuoc'},
-    {productid:'TC1622', brandid:'Senko', img:'../hinhanh/quatdien/fan4.jpg', 
-        name:'Quạt treo tường Senko 7 cánh TC1622 65W', price: 540000,  category: 'quattran'},
-    {productid:'VY377790', brandid:'Asia', img:'../hinhanh/quatdien/fan5.jpg', 
-        name:'Quạt treo tường Asia 3 cánh VY377790 55W', price: 720000},
-    {productid:'B1612', brandid:'Senko', img:'../hinhanh/quatdien/fan6.jpg', 
-        name:'Quạt bàn Senko 3 cánh B1612 47W', price: 425000}, 
-    {productid:'L1638', brandid:'Senko', img:'../hinhanh/quatdien/fan7.jpg', 
-        name:'Quạt lửng Senko 3 cánh L1638 47W', price: 470000, category: 'quatdien'},
-    {productid:'LTS1636', brandid:'Senko', img:'../hinhanh/quatdien/fan8.jpg', 
-        name:'Quạt lửng Senko 7 cánh LTS1636 65W', price: 560000},
-    {productid:'VY357690', brandid:'Asia', img:'../hinhanh/quatdien/fan9.jpg', 
-        name:'Quạt treo tường Asia 3 cánh VY357690 55W', price: 550000},
-    {productid:'VY355790', brandid:'Asia', img:'../hinhanh/quatdien/fan10.jpg', 
-        name:'Quạt bàn Asia 3 cánh VY355790 55W', price: 550000},
-    {productid:'B1213', brandid:'Senko', img:'../hinhanh/quatdien/fan11.jpg', 
-        name:'Quạt bàn Senko 3 cánh B1213 40W', price: 379000},
-    {productid:'SHD7115', brandid:'Sunhouse', img:'../hinhanh/quatdien/fan12.jpg', 
-        name:'Quạt sạc điện Sunhouse 3 cánh SHD7115 15W', price: 550000},
-];
+// var productArray = [
+//     {productid:'DH1600', brandid:'Senko', img:'../hinhanh/quatdien/fan1.jpg', 
+//         name:'Quạt đứng Senko 3 cánh DH1600 47W', price: 559000 , category: 'quatdien'},
+//     {productid:'VY628890', brandid:'Asia ', img:'../hinhanh/quatdien/fan2.jpg', 
+//         name:'Quạt lửng Asia VY628890 75W', price: 510000,  category: 'quatcongnghiep'},
+//     {productid:'VY639990', brandid:'Asia', img:'../hinhanh/quatdien/fan3.jpg', 
+//         name:'Quạt đứng Asia 6 cánh VY639990 80W', price: 790000,  category: 'quathoinuoc'},
+//     {productid:'TC1622', brandid:'Senko', img:'../hinhanh/quatdien/fan4.jpg', 
+//         name:'Quạt treo tường Senko 7 cánh TC1622 65W', price: 540000,  category: 'quattran'},
+//     {productid:'VY377790', brandid:'Asia', img:'../hinhanh/quatdien/fan5.jpg', 
+//         name:'Quạt treo tường Asia 3 cánh VY377790 55W', price: 720000},
+//     {productid:'B1612', brandid:'Senko', img:'../hinhanh/quatdien/fan6.jpg', 
+//         name:'Quạt bàn Senko 3 cánh B1612 47W', price: 425000}, 
+//     {productid:'L1638', brandid:'Senko', img:'../hinhanh/quatdien/fan7.jpg', 
+//         name:'Quạt lửng Senko 3 cánh L1638 47W', price: 470000, category: 'quatdien'},
+//     {productid:'LTS1636', brandid:'Senko', img:'../hinhanh/quatdien/fan8.jpg', 
+//         name:'Quạt lửng Senko 7 cánh LTS1636 65W', price: 560000},
+//     {productid:'VY357690', brandid:'Asia', img:'../hinhanh/quatdien/fan9.jpg', 
+//         name:'Quạt treo tường Asia 3 cánh VY357690 55W', price: 550000},
+//     {productid:'VY355790', brandid:'Asia', img:'../hinhanh/quatdien/fan10.jpg', 
+//         name:'Quạt bàn Asia 3 cánh VY355790 55W', price: 550000},
+//     {productid:'B1213', brandid:'Senko', img:'../hinhanh/quatdien/fan11.jpg', 
+//         name:'Quạt bàn Senko 3 cánh B1213 40W', price: 379000},
+//     {productid:'SHD7115', brandid:'Sunhouse', img:'../hinhanh/quatdien/fan12.jpg', 
+//         name:'Quạt sạc điện Sunhouse 3 cánh SHD7115 15W', price: 550000},
+// ];
     const listProduct ='listProduct';
     localStorage.setItem(listProduct, JSON.stringify(productArray));
    

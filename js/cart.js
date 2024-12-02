@@ -51,8 +51,8 @@ function updateQuantity() {
 function loadCart() {
     const cart = JSON.parse(localStorage.getItem('cart')) || [];
     console.log(cart);
-
     const container = document.getElementById('cart-container');
+    const productArray = JSON.parse(localStorage.getItem('productList')) || [];
     let s = '';
 
     if (cart.length > 0 && container) {
@@ -439,7 +439,7 @@ function loadBill() {
     const cart = JSON.parse(localStorage.getItem('cart'));
     const container = document.getElementById('hoadon-container-2');
     let s = '';
-
+    const productArray = JSON.parse(localStorage.getItem('productList'));
     if (cart && container) {
         s = `<tr>
                             <th></th>
@@ -780,280 +780,280 @@ var brandArray = [
     },
 ];
 
-let productArray = [
-    {
-        productid: 'D16027-TV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan18-1.jpg', name: 'Quạt đứng Asia D16027-TV0',
-        size: 'Ngang 42cm - Cao 93 - 130cm - Sâu 42cm', power: '45W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 1099000
-    },
+// let productArray = [
+//     {
+//         productid: 'D16027-TV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan18-1.jpg', name: 'Quạt đứng Asia D16027-TV0',
+//         size: 'Ngang 42cm - Cao 93 - 130cm - Sâu 42cm', power: '45W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 1099000
+//     },
 
-    {
-        productid: 'VY538990', brandid: 'Asia', img: 'hinhanh/quatdien/fan21-1.jpg', name: 'Quạt lửng Asia VY538990',
-        size: 'Ngang 39cm - Cao 78.2 - 97.2cm - Sâu 39cm', power: '55W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 460000
-    },
+//     {
+//         productid: 'VY538990', brandid: 'Asia', img: 'hinhanh/quatdien/fan21-1.jpg', name: 'Quạt lửng Asia VY538990',
+//         size: 'Ngang 39cm - Cao 78.2 - 97.2cm - Sâu 39cm', power: '55W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 460000
+//     },
 
-    {
-        productid: 'DH1600', brandid: 'Senko', img: 'hinhanh/quatdien/fan1.jpg', name: 'Quạt đứng Senko DH1600',
-        size: 'Ngang 37.5cm - Cao 109 - 123cm - Sâu 41cm', power: '47W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 559000
-    },
+//     {
+//         productid: 'DH1600', brandid: 'Senko', img: 'hinhanh/quatdien/fan1.jpg', name: 'Quạt đứng Senko DH1600',
+//         size: 'Ngang 37.5cm - Cao 109 - 123cm - Sâu 41cm', power: '47W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 559000
+//     },
 
-    {
-        productid: 'F-60XDN', brandid: 'Panasonic', img: 'hinhanh/quattran/fan1-1.jpg', name: 'Quạt trần Panasonic F-60XDN',
-        size: 'Ngang 150cm - Cao 28.8cm - Sâu 150cm', power: '37W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 7390000
-    },
+//     {
+//         productid: 'F-60XDN', brandid: 'Panasonic', img: 'hinhanh/quattran/fan1-1.jpg', name: 'Quạt trần Panasonic F-60XDN',
+//         size: 'Ngang 150cm - Cao 28.8cm - Sâu 150cm', power: '37W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 7390000
+//     },
 
-    {
-        productid: 'F-48DGL', brandid: 'Panasonic', img: 'hinhanh/quattran/fan2-1.jpg', name: 'Quạt trần Panasonic F-48DGL',
-        size: 'Ngang 120cm - Cao 27.8cm - Sâu 120cm', power: '31W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2021', price: 1590000
-    },
+//     {
+//         productid: 'F-48DGL', brandid: 'Panasonic', img: 'hinhanh/quattran/fan2-1.jpg', name: 'Quạt trần Panasonic F-48DGL',
+//         size: 'Ngang 120cm - Cao 27.8cm - Sâu 120cm', power: '31W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2021', price: 1590000
+//     },
 
-    {
-        productid: 'VY628890', brandid: 'Asia ', img: 'hinhanh/quatdien/fan2.jpg', name: 'Quạt lửng Asia VY628890',
-        size: 'Ngang 45cm - Cao 80 - 98cm - Sâu 45cm', power: '75W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2024', price: 510000
-    },
+//     {
+//         productid: 'VY628890', brandid: 'Asia ', img: 'hinhanh/quatdien/fan2.jpg', name: 'Quạt lửng Asia VY628890',
+//         size: 'Ngang 45cm - Cao 80 - 98cm - Sâu 45cm', power: '75W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2024', price: 510000
+//     },
 
-    {
-        productid: 'VY539790', brandid: 'Asia', img: 'hinhanh/quatdien/fan14-1.jpg', name: 'Quạt đứng Asia VY539790',
-        size: 'Ngang 46.5cm - Cao 110 - 139cm - Sâu 46.5cm', power: '55W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 650000
-    },
+//     {
+//         productid: 'VY539790', brandid: 'Asia', img: 'hinhanh/quatdien/fan14-1.jpg', name: 'Quạt đứng Asia VY539790',
+//         size: 'Ngang 46.5cm - Cao 110 - 139cm - Sâu 46.5cm', power: '55W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 650000
+//     },
 
-    {
-        productid: 'VY619990', brandid: 'Asia', img: 'hinhanh/quatdien/fan15-1.jpg', name: 'Quạt đứng Asia VY619990',
-        size: 'Ngang 50cm - Cao 101 - 121cm - Sâu 50cm', power: '55W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2023', price: 599000
-    },
+//     {
+//         productid: 'VY619990', brandid: 'Asia', img: 'hinhanh/quatdien/fan15-1.jpg', name: 'Quạt đứng Asia VY619990',
+//         size: 'Ngang 50cm - Cao 101 - 121cm - Sâu 50cm', power: '55W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2023', price: 599000
+//     },
 
-    {
-        productid: 'F-56MPG-S', brandid: 'Panasonic', img: 'hinhanh/quattran/fan3-1.jpg', name: 'Quạt trần Panasonic F-56MPG-S',
-        size: 'Ngang 140cm - Cao 31.9cm - Sâu 140cm', power: '59W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2022', price: 3180000
-    },
+//     {
+//         productid: 'F-56MPG-S', brandid: 'Panasonic', img: 'hinhanh/quattran/fan3-1.jpg', name: 'Quạt trần Panasonic F-56MPG-S',
+//         size: 'Ngang 140cm - Cao 31.9cm - Sâu 140cm', power: '59W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2022', price: 3180000
+//     },
 
-    {
-        productid: 'VY639990', brandid: 'Asia', img: 'hinhanh/quatdien/fan3.jpg', name: 'Quạt đứng Asia VY639990',
-        size: 'Ngang 52cm - Cao 100.5 - 119cm - Sâu 52cm', power: '80W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 790000
-    },
+//     {
+//         productid: 'VY639990', brandid: 'Asia', img: 'hinhanh/quatdien/fan3.jpg', name: 'Quạt đứng Asia VY639990',
+//         size: 'Ngang 52cm - Cao 100.5 - 119cm - Sâu 52cm', power: '80W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 790000
+//     },
 
-    {
-        productid: 'TC1622', brandid: 'Senko', img: 'hinhanh/quatdien/fan4.jpg', name: 'Quạt treo tường Senko TC1622',
-        size: 'Ngang 45cm - Cao 47cm - Sâu 29cm', power: '65W', category: 'quattreotuong',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 540000
-    },
+//     {
+//         productid: 'TC1622', brandid: 'Senko', img: 'hinhanh/quatdien/fan4.jpg', name: 'Quạt treo tường Senko TC1622',
+//         size: 'Ngang 45cm - Cao 47cm - Sâu 29cm', power: '65W', category: 'quattreotuong',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 540000
+//     },
 
-    {
-        productid: 'VY449690', brandid: 'Asia', img: 'hinhanh/quatdien/fan16-1.jpg', name: 'Quạt đứng Asia VY449690',
-        size: 'Ngang 44.5cm - Cao 95 - 130cm - Sâu 44.5cm', power: '55W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 790000
-    },
+//     {
+//         productid: 'VY449690', brandid: 'Asia', img: 'hinhanh/quatdien/fan16-1.jpg', name: 'Quạt đứng Asia VY449690',
+//         size: 'Ngang 44.5cm - Cao 95 - 130cm - Sâu 44.5cm', power: '55W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 790000
+//     },
 
-    {
-        productid: 'VY358990', brandid: 'Asia', img: 'hinhanh/quatdien/fan23-1.jpg', name: 'Quạt lửng Asia VY358990',
-        size: 'Ngang 48.5cm - Cao 72 - 86cm - Sâu 48.5cm', power: '55W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 580000
-    },
+//     {
+//         productid: 'VY358990', brandid: 'Asia', img: 'hinhanh/quatdien/fan23-1.jpg', name: 'Quạt lửng Asia VY358990',
+//         size: 'Ngang 48.5cm - Cao 72 - 86cm - Sâu 48.5cm', power: '55W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 580000
+//     },
 
-    {
-        productid: 'DR1608', brandid: 'Senko', img: 'hinhanh/quatdien/fan24-1.jpg', name: 'Quạt đứng Senko DR1608',
-        size: 'Ngang 39cm - Cao 117 - 129cm - Sâu 39cm', power: '65W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2018', price: 990000
-    },
+//     {
+//         productid: 'DR1608', brandid: 'Senko', img: 'hinhanh/quatdien/fan24-1.jpg', name: 'Quạt đứng Senko DR1608',
+//         size: 'Ngang 39cm - Cao 117 - 129cm - Sâu 39cm', power: '65W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2018', price: 990000
+//     },
 
-    {
-        productid: 'A16019-XV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan22-1.jpg', name: 'Quạt lửng Asia A16019-XV0',
-        size: 'Ngang 36cm - Cao 72 - 92cm - Sâu 36cm', power: '55W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 590000
-    },
+//     {
+//         productid: 'A16019-XV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan22-1.jpg', name: 'Quạt lửng Asia A16019-XV0',
+//         size: 'Ngang 36cm - Cao 72 - 92cm - Sâu 36cm', power: '55W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 590000
+//     },
 
-    {
-        productid: 'KG726', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan31-1.jpg', name: 'Quạt đứng Kangaroo KG726',
-        size: 'Ngang 37.6cm - Cao 95 - 126cm - Sâu 38cm', power: '45W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 1154000
-    },
+//     {
+//         productid: 'KG726', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan31-1.jpg', name: 'Quạt đứng Kangaroo KG726',
+//         size: 'Ngang 37.6cm - Cao 95 - 126cm - Sâu 38cm', power: '45W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 1154000
+//     },
 
-    {
-        productid: 'F-80ZBR', brandid: 'Panasonic', img: 'hinhanh/quattran/fan13-1.jpg', name: 'Quạt trần Panasonic F-80ZBR',
-        size: 'Ngang 200cm - Cao 40cm - Sâu 200cm', power: '57W ', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 17390000
-    },
+//     {
+//         productid: 'F-80ZBR', brandid: 'Panasonic', img: 'hinhanh/quattran/fan13-1.jpg', name: 'Quạt trần Panasonic F-80ZBR',
+//         size: 'Ngang 200cm - Cao 40cm - Sâu 200cm', power: '57W ', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 17390000
+//     },
 
-    {
-        productid: 'D16026-XV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan17-1.jpg', name: 'Quạt đứng Asia D16026-XV0',
-        size: 'Ngang 38.5cm - Cao 104 - 119cm - Sâu 39.5cm', power: '56W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 890000
-    },
+//     {
+//         productid: 'D16026-XV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan17-1.jpg', name: 'Quạt đứng Asia D16026-XV0',
+//         size: 'Ngang 38.5cm - Cao 104 - 119cm - Sâu 39.5cm', power: '56W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 890000
+//     },
 
-    {
-        productid: 'F-60TAN', brandid: 'Panasonic', img: 'hinhanh/quattran/fan4-1.jpg', name: 'Quạt trần Panasonic F-60TAN ',
-        size: 'Ngang 150cm - Cao 28.8cm - Sâu 150cm', power: '37W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2016', price: 8500000
-    },
+//     {
+//         productid: 'F-60TAN', brandid: 'Panasonic', img: 'hinhanh/quattran/fan4-1.jpg', name: 'Quạt trần Panasonic F-60TAN ',
+//         size: 'Ngang 150cm - Cao 28.8cm - Sâu 150cm', power: '37W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2016', price: 8500000
+//     },
 
-    {
-        productid: 'TR1628', brandid: 'Senko', img: 'hinhanh/quatdien/fan27-1.jpg', name: 'Quạt treo tường Senko TR1628',
-        size: 'Ngang 44.3cm - Cao 63cm - Sâu 36.5cm', power: '47W', category: 'quattreotuong',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 550000
-    },
+//     {
+//         productid: 'TR1628', brandid: 'Senko', img: 'hinhanh/quatdien/fan27-1.jpg', name: 'Quạt treo tường Senko TR1628',
+//         size: 'Ngang 44.3cm - Cao 63cm - Sâu 36.5cm', power: '47W', category: 'quattreotuong',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 550000
+//     },
 
-    {
-        productid: 'KG729', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan32-1.jpg', name: 'Quạt đứng Kangaroo DC inverter KG729',
-        size: 'Ngang 38cm - Cao 114 - 123.5cm - Sâu 38cm', power: '33W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 3600000
-    },
+//     {
+//         productid: 'KG729', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan32-1.jpg', name: 'Quạt đứng Kangaroo DC inverter KG729',
+//         size: 'Ngang 38cm - Cao 114 - 123.5cm - Sâu 38cm', power: '33W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 3600000
+//     },
 
-    {
-        productid: 'F-60FEN', brandid: 'Panasonic', img: 'hinhanh/quattran/fan12-1.jpg', name: 'Quạt trần Panasonic F-60FEN',
-        size: 'Ngang 150cm - Cao 28.8cm - Sâu 150cm', power: '40W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2024', price: 9990000
-    },
+//     {
+//         productid: 'F-60FEN', brandid: 'Panasonic', img: 'hinhanh/quattran/fan12-1.jpg', name: 'Quạt trần Panasonic F-60FEN',
+//         size: 'Ngang 150cm - Cao 28.8cm - Sâu 150cm', power: '40W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2024', price: 9990000
+//     },
 
-    {
-        productid: 'TC1626', brandid: 'Senko', img: 'hinhanh/quatdien/fan28-1.jpg', name: 'Quạt treo tường Senko TC1626',
-        size: 'Ngang 44.5cm - Cao 54.5cm - Sâu 33.5cm', power: '47W', category: 'quattreotuong',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 425000
-    },
+//     {
+//         productid: 'TC1626', brandid: 'Senko', img: 'hinhanh/quatdien/fan28-1.jpg', name: 'Quạt treo tường Senko TC1626',
+//         size: 'Ngang 44.5cm - Cao 54.5cm - Sâu 33.5cm', power: '47W', category: 'quattreotuong',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 425000
+//     },
 
-    {
-        productid: 'F-60MZ2', brandid: 'Panasonic', img: 'hinhanh/quattran/fan5-1.jpg', name: 'Quạt trần Panasonic F-60MZ2',
-        size: 'Ngang 150cm - Cao 45.7cm - Sâu 150cm', power: '66W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2015', price: 1180000
-    },
+//     {
+//         productid: 'F-60MZ2', brandid: 'Panasonic', img: 'hinhanh/quattran/fan5-1.jpg', name: 'Quạt trần Panasonic F-60MZ2',
+//         size: 'Ngang 150cm - Cao 45.7cm - Sâu 150cm', power: '66W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2015', price: 1180000
+//     },
 
-    {
-        productid: 'F-56MPG-GO', brandid: 'Panasonic', img: 'hinhanh/quattran/fan6-1.jpg', name: 'Quạt trần Panasonic F-56MPG-GO',
-        size: 'Ngang 140cm - Cao 31.9cm - Sâu 140cm', power: '59W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2020', price: 2990000
-    },
+//     {
+//         productid: 'F-56MPG-GO', brandid: 'Panasonic', img: 'hinhanh/quattran/fan6-1.jpg', name: 'Quạt trần Panasonic F-56MPG-GO',
+//         size: 'Ngang 140cm - Cao 31.9cm - Sâu 140cm', power: '59W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2020', price: 2990000
+//     },
 
-    {
-        productid: 'VY377790', brandid: 'Asia', img: 'hinhanh/quatdien/fan5.jpg', name: 'Quạt treo tường Asia VY377790',
-        size: 'Ngang 47cm - Cao 69cm - Sâu 36.5cm', power: '55W', category: 'quattreotuong',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 720000
-    },
+//     {
+//         productid: 'VY377790', brandid: 'Asia', img: 'hinhanh/quatdien/fan5.jpg', name: 'Quạt treo tường Asia VY377790',
+//         size: 'Ngang 47cm - Cao 69cm - Sâu 36.5cm', power: '55W', category: 'quattreotuong',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 720000
+//     },
 
-    {
-        productid: 'B1612', brandid: 'Senko', img: 'hinhanh/quatdien/fan6.jpg', name: 'Quạt bàn Senko B1612',
-        size: 'Ngang 32cm - Cao 65.5cm - Sâu 32cm', power: '47W', category: 'quatban',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 425000
-    },
+//     {
+//         productid: 'B1612', brandid: 'Senko', img: 'hinhanh/quatdien/fan6.jpg', name: 'Quạt bàn Senko B1612',
+//         size: 'Ngang 32cm - Cao 65.5cm - Sâu 32cm', power: '47W', category: 'quatban',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 425000
+//     },
 
-    {
-        productid: 'KG725', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan33-1.jpg', name: 'Quạt đứng Kangaroo KG725',
-        size: 'Ngang 40cm - Cao 113.5 - 135cm - Sâu 40cm', power: '55W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 1190000
-    },
+//     {
+//         productid: 'KG725', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan33-1.jpg', name: 'Quạt đứng Kangaroo KG725',
+//         size: 'Ngang 40cm - Cao 113.5 - 135cm - Sâu 40cm', power: '55W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 1190000
+//     },
 
-    {
-        productid: 'F-56NCL-S', brandid: 'Panasonic', img: 'hinhanh/quattran/fan11-1.jpg', name: 'Quạt trần Panasonic F-56NCL-S',
-        size: 'Ngang 150cm - Cao 30.4cm - Sâu 150cm', power: '70W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2021', price: 2100000
-    },
+//     {
+//         productid: 'F-56NCL-S', brandid: 'Panasonic', img: 'hinhanh/quattran/fan11-1.jpg', name: 'Quạt trần Panasonic F-56NCL-S',
+//         size: 'Ngang 150cm - Cao 30.4cm - Sâu 150cm', power: '70W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2021', price: 2100000
+//     },
 
-    {
-        productid: 'L1638', brandid: 'Senko', img: 'hinhanh/quatdien/fan7.jpg', name: 'Quạt lửng Senko L1638',
-        size: 'Ngang 36.8cm - Cao 75.6 - 91.5cm - Sâu 36cm', power: '47W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 470000
-    },
+//     {
+//         productid: 'L1638', brandid: 'Senko', img: 'hinhanh/quatdien/fan7.jpg', name: 'Quạt lửng Senko L1638',
+//         size: 'Ngang 36.8cm - Cao 75.6 - 91.5cm - Sâu 36cm', power: '47W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 470000
+//     },
 
-    {
-        productid: 'DTS1609', brandid: 'Senko', img: 'hinhanh/quatdien/fan25-1.jpg', name: 'Quạt đứng Senko DTS1609',
-        size: 'Ngang 46.5cm - Cao 106.3 - 117.5cm - Sâu 46.5cm', power: '60W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 645000
-    },
+//     {
+//         productid: 'DTS1609', brandid: 'Senko', img: 'hinhanh/quatdien/fan25-1.jpg', name: 'Quạt đứng Senko DTS1609',
+//         size: 'Ngang 46.5cm - Cao 106.3 - 117.5cm - Sâu 46.5cm', power: '60W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 645000
+//     },
 
-    {
-        productid: 'KG723', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan30-1.jpg', name: 'Quạt treo tường Kangaroo KG723',
-        size: 'Ngang 41cm - Cao 53cm - Sâu 30cm', power: '55W', category: 'quattreotuong',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 499000
-    },
+//     {
+//         productid: 'KG723', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan30-1.jpg', name: 'Quạt treo tường Kangaroo KG723',
+//         size: 'Ngang 41cm - Cao 53cm - Sâu 30cm', power: '55W', category: 'quattreotuong',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 499000
+//     },
 
-    {
-        productid: 'LTS1632', brandid: 'Senko', img: 'hinhanh/quatdien/fan26-1.jpg', name: 'Quạt lửng Senko LTS1632',
-        size: 'Ngang 41.5cm - Cao 86 - 98cm - Sâu 41.5cm', power: '60W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 620000
-    },
+//     {
+//         productid: 'LTS1632', brandid: 'Senko', img: 'hinhanh/quatdien/fan26-1.jpg', name: 'Quạt lửng Senko LTS1632',
+//         size: 'Ngang 41.5cm - Cao 86 - 98cm - Sâu 41.5cm', power: '60W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2021', price: 620000
+//     },
 
-    {
-        productid: 'T1680', brandid: 'Senko', img: 'hinhanh/quatdien/fan29-1.jpg', name: 'Quạt treo tường Senko T1680',
-        size: 'Ngang 44.5cm - Cao 59cm - Sâu 33.5cm', power: '47W', category: 'quattreotuong',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 349000
-    },
+//     {
+//         productid: 'T1680', brandid: 'Senko', img: 'hinhanh/quatdien/fan29-1.jpg', name: 'Quạt treo tường Senko T1680',
+//         size: 'Ngang 44.5cm - Cao 59cm - Sâu 33.5cm', power: '47W', category: 'quattreotuong',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 349000
+//     },
 
-    {
-        productid: 'LTS1636', brandid: 'Senko', img: 'hinhanh/quatdien/fan8.jpg', name: 'Quạt lửng Senko LTS1636',
-        size: 'Ngang 41cm - Cao 85 - 97cm - Sâu 41cm', power: '65W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 560000
-    },
+//     {
+//         productid: 'LTS1636', brandid: 'Senko', img: 'hinhanh/quatdien/fan8.jpg', name: 'Quạt lửng Senko LTS1636',
+//         size: 'Ngang 41cm - Cao 85 - 97cm - Sâu 41cm', power: '65W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 560000
+//     },
 
-    {
-        productid: 'VY357690', brandid: 'Asia', img: 'hinhanh/quatdien/fan9.jpg', name: 'Quạt treo tường Asia VY357690',
-        size: 'Ngang 44.7cm - Cao 54.5cm - Sâu 33.8cm', power: '55W', category: 'quattreotuong',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 550000
-    },
+//     {
+//         productid: 'VY357690', brandid: 'Asia', img: 'hinhanh/quatdien/fan9.jpg', name: 'Quạt treo tường Asia VY357690',
+//         size: 'Ngang 44.7cm - Cao 54.5cm - Sâu 33.8cm', power: '55W', category: 'quattreotuong',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 550000
+//     },
 
-    {
-        productid: 'KGSF056051', brandid: 'Kangaroo', img: 'hinhanh/quattran/fan7-1.jpg', name: ' Quạt trần Kangaroo KGSF056051',
-        size: 'Ngang 140cm - Cao 40.8cm - Sâu 140cm', power: '56W', category: 'quattran',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2021', price: 2290000
-    },
+//     {
+//         productid: 'KGSF056051', brandid: 'Kangaroo', img: 'hinhanh/quattran/fan7-1.jpg', name: ' Quạt trần Kangaroo KGSF056051',
+//         size: 'Ngang 140cm - Cao 40.8cm - Sâu 140cm', power: '56W', category: 'quattran',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2021', price: 2290000
+//     },
 
-    {
-        productid: 'D16018-BV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan19-1.jpg', name: 'Quạt đứng Asia D16018-BV0',
-        size: 'Ngang 38.5cm - Cao 96.5 - 109cm - Sâu 41.5cm', power: '45W', category: 'quatdung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 650000
-    },
+//     {
+//         productid: 'D16018-BV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan19-1.jpg', name: 'Quạt đứng Asia D16018-BV0',
+//         size: 'Ngang 38.5cm - Cao 96.5 - 109cm - Sâu 41.5cm', power: '45W', category: 'quatdung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2017', price: 650000
+//     },
 
-    {
-        productid: 'A16009-DV1', brandid: 'Asia', img: 'hinhanh/quatdien/fan20-1.jpg', name: 'Quạt lửng Asia A16009-DV1',
-        size: 'Ngang 44cm - Cao 76.5 - 94.5cm - Sâu 44cm', power: '45W', category: 'quatlung',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2018', price: 590000
-    },
+//     {
+//         productid: 'A16009-DV1', brandid: 'Asia', img: 'hinhanh/quatdien/fan20-1.jpg', name: 'Quạt lửng Asia A16009-DV1',
+//         size: 'Ngang 44cm - Cao 76.5 - 94.5cm - Sâu 44cm', power: '45W', category: 'quatlung',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2018', price: 590000
+//     },
 
-    {
-        productid: 'F-56XPG-W', brandid: 'Panasonic', img: 'hinhanh/quattran/fan8-1.jpg', name: 'Quạt trần Panasonic F-56XPG-W',
-        size: 'Ngang 140cm - Cao 29.2cm - Sâu 140cm', power: '59W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 3500000
-    },
+//     {
+//         productid: 'F-56XPG-W', brandid: 'Panasonic', img: 'hinhanh/quattran/fan8-1.jpg', name: 'Quạt trần Panasonic F-56XPG-W',
+//         size: 'Ngang 140cm - Cao 29.2cm - Sâu 140cm', power: '59W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 3500000
+//     },
 
-    {
-        productid: 'VY355790', brandid: 'Asia', img: 'hinhanh/quatdien/fan10.jpg', name: 'Quạt bàn Asia VY355790',
-        size: 'Ngang 29cm - Cao 60cm - Sâu 33cm', power: '55W', category: 'quatban',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 550000
-    },
+//     {
+//         productid: 'VY355790', brandid: 'Asia', img: 'hinhanh/quatdien/fan10.jpg', name: 'Quạt bàn Asia VY355790',
+//         size: 'Ngang 29cm - Cao 60cm - Sâu 33cm', power: '55W', category: 'quatban',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2022', price: 550000
+//     },
 
-    {
-        productid: 'B1213', brandid: 'Senko', img: 'hinhanh/quatdien/fan11.jpg', name: 'Quạt bàn Senko B1213',
-        size: 'Ngang 26.5cm - Cao 54cm - Sâu 27.5cm', power: '40W', category: 'quatban',
-        brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 379000
-    },
+//     {
+//         productid: 'B1213', brandid: 'Senko', img: 'hinhanh/quatdien/fan11.jpg', name: 'Quạt bàn Senko B1213',
+//         size: 'Ngang 26.5cm - Cao 54cm - Sâu 27.5cm', power: '40W', category: 'quatban',
+//         brandOf: 'Việt Nam', madein: 'Việt Nam', year: '2019', price: 379000
+//     },
 
-    {
-        productid: 'KG748', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan12.jpg', name: 'Quạt sạc điện Kangaroo KG748',
-        size: 'Ngang 36cm - Cao 74 - 88.2cm - Sâu 36cm', power: '24W', category: 'quatsacdien',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2024', price: 2090000
-    },
+//     {
+//         productid: 'KG748', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan12.jpg', name: 'Quạt sạc điện Kangaroo KG748',
+//         size: 'Ngang 36cm - Cao 74 - 88.2cm - Sâu 36cm', power: '24W', category: 'quatsacdien',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2024', price: 2090000
+//     },
 
-    {
-        productid: 'KG745', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan13-1.jpg', name: 'Quạt sạc điện Kangaroo KG745',
-        size: 'Ngang 24.6cm - Cao 60cm - Sâu 24.6cm', power: '24W', category: 'quatsacdien',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2024', price: 1250000
-    },
+//     {
+//         productid: 'KG745', brandid: 'Kangaroo', img: 'hinhanh/quatdien/fan13-1.jpg', name: 'Quạt sạc điện Kangaroo KG745',
+//         size: 'Ngang 24.6cm - Cao 60cm - Sâu 24.6cm', power: '24W', category: 'quatsacdien',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2024', price: 1250000
+//     },
 
-    {
-        productid: 'KG722DC', brandid: 'Kangaroo', img: 'hinhanh/quattran/fan9-1.jpg', name: 'Quạt trần Kangaroo KG722DC',
-        size: 'Ngang 142cm - Cao 42cm - Sâu 142cm', power: '50W', category: 'quattran',
-        brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 2990000
-    },
+//     {
+//         productid: 'KG722DC', brandid: 'Kangaroo', img: 'hinhanh/quattran/fan9-1.jpg', name: 'Quạt trần Kangaroo KG722DC',
+//         size: 'Ngang 142cm - Cao 42cm - Sâu 142cm', power: '50W', category: 'quattran',
+//         brandOf: 'Việt Nam', madein: 'Trung Quốc', year: '2022', price: 2990000
+//     },
 
-    {
-        productid: 'F-60WWK-S', brandid: 'Panasonic', img: 'hinhanh/quattran/fan10-1.jpg', name: 'Quạt trần Panasonic F-60WWK-S',
-        size: 'Ngang 150cm - Cao 19.6cm - Sâu 150cm', power: '76W', category: 'quattran',
-        brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 6390000
-    },
-];
+//     {
+//         productid: 'F-60WWK-S', brandid: 'Panasonic', img: 'hinhanh/quattran/fan10-1.jpg', name: 'Quạt trần Panasonic F-60WWK-S',
+//         size: 'Ngang 150cm - Cao 19.6cm - Sâu 150cm', power: '76W', category: 'quattran',
+//         brandOf: 'Nhật Bản', madein: 'Malaysia', year: '2019', price: 6390000
+//     },
+// ];

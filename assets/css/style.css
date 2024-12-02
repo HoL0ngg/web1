@@ -606,7 +606,7 @@ html {
 #topmenu_icon>div {
     font-size: 1.64rem;
     width: 20px;
-    margin: 0 18px;
+    margin: 0 20px;
 }
 
 #topmenu_icon>div:hover {
@@ -1135,7 +1135,7 @@ i#find_wrap [type="text"]::placeholder {
     color: black;
     flex-direction: column;
     width: 160px;
-    border-radius: 20px;
+    border-radius: 5px;
 }
 
 .user--selection.hidden {

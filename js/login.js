@@ -14,7 +14,7 @@ let adminArr = [
     }
 ]
 
-const openSignIn = document.getElementById('icon--user');
+const openSignIn = document.getElementById('topmenu_icon--user');
 const goToSignUp = document.getElementById('GoToSignUp');
 const signUpBackToSignIn = document.getElementById('SignUpBackToSignIn');
 const closeFormLogin = document.getElementById('CloseFormLogin');
@@ -33,7 +33,10 @@ checklogin();
 function checklogin() {
     hideAdmin();
     const user = JSON.parse(localStorage.getItem('userlogin'));
-    if (user == null) return;
+    if (user == null) {
+        hideNameUser();
+        return;
+    }
 
     const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
     // kieemr tra
@@ -41,10 +44,10 @@ function checklogin() {
     if (userlogin) {
         // showAlert("Đăng nhập thành công!");
         isLogin = true;
-        // hideLogin();
+        hideLogin();
         hideUser();
         showNameUser();
-        nameUser.innerText = userlogin.username;
+        nameUser.textContent = userlogin.username;
         return;
     }
     userlogin = adminArr.find(admin => admin.username == user.username && admin.password == user.password)
@@ -52,12 +55,11 @@ function checklogin() {
 
         // showAlert("Đăng nhập thành công với tài khoản admin!");
         isLogin = true;
-        // hideLogin();
+        hideLogin();
         hideUser();
         showAdmin();
-        nameUser.innerText = userlogin.username;
+        nameUser.textContent = 'admin';
         showNameUser();
-        // userNameElement.style.display = 'flex';
     }
 }
 
@@ -66,11 +68,24 @@ function showAlert(message) {
     alert(message);
 }
 
+function customAlert(message, type) {
+    if (type == 'success') {
+        document.getElementById("customalert").style.backgroundColor = '#4CAF50';
+    }
+    if (type == 'warning') {
+        document.getElementById("customalert").style.backgroundColor = '#f44336';
+    }
+    document.getElementById("customalert").innerHTML = message;
+    var x = document.getElementById("customalert");
+    x.className = "show";
+    setTimeout(function () { x.className = x.classList.remove("show"); }, 3500);
+}
+
 // Hàm lưu tài khoản vào localStorage
 function saveAccount(username, numberphone, password) {
     const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
-    accounts.push({ username, numberphone, password });
-    localStorage.setItem("accounts", JSON.stringify(accounts));
+    let newUser = { username: username, numberphone: numberphone, password: password, status: 1 };
+    accounts.push(newUser); localStorage.setItem('accounts', JSON.stringify(accounts));
 }
 
 // Check tài khoản đã tồn tại hay chưa?
@@ -110,7 +125,6 @@ function isBlackList(numberphoneOrUsername) {
 // Hàm tìm tài khoản trong localStorage
 function findAccount(numberphoneOrUsername, password) {
     const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
-    // kieemr tra
     return accounts.find(account =>
         (account.numberphone === numberphoneOrUsername || account.username === numberphoneOrUsername) &&
         account.password === password
@@ -119,8 +133,6 @@ function findAccount(numberphoneOrUsername, password) {
 
 document.querySelectorAll('.logout').forEach(logoutbtn => {
     logoutbtn.addEventListener('click', function () {
-        console.log('hehe');
-
         logout();
     })
 })
@@ -136,14 +148,11 @@ function logout() {
     isLogin = false;
     userlogin = undefined;
     hideAdmin();
+    hideLogin();
     hideNameUser();
     hideUserSelection();
     showUser();
-    document.getElementById('dangnhap-form').reset();
-    document.getElementById('dangky-form').reset();
     document.getElementById('personal-form').reset();
-    localStorage.removeItem('cart');
-    loadCart();
     if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
@@ -155,11 +164,11 @@ function logout() {
 
 //Hàm ấn icon user
 function hideUser() {
-    iconUser.classList.add('hidden');
+    iconUser.style.display = 'none';
 }
 // Hàm hiện icon user
 function showUser() {
-    iconUser.classList.remove('hidden');
+    iconUser.style.display = 'block';
 }
 
 // ham an name user
@@ -174,6 +183,17 @@ function showNameUser() {
 nameUser.addEventListener('click', function (e) {
     userSelection[0].classList.toggle('hidden');
 });
+
+const logoutButton = document.getElementById('logout--button');
+if (logoutButton) logoutButton.style.display = 'none';
+//ham an nut logout
+function hideLogoutButton() {
+    logoutButton.style.display = 'none';
+}
+//ham hien nut logout
+function showLogoutButton() {
+    logoutButton.style.display = 'none';
+}
 
 // Hàm hiển thị cửa sổ Login
 function showLogin() {
@@ -193,20 +213,12 @@ function hideAdmin() {
     adminContainer.style.display = 'none';
 }
 
-const userSelection = document.querySelectorAll('.user--selection');
-
-userSelection.forEach(select => {
-    select.addEventListener('click', (e) => e.stopPropagation());
-})
+const userSelection = document.getElementsByClassName('user--selection');
 
 //mở trang đăng nhập
 openSignIn.addEventListener('click', (e) => {
-    console.log('hihi');
-    console.log(userSelection);
-
-    if (userlogin == undefined && openSignIn.contains(e.target)) {
+    if (userlogin == undefined)
         showLogin();
-    }
     else {
         // show thông tin để chọn
         userSelection[1].classList.toggle('hidden');
@@ -232,46 +244,78 @@ closeFormLogin.addEventListener('click', (e) => {
 
 // -------------------------------------------------------------------------------------//
 
+// kiểm tra sdt 
+function isValidPhoneNumber(phoneNumber) {
+    phoneNumber = phoneNumber.trim();
+    const phoneRegex = /^(?:\+84|0)(?:3[2-9]|5[6|8|9]|7[0|6-9]|8[1-9]|9[0-9])\d{7}$/;
+
+    return phoneRegex.test(phoneNumber);
+}
+
+// Hàm kiểm tra tài khoản đã tồn tại
+function checkDuplicateAccount(name, num) {
+    let accounts = localStorage.getItem("accounts") ? JSON.parse(localStorage.getItem("accounts")) : [];
+    return accounts.some(account => account.username === name || account.numberphone === num);
+}
+
 // Kiểm tra đăng kí tài khoản
 signUpForm.addEventListener("submit", function (event) {
     event.preventDefault();
 
-    const username = signUpForm.querySelector("input[placeholder='Tên tài khoản']").value;
-    const numberphone = signUpForm.querySelector("input[placeholder='Số điện thoại']").value;
-    const password = signUpForm.querySelector("input[placeholder='Mật khẩu']").value;
-    const confirmPassword = signUpForm.querySelector("input[placeholder='Nhập lại mật khẩu']").value;
+    const numberphone = signUpForm.querySelector("input[placeholder='Số điện thoại']");
+    const num = numberphone.value.trim();
+    if (!isValidPhoneNumber(num)) {
+        showAlert("Số điện thoại không hợp lệ !");
+        numberphone.focus();
+        return;
+    }
 
+    const username = signUpForm.querySelector("input[placeholder='Tên tài khoản']");
+    const name = username.value.trim();
+    if (name.length < 6 || name.length > 10) {
+        showAlert("Tên tài khoản phải từ 6 đến 10 ký tự.");
+        username.focus();
+        return;
+    }
 
     if (checkAccount(username)) {
         showAlert("Tài khoản đã tồn tại");
+        username.focus();
         return;
     }
 
     if (isBlackList(username) || isBlackList(numberphone)) {
         showAlert("Tài khoản này đã bị chặn và không thể đăng kí. Vui lòng liên hệ Người Quản Trị để giải quyết");
+        username.focus();
         return;
     }
 
-    if (username.length < 6 || username.length > 10) {
-        showAlert("Tên tài khoản phải từ 6 đến 10 ký tự.");
+    if (checkDuplicateAccount(name, num)) {
+        showAlert("Tên tài khoản hoặc số điện thoại đã được sử dụng. Vui lòng sử dụng thông tin khác.");
+        username.focus();
         return;
     }
 
+    const password = signUpForm.querySelector("input[placeholder='Mật khẩu']").value;
     if (password.length < 6 || password.length > 20) {
         showAlert("Mật khẩu phải từ 6 đến 20 ký tự.");
+        password.focus();
         return;
     }
 
+    const confirmPassword = signUpForm.querySelector("input[placeholder='Nhập lại mật khẩu']").value;
     if (password !== confirmPassword) {
         showAlert("Mật khẩu nhập lại không khớp.");
+        confirmPassword.focus();
         return;
     }
 
-    saveAccount(username, numberphone, password);
+    saveAccount(name, num, password);
     showAlert("Đăng kí thành công! Bạn có thể đăng nhập bằng tài khoản mới.");
     signUpContainer.style.display = 'none';
     signInContainer.style.display = 'flex';
 });
+
 
 // Kiểm tra đăng nhập
 signInForm.addEventListener("submit", function (event) {
@@ -280,39 +324,51 @@ signInForm.addEventListener("submit", function (event) {
     const numberphoneOrUsername = signInForm.querySelector("input[placeholder='Số điện thoại hoặc Tên tài khoản']").value;
     const password = signInForm.querySelector("input[placeholder='Mật khẩu']").value;
 
-    if (isBlackList(numberphoneOrUsername)) {
-        showAlert("Tài khoản này đã bị chặn và không thể đăng nhập. Vui lòng liên hệ Người Quản Trị để giải quyết");
-        return;
-    }
-
-    if (adminArr.find(admin => admin.username == numberphoneOrUsername && admin.password == password)) {
+    // Kiểm tra tài khoản admin
+    if (adminArr.find(admin => admin.username === numberphoneOrUsername && admin.password === password)) {
         showAlert("Đăng nhập thành công với tài khoản admin!");
         isLogin = true;
         hideLogin();
         hideUser();
         showAdmin();
-        nameUser.textContent = 'admin';
+        nameUser.textContent = numberphoneOrUsername;
         userlogin = adminArr.find(admin => admin.username == numberphoneOrUsername);
         showNameUser();
         localStorage.setItem('userlogin', JSON.stringify(userlogin));
-        // userNameElement.style.display = 'flex';
+        return;
     }
-    else if (findAccount(numberphoneOrUsername, password)) {
-        showAlert("Đăng nhập thành công!");
-        isLogin = true;
-        hideLogin();
-        hideUser();
-        nameUser.textContent = numberphoneOrUsername;
-        userlogin = findAccount(numberphoneOrUsername, password);
-        updatePersonalForm();
-        updateUser();
-        showNameUser();
-        localStorage.setItem('userlogin', JSON.stringify(userlogin));
 
+    // Kiểm tra tài khoản người dùng
+    let account = findAccount(numberphoneOrUsername, password);
+    if (account) {
+        if (account.status === 0) {
+            showAlert("Tài khoản của bạn đã bị khóa. Vui lòng liên hệ quản trị viên để biết thêm chi tiết.");
+        } else {
+            showAlert("Đăng nhập thành công!");
+            isLogin = true;
+            hideLogin();
+            hideUser();
+            nameUser.textContent = numberphoneOrUsername;
+            showNameUser();
+            userlogin = account;
+            updatePersonalForm();
+            updateUser();
+            localStorage.setItem('userlogin', JSON.stringify(userlogin));
+        }
     } else {
         showAlert("Số điện thoại, tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.");
     }
 });
+
+// Hàm tìm tài khoản trong localStorage
+function findAccount(numberphoneOrUsername, password) {
+    const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+    return accounts.find(account =>
+        (account.numberphone === numberphoneOrUsername || account.username === numberphoneOrUsername) &&
+        account.password === password
+    );
+}
+
 
 // blackListAccount("0123456789","a12345");
 
@@ -333,9 +389,6 @@ function updatePersonalForm() {
 }
 
 function closePersonalInfoTable() {
-    document.querySelectorAll('.error-input').forEach(error => {
-        error.classList.remove('invalid');
-    })
     const displayPersonalInfo = document.getElementById("display-personal-info");
     displayPersonalInfo.style.display = 'none';
 
@@ -392,25 +445,98 @@ if (document.getElementById('personal-form')) document.getElementById('personal-
     }
 })
 
-// Phần này ai rảnh làm dùm đi ;v
-function changePassword() {
-    // 1. Lấy dữ liệu từ localStorage
-    const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
+// // Phần này ai rảnh làm dùm đi ;v
+// function changePassword() {
+//     // 1. Lấy dữ liệu từ localStorage
+//     const accounts = JSON.parse(localStorage.getItem('accounts')) || [];
 
-    // 2. Tìm account cần thay đổi
-    const accountIndex = accounts.findIndex(acc => acc.username === userlogin.username);
+//     // 2. Tìm account cần thay đổi
+//     const accountIndex = accounts.findIndex(acc => acc.username === userlogin.username);
 
-    // Cho nhập lại password để kiểm tra
+//     // Cho nhập lại password để kiểm tra
 
 
-    //Kiểm tra hoàn tất thì hiện 1 ô để nhập password mới và xác nhận
+//     //Kiểm tra hoàn tất thì hiện 1 ô để nhập password mới và xác nhận
 
-    // 3. Cập nhật password
-    accounts[accountIndex].password = newPassword;
+//     // 3. Cập nhật password
+//     accounts[accountIndex].password = newPassword;
 
-    // 4. Lưu lại vào localStorage
-    localStorage.setItem('accounts', JSON.stringify(accounts));
+//     // 4. Lưu lại vào localStorage
+//     localStorage.setItem('accounts', JSON.stringify(accounts));
 
-    console.log('Password changed successfully!');
+//     console.log('Password changed successfully!');
 
-}
+// }
+
+
+// Lấy phần tử
+const changePassBtn = document.querySelector('.changePass');
+const changePassForm = document.querySelector('.changePassForm');
+const cancelChangePass = document.querySelector('#cancelChangePass');
+const changePassFormElement = document.querySelector('#changePassForm');
+
+// Ẩn/hiện form đổi mật khẩu
+changePassBtn.addEventListener('click', () => {
+    changePassForm.classList.remove('hidden');
+}); ``
+
+if (cancelChangePass) cancelChangePass.addEventListener('click', () => {
+    if (addEventListener) {
+        changePassForm.classList.add('hidden');
+    }
+});
+
+// Xử lý đổi mật khẩu
+if (changePassFormElement) changePassFormElement.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const currentPassInput = changePassFormElement.querySelector("input[placeholder='Mật khẩu hiện tại']");
+    const newPassInput = changePassFormElement.querySelector("input[placeholder='Mật khẩu mới']");
+    const confirmNewPassInput = changePassFormElement.querySelector("input[placeholder='Nhập lại mật khẩu mới']");
+
+    const currentPass = currentPassInput.value.trim();
+    const newPass = newPassInput.value.trim();
+    const confirmNewPass = confirmNewPassInput.value.trim();
+
+    // Kiểm tra đăng nhập
+    if (!isLogin || !userlogin) {
+        showAlert("Bạn cần đăng nhập để đổi mật khẩu.");
+        changePassForm.classList.add('hidden');
+        return;
+    }
+
+    // Kiểm tra mật khẩu hiện tại
+    if (currentPass !== userlogin.password) {
+        showAlert("Mật khẩu hiện tại không đúng.");
+        currentPassInput.focus();
+        return;
+    }
+
+    // Kiểm tra mật khẩu mới
+    if (newPass.length < 6 || newPass.length > 20) {
+        showAlert("Mật khẩu mới phải từ 6 đến 20 ký tự.");
+        newPassInput.focus();
+        return;
+    }
+
+    if (newPass !== confirmNewPass) {
+        showAlert("Mật khẩu nhập lại không khớp.");
+        confirmNewPassInput.focus();
+        return;
+    }
+
+    // Cập nhật mật khẩu
+    const accounts = JSON.parse(localStorage.getItem("accounts")) || [];
+    const userIndex = accounts.findIndex(account => account.username === userlogin.username);
+
+    if (userIndex !== -1) {
+        accounts[userIndex].password = newPass;
+        localStorage.setItem("accounts", JSON.stringify(accounts));
+        userlogin.password = newPass; // Cập nhật trong bộ nhớ tạm
+        localStorage.setItem("userlogin", JSON.stringify(userlogin));
+        showAlert("Đổi mật khẩu thành công!");
+        changePassForm.classList.add('hidden');
+    } else {
+        showAlert("Đã xảy ra lỗi khi đổi mật khẩu.");
+    }
+});
