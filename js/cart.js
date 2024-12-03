@@ -53,6 +53,8 @@ function loadCart() {
     console.log(cart);
     const container = document.getElementById('cart-container');
     const productArray = JSON.parse(localStorage.getItem('productList')) || [];
+    console.log(productArray);
+
     let s = '';
 
     if (cart.length > 0 && container) {

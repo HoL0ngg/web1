@@ -152,7 +152,11 @@ function logout() {
     hideNameUser();
     hideUserSelection();
     showUser();
+    document.getElementById('dangnhap-form').reset();
+    document.getElementById('dangky-form').reset();
     document.getElementById('personal-form').reset();
+    localStorage.removeItem('cart');
+    loadCart();
     if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
@@ -214,6 +218,10 @@ function hideAdmin() {
 }
 
 const userSelection = document.getElementsByClassName('user--selection');
+
+// if (userSelection) userSelection.forEach(select => {
+//     select.addEventListener('click', (e) => e.stopPropagation());
+// })
 
 //mở trang đăng nhập
 openSignIn.addEventListener('click', (e) => {
@@ -389,6 +397,9 @@ function updatePersonalForm() {
 }
 
 function closePersonalInfoTable() {
+    document.querySelectorAll('.error-input').forEach(error => {
+        error.classList.remove('invalid');
+    })
     const displayPersonalInfo = document.getElementById("display-personal-info");
     displayPersonalInfo.style.display = 'none';
 

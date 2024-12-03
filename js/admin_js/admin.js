@@ -74,7 +74,7 @@ function getMoney() {
 
     orders.forEach(item => {
         // Check if item.total exists and if item.trangthai is true (or truthy)
-        if (item.total !== undefined && item.trangthai == 1) {  
+        if (item.total !== undefined && item.trangthai == 1) {
             tongtien += item.total;
         }
     });
@@ -130,7 +130,7 @@ function paginationChange(page, productAll, currentPage) {
 }
 function attachDeleteEvents() {
     document.querySelectorAll('.btn-delete').forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function (e) {
             const id = e.target.closest('button').dataset.id;
             console.log("Button clicked, ID:", id); // Kiểm tra ID sản phẩm
             deleteProduct(parseInt(id)); // Chuyển đổi ID sang số trước khi xóa
@@ -138,7 +138,7 @@ function attachDeleteEvents() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     showProduct();
     attachDeleteEvents(); // Gán sự kiện click sau khi DOM đã tải
 });
@@ -192,7 +192,7 @@ function showProductArr(arr) {
 
 function attachDeleteEvents() {
     document.querySelectorAll('.btn-delete').forEach(button => {
-        button.addEventListener('click', function(e) {
+        button.addEventListener('click', function (e) {
             const id = e.target.closest('button').dataset.id;
             const action = e.target.closest('button').dataset.action;
             if (action === 'delete') {
@@ -206,7 +206,7 @@ function attachDeleteEvents() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     showProduct();
 });
 
@@ -233,7 +233,7 @@ function showProduct() {
     showProductArr(result);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     showProduct();
 });
 
@@ -259,7 +259,7 @@ function createId(arr) {
         id++;
         check = arr.find((item) => item.productid == id);
     }
-    return id;  
+    return id;
 }
 
 
@@ -305,7 +305,7 @@ document.getElementById("add-product-button").addEventListener("click", (e) => {
 });
 
 // Đảm bảo các sự kiện DOMContentLoaded được gán đúng cách
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     showProduct();
 });
 
@@ -430,7 +430,7 @@ document.querySelector(".modal-close.product-form").addEventListener("click", ()
     setDefaultValue();
 })
 
- function setDefaultValue() {
+function setDefaultValue() {
     document.querySelector(".upload-image-preview").src = "./assets/img/ADD_img.jpg"; // Hoặc đường dẫn mặc định cho ảnh
     document.getElementById("ten-sanPham").value = "";
     document.getElementById("gia-moi").value = "";
@@ -470,7 +470,7 @@ function uploadImage(el) {
     const file = el.files[0];
     if (file) {
         const reader = new FileReader();
-        reader.onload = function(e) {
+        reader.onload = function (e) {
             document.querySelector(".upload-image-preview").src = e.target.result;
         };
         reader.readAsDataURL(file);
@@ -523,7 +523,7 @@ function showOrder(arr) {
             orderHtml += `
             <tr>
             <td>${item.id}</td>
-            <td>${item.user}</td>
+            <td>${item.user.username}</td>
             <td>${date}</td>
             <td>${vnd(item.total)}</td>                               
             <td>${status}</td>
@@ -568,13 +568,13 @@ function detailOrder(id) {
     document.querySelector(".modal.detail-order").classList.add("open");
     let orders = localStorage.getItem("hoadon") ? JSON.parse(localStorage.getItem("hoadon")) : [];
     let products = localStorage.getItem("productList") ? JSON.parse(localStorage.getItem("productList")) : [];
-    
+
     // Lấy hóa đơn
     let order = orders.find((item) => item.id == id);
-    
+
     // Lấy chi tiết hóa đơn
     let ctDon = getOrderDetails(id);
-    
+
     let spHtml = `<div class="modal-detail-left"><div class="order-item-group">`;
     ctDon.forEach((item) => {
         let detaiSP = products.find(product => product.productid == item.id);
@@ -596,7 +596,7 @@ function detailOrder(id) {
         }
     });
     spHtml += `</div></div>`;
-    
+
     spHtml += `<div class="modal-detail-right">
         <ul class="detail-order-group">
             <li class="detail-order-item">
@@ -605,11 +605,11 @@ function detailOrder(id) {
             </li>
             <li class="detail-order-item">
                 <span class="detail-order-item-left"><i class="fa-solid fa-user"></i> Người nhận</span>
-                <span class="detail-order-item-right">${order.user}</span>
+                <span class="detail-order-item-right">${order.user.username}</span>
             </li>
             <li class="detail-order-item">
                 <span class="detail-order-item-left"><i class="fa-solid fa-phone"></i> Số điện thoại</span>
-                <span class="detail-order-item-right">${order.sdt}</span>
+                <span class="detail-order-item-right">${order.user.numberphone}</span>
             </li>
             <li class="detail-order-item tb">
                 <span class="detail-order-item-left"><i class="fa-solid fa-clock"></i> Thời gian giao</span>
@@ -621,9 +621,9 @@ function detailOrder(id) {
             </li>
         </ul>
     </div>`;
-    
+
     document.querySelector(".modal-detail-order").innerHTML = spHtml;
-   
+
     let classDetailBtn = order.trangthai == 0 ? "btn-chuaxuly" : "btn-daxuly";
     let textDetailBtn = order.trangthai == 0 ? "Chưa xử lý" : "Đã xử lý";
     document.querySelector(
@@ -652,12 +652,12 @@ function findOrder() {
     }
 
     let orders = localStorage.getItem("hoadon") ? JSON.parse(localStorage.getItem("hoadon")) : [];
-    
+
     // Lọc theo trạng thái
     let result = tinhTrang === 2 ? orders : orders.filter((item) => item.trangthai === tinhTrang);
 
     // Lọc theo từ khóa tìm kiếm
-    result = ct === "" ? result : result.filter((item) => 
+    result = ct === "" ? result : result.filter((item) =>
         item.user.toLowerCase().includes(ct.toLowerCase()) || item.id.toString().toLowerCase().includes(ct.toLowerCase())
     );
 
@@ -667,12 +667,12 @@ function findOrder() {
     } else if (timeStart === "" && timeEnd !== "") {
         result = result.filter((item) => new Date(item.date) <= new Date(timeEnd).setHours(23, 59, 59));
     } else if (timeStart !== "" && timeEnd !== "") {
-        result = result.filter((item) => 
-            new Date(item.date) >= new Date(timeStart).setHours(0, 0, 0) && 
+        result = result.filter((item) =>
+            new Date(item.date) >= new Date(timeStart).setHours(0, 0, 0) &&
             new Date(item.date) <= new Date(timeEnd).setHours(23, 59, 59)
         );
     }
-    
+
     showOrder(result);
 }
 
@@ -733,7 +733,7 @@ function thongKe(mode) {
     let ct = document.getElementById("form-search-tk").value;
     let timeStart = document.getElementById("time-start-tk").value;
     let timeEnd = document.getElementById("time-end-tk").value;
-    
+
     if (timeEnd < timeStart && timeEnd !== "" && timeStart !== "") {
         alert("Lựa chọn thời gian sai!");
         return;
@@ -753,23 +753,23 @@ function thongKe(mode) {
 
     // Lọc theo thời gian
     // Lọc theo thời gian
-if (timeStart !== "" && timeEnd === "") {
-    result = result.filter((item) => {
-        let itemDate = new Date(item.date.split("/").reverse().join("-"));
-        return itemDate >= new Date(new Date(timeStart).setHours(0, 0, 0));
-    });
-} else if (timeStart === "" && timeEnd !== "") {
-    result = result.filter((item) => {
-        let itemDate = new Date(item.date.split("/").reverse().join("-"));
-        return itemDate <= new Date(new Date(timeEnd).setHours(23, 59, 59));
-    });
-} else if (timeStart !== "" && timeEnd !== "") {
-    result = result.filter((item) => {
-        let itemDate = new Date(item.date.split("/").reverse().join("-"));
-        return itemDate >= new Date(new Date(timeStart).setHours(0, 0, 0)) && 
-               itemDate <= new Date(new Date(timeEnd).setHours(23, 59, 59));
-    });
-}
+    if (timeStart !== "" && timeEnd === "") {
+        result = result.filter((item) => {
+            let itemDate = new Date(item.date.split("/").reverse().join("-"));
+            return itemDate >= new Date(new Date(timeStart).setHours(0, 0, 0));
+        });
+    } else if (timeStart === "" && timeEnd !== "") {
+        result = result.filter((item) => {
+            let itemDate = new Date(item.date.split("/").reverse().join("-"));
+            return itemDate <= new Date(new Date(timeEnd).setHours(23, 59, 59));
+        });
+    } else if (timeStart !== "" && timeEnd !== "") {
+        result = result.filter((item) => {
+            let itemDate = new Date(item.date.split("/").reverse().join("-"));
+            return itemDate >= new Date(new Date(timeStart).setHours(0, 0, 0)) &&
+                itemDate <= new Date(new Date(timeEnd).setHours(23, 59, 59));
+        });
+    }
 
     // Hiển thị thống kê
     showThongKe(result, mode);
@@ -854,7 +854,7 @@ function detailOrderProduct(arr, id) {
             <td>${item.quantity}</td>
             <td>${vnd(item.price)}</td>
             <td>${formatDate(item.date)}</td>
-            </tr>`;      
+            </tr>`;
         }
     });
     document.getElementById("show-product-order-detail").innerHTML = orderHtml;
@@ -896,7 +896,7 @@ function signUpFormReset() {
 }
 
 // Hiển thị danh sách tài khoản từ local storage khi trang được tải
-window.onload = function() {
+window.onload = function () {
     showUser();
 };
 
@@ -947,7 +947,7 @@ function showUser() {
 }
 
 // Gọi hàm hiển thị ngay khi DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     showUser();
 });
 
@@ -964,7 +964,7 @@ addAccount.addEventListener("click", (e) => {
     let formMessageName = document.querySelector('.form-message-name');
     let formMessagePhone = document.querySelector('.form-message-phone');
     let formMessagePassword = document.querySelector('.form-message-password');
-    
+
     if (!usernameUser) {
         formMessageName.innerHTML = 'Vui lòng nhập tên tài khoản';
     } else {
@@ -1079,8 +1079,8 @@ function deleteAcount(phone) {
 
 
 
-function logout(){
-	localStorage.removeItem('userlogin');
-	localStorage.removeItem('cart');
-	location.href='../index.html';
+function logout() {
+    localStorage.removeItem('userlogin');
+    localStorage.removeItem('cart');
+    location.href = '../index.html';
 }

@@ -19,7 +19,7 @@
         <div class="login-content">
             <span class="close-login" id="CloseFormLogin">&times;</span>
             <div class="form-container sign-in-container">
-                <form action="#">
+                <form action="#" id="dangnhap-form">
                     <h1>Đăng nhập</h1>
                     <div class="social-container">
                         <a href=""><i class="fab fa-facebook-f"></i></a>
@@ -113,7 +113,7 @@
                     <li>Liên Hệ</li>
                     <li>Cửa Hàng</li>
                     <li>Giới Thiệu</li>
-                    <li onclick="window.location.href='OrderHistoryhtml'">Lịch Sử Đặt Hàng</li>
+                    <li onclick="window.location.href='OrderHistory.html'">Lịch Sử Đặt Hàng</li>
                 </ul>
             </div>
             <div id="bar_bottom">
@@ -298,7 +298,7 @@
     </div>
     <script src="./js/login.js"></script>
     <script src="./js/cart.js"></script>
-    <script src="./js/createAdminAccount.js"></script>
+    <!-- <script src="./js/createAdminAccount.js"></script> -->
     <script>
         const images = document.querySelectorAll('.banner img');
         let currentIndex = 0;
@@ -369,8 +369,8 @@
             let s = `
                 <p style="display: none;" id="product-id">${productid}</p>
                 <h2>${productName}</h2>
-                <p><b>Công suất: </b> ${productPower}</p>
-                <p><b>Kích thước: </b>${productSize}</p>       
+                <p><b>Công suất: </b> ${productSize}</p>
+                <p><b>Kích thước: </b>${productPower}</p>       
                 <p><b>Xuất xứ:</b> ${madeIn}</p>
                 <p><b>Năm ra mắt:</b> ${year}</p>              
                 <p><b>Giá: </b>${productPrice.toLocaleString('vi-VN')} VNĐ</p>          
