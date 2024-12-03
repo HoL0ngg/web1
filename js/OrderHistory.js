@@ -33,31 +33,54 @@ function displayOrders() {
 
     // Lấy dữ liệu từ `hoadon` và `userInfo` trong localStorage
     const hoadons = JSON.parse(localStorage.getItem('hoadon')) || [];
-    const userInfoArray = JSON.parse(localStorage.getItem('userInfo')) || [];
+    const userInfoArray = JSON.parse(localStorage.getItem('accounts')) || [];
 
+    console.log(hoadons);
+    console.log(userInfoArray);
+
+    if (userlogin == undefined) {
+        document.getElementById('chua-mua-hang').style.display = 'block';
+        document.getElementById('order_history').style.display = 'none';
+        return;
+    }
+
+    let user = userInfoArray.find(user => user.username == userlogin.username);
+
+    // if (user == undefined)
+    let cnt = 0;
     // Duyệt qua từng hóa đơn và thêm vào bảng
     hoadons.forEach(order => {
-        const row = document.createElement('tr');
+        if (order.user.username == user.username) {
+            const row = document.createElement('tr');
 
-        // Tìm thông tin người dùng từ `userInfo` dựa trên username
-        let user = userInfoArray.find(user => user.username == order.user.username);
-        let userAddress = user ? user.diachi : 'Không có địa chỉ'; // Nếu không tìm thấy, dùng giá trị mặc định
-        let total = order.total.toLocaleString('vi-VN');
+            // Tìm thông tin người dùng từ `userInfo` dựa trên username
+            let total = order.total.toLocaleString('vi-VN');
 
-        // Thêm hàng vào bảng
-        row.innerHTML = `
-            <td>${order.id}</td> <!-- Mã đơn hàng -->
-            <td>${order.date}</td> <!-- Ngày đặt hàng -->
-            <td>${total} VNĐ</td> <!-- Tổng tiền -->
-            <td>${order.items.map(item => `${item.id} (x${item.quantity})`).join(', ')}</td> <!-- Các sản phẩm trong đơn hàng -->
-            <td>${order.diachi}</td> <!-- Địa chỉ lấy từ userInfo -->
-            <td>${order.payment_method}</td>
-            <td>${order.trangthai ? 'Đã xử lý' : 'Chưa xử lý'}</td> <!-- Trạng thái -->
-            
-        `;
+            // Thêm hàng vào bảng
+            row.innerHTML = `
+                <td>${order.id}</td> <!-- Mã đơn hàng -->
+                <td>${order.date}</td> <!-- Ngày đặt hàng -->
+                <td>${total} VNĐ</td> <!-- Tổng tiền -->
+                <td>${order.items.map(item => `${item.id} (x${item.quantity})`).join(', ')}</td> <!-- Các sản phẩm trong đơn hàng -->
+                <td>${order.diachi}</td> <!-- Địa chỉ lấy từ userInfo -->
+                <td>${order.payment_method}</td>
+                <td>${order.trangthai ? 'Đã xử lý' : 'Chưa xử lý'}</td> <!-- Trạng thái -->
+                
+            `;
 
-        ordersTable.appendChild(row);
+            ordersTable.appendChild(row);
+            ++cnt;
+        }
     });
+    console.log(cnt);
+
+    if (cnt == 0) {
+        document.getElementById('chua-mua-hang').style.display = 'block';
+        document.getElementById('order_history').style.display = 'none';
+    } else {
+        document.getElementById('chua-mua-hang').style.display = 'none';
+        document.getElementById('order_history').style.display = 'block';
+    }
 }
 
 function updateQuantity() {
@@ -75,7 +98,6 @@ function updateQuantity() {
     else
         document.getElementById('item-quantity').style.display = 'none';
 }
-
 
 // Hiển thị dữ liệu khi tải trang
 document.addEventListener('DOMContentLoaded', function () {

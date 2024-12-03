@@ -150,7 +150,7 @@
                     <div>Liên Hệ</div>
                     <div>Cửa Hàng</div>
                     <div>Giới Thiệu</div>
-                    <div onclick="window.location.href='OrderHistoryhtml'">Lịch Sử Đặt Hàng</div>
+                    <div onclick="window.location.href='OrderHistory.html'">Lịch Sử Đặt Hàng</div>
                 </div>
             </div>
         </div>
@@ -336,6 +336,14 @@
             const minus = document.querySelector(".minus");
             const num = document.querySelector(".num");
             if (num && plus && minus) {
+                num.addEventListener("input", function () {
+                    this.value = this.value.replace(/[^0-9]/g, '');
+                });
+                num.addEventListener("blur", function () {
+                    if (this.value.trim() === "") {
+                        this.value = 1;
+                    }
+                });
                 plus.addEventListener("click", () => {
                     num.value = parseInt(num.value, 10) + 1;
                 });
@@ -369,8 +377,8 @@
             let s = `
                 <p style="display: none;" id="product-id">${productid}</p>
                 <h2>${productName}</h2>
-                <p><b>Công suất: </b> ${productSize}</p>
-                <p><b>Kích thước: </b>${productPower}</p>       
+                <p><b>Công suất: </b> ${productPower}</p>
+                <p><b>Kích thước: </b>${productSize}</p>       
                 <p><b>Xuất xứ:</b> ${madeIn}</p>
                 <p><b>Năm ra mắt:</b> ${year}</p>              
                 <p><b>Giá: </b>${productPrice.toLocaleString('vi-VN')} VNĐ</p>          

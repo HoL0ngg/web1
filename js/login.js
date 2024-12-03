@@ -43,7 +43,6 @@ function checklogin() {
     userlogin = accounts.find(account => account.username === user.username);
     if (userlogin) {
         // showAlert("Đăng nhập thành công!");
-        isLogin = true;
         hideLogin();
         hideUser();
         showNameUser();
@@ -147,21 +146,22 @@ function hideUserSelection() {
 function logout() {
     isLogin = false;
     userlogin = undefined;
+    localStorage.removeItem('userlogin');
+    localStorage.removeItem('cart');
+    updateUser();
     hideAdmin();
     hideLogin();
     hideNameUser();
     hideUserSelection();
     showUser();
-    document.getElementById('dangnhap-form').reset();
-    document.getElementById('dangky-form').reset();
-    document.getElementById('personal-form').reset();
-    localStorage.removeItem('cart');
+    if (document.getElementById('dangnhap-form')) document.getElementById('dangnhap-form').reset();
+    if (document.getElementById('dangky-form')) document.getElementById('dangky-form').reset();
+    if (document.getElementById('personal-form')) document.getElementById('personal-form').reset();
     loadCart();
+    displayOrders();
     if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
-    localStorage.removeItem('userlogin');
-    updateUser();
     showAlert("Bạn đã đăng xuất thành công.");
 }
 // ----------------------------------------------------------------------------------------------------------------------//
@@ -360,6 +360,7 @@ signInForm.addEventListener("submit", function (event) {
             showNameUser();
             userlogin = account;
             updatePersonalForm();
+            displayOrders();
             updateUser();
             localStorage.setItem('userlogin', JSON.stringify(userlogin));
         }
@@ -389,10 +390,10 @@ function updatePersonalForm() {
     // Không tìm thấy
     if (hihi == undefined) return false;
 
-    document.getElementById('namePersonal').value = hihi.hoten;
-    document.getElementById('emailPersonal').value = hihi.email;
-    document.getElementById('phonePersonal').value = hihi.sdt;
-    document.getElementById('addressPersonal').value = hihi.diachi;
+    if (document.getElementById('namePersonal')) document.getElementById('namePersonal').value = hihi.hoten;
+    if (document.getElementById('emailPersonal')) document.getElementById('emailPersonal').value = hihi.email;
+    if (document.getElementById('phonePersonal')) document.getElementById('phonePersonal').value = hihi.sdt;
+    if (document.getElementById('addressPersonal')) document.getElementById('addressPersonal').value = hihi.diachi;
     return true;
 }
 

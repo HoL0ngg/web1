@@ -272,7 +272,23 @@ btnUpdateProductIn.addEventListener("click", (e) => {
     let titleProductCur = document.getElementById("ten-sanPham").value;
     let curProductCur = document.getElementById("gia-moi").value;
     let descProductCur = document.getElementById("mo-ta").value;
-    let categoryText = document.getElementById("chon-sanPham").value;
+    let categoryTmp = document.getElementById("chon-sanPham").value;
+    let categoryText;
+    switch (categoryTmp) {
+        case 'Quạt đứng':
+            categoryText = 'quatdung';
+            break;
+        case 'Quạt treo tường':
+            categoryText = 'quattreotuong';
+            break;
+        case 'Quạt trần':
+            categoryText = 'quattran';
+            break;
+        case 'Quạt lửng':
+            categoryText = 'quatlung';
+            break;
+    }
+    console.log(categoryText);
 
     if (imgProductCur != imgProduct || titleProductCur != titleProduct || curProductCur != curProduct || descProductCur != descProduct || categoryText != categoryProduct) {
         let productadd = {
@@ -303,7 +319,23 @@ btnAddProductIn.addEventListener("click", (e) => {
     let tenSanPham = document.getElementById("ten-sanPham").value;
     let price = document.getElementById("gia-moi").value;
     let moTa = document.getElementById("mo-ta").value;
-    let categoryText = document.getElementById("chon-sanPham").value;
+    let categoryTmp = document.getElementById("chon-sanPham").value;
+    let categoryText;
+    switch (categoryTmp) {
+        case 'Quạt đứng':
+            categoryText = 'quatdung';
+            break;
+        case 'Quạt treo tường':
+            categoryText = 'quattreotuong';
+            break;
+        case 'Quạt trần':
+            categoryText = 'quattran';
+            break;
+        case 'Quạt lửng':
+            categoryText = 'quatlung';
+            break;
+    }
+    console.log(categoryText);
     if (tenSanPham == "" || price == "" || moTa == "") {
         toast({ title: "Chú ý", message: "Vui lòng nhập đầy đủ thông tin sản phẩm!", type: "warning", duration: 3000, });
     } else {

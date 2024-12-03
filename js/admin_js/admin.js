@@ -266,11 +266,27 @@ function createId(arr) {
 // Hàm thêm sản phẩm mới
 function addProduct() {
     let products = JSON.parse(localStorage.getItem("productList")) || [];
+    let categoryTmp = document.getElementById("chon-sanPham").value;
+    let categoryText;
+    switch (categoryTmp) {
+        case 'Quạt đứng':
+            categoryText = 'quatdung';
+            break;
+        case 'Quạt treo tường':
+            categoryText = 'quattreotuong';
+            break;
+        case 'Quạt trần':
+            categoryText = 'quattran';
+            break;
+        case 'Quạt lửng':
+            categoryText = 'quatlung';
+            break;
+    }
     let newProduct = {
         productid: createId(products),
         name: document.getElementById("ten-sanPham").value,
         img: document.querySelector(".upload-image-preview").src,
-        category: document.getElementById("chon-sanPham").value,
+        category: categoryText,
         price: parseInt(document.getElementById("gia-moi").value),
         madein: document.getElementById("madeIn").value,
         power: document.getElementById("power").value,
@@ -388,7 +404,22 @@ btnUpdateProductIn.addEventListener("click", (e) => {
     let imgProductCur = document.querySelector(".upload-image-preview").src;
     let nameProductCur = document.getElementById("ten-sanPham").value;
     let curProductCur = document.getElementById("gia-moi").value;
-    let categoryText = document.getElementById("chon-sanPham").value;
+    let categoryTmp = document.getElementById("chon-sanPham").value;
+    let categoryText;
+    switch (categoryTmp) {
+        case 'Quạt đứng':
+            categoryText = 'quatdung';
+            break;
+        case 'Quạt treo tường':
+            categoryText = 'quattreotuong';
+            break;
+        case 'Quạt trần':
+            categoryText = 'quattran';
+            break;
+        case 'Quạt lửng':
+            categoryText = 'quatlung';
+            break;
+    }
     let madeInProductCur = document.getElementById("madeIn").value;
     let powerProductCur = document.getElementById("power").value;
     let sizeProductCur = document.getElementById("size").value;
