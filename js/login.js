@@ -157,11 +157,11 @@ function logout() {
     if (document.getElementById('dangnhap-form')) document.getElementById('dangnhap-form').reset();
     if (document.getElementById('dangky-form')) document.getElementById('dangky-form').reset();
     if (document.getElementById('personal-form')) document.getElementById('personal-form').reset();
-    loadCart();
-    displayOrders();
     if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
+    loadCart();
+    displayOrders();
     showAlert("Bạn đã đăng xuất thành công.");
 }
 // ----------------------------------------------------------------------------------------------------------------------//
@@ -359,10 +359,10 @@ signInForm.addEventListener("submit", function (event) {
             nameUser.textContent = numberphoneOrUsername;
             showNameUser();
             userlogin = account;
+            localStorage.setItem('userlogin', JSON.stringify(userlogin));
+            updateUser();
             updatePersonalForm();
             displayOrders();
-            updateUser();
-            localStorage.setItem('userlogin', JSON.stringify(userlogin));
         }
     } else {
         showAlert("Số điện thoại, tên tài khoản hoặc mật khẩu không đúng. Vui lòng thử lại.");

@@ -266,22 +266,7 @@ function createId(arr) {
 // Hàm thêm sản phẩm mới
 function addProduct() {
     let products = JSON.parse(localStorage.getItem("productList")) || [];
-    let categoryTmp = document.getElementById("chon-sanPham").value;
-    let categoryText;
-    switch (categoryTmp) {
-        case 'Quạt đứng':
-            categoryText = 'quatdung';
-            break;
-        case 'Quạt treo tường':
-            categoryText = 'quattreotuong';
-            break;
-        case 'Quạt trần':
-            categoryText = 'quattran';
-            break;
-        case 'Quạt lửng':
-            categoryText = 'quatlung';
-            break;
-    }
+    let categoryText = document.getElementById("chon-sanPham").value;
     let newProduct = {
         productid: createId(products),
         name: document.getElementById("ten-sanPham").value,
@@ -404,22 +389,7 @@ btnUpdateProductIn.addEventListener("click", (e) => {
     let imgProductCur = document.querySelector(".upload-image-preview").src;
     let nameProductCur = document.getElementById("ten-sanPham").value;
     let curProductCur = document.getElementById("gia-moi").value;
-    let categoryTmp = document.getElementById("chon-sanPham").value;
-    let categoryText;
-    switch (categoryTmp) {
-        case 'Quạt đứng':
-            categoryText = 'quatdung';
-            break;
-        case 'Quạt treo tường':
-            categoryText = 'quattreotuong';
-            break;
-        case 'Quạt trần':
-            categoryText = 'quattran';
-            break;
-        case 'Quạt lửng':
-            categoryText = 'quatlung';
-            break;
-    }
+    let categoryText = document.getElementById("chon-sanPham").value;
     let madeInProductCur = document.getElementById("madeIn").value;
     let powerProductCur = document.getElementById("power").value;
     let sizeProductCur = document.getElementById("size").value;
@@ -739,7 +709,6 @@ function createObj() {
                         quantity: item.quantity,
                         category: prod.category,
                         name: prod.name,
-                        img: prod.img,
                         price: prod.price,
                         total: item.quantity * prod.price,
                         diachi: order.diachi,
@@ -840,7 +809,7 @@ function showThongKe(arr, mode) {
         orderHtml += `
         <tr>
             <td>${i + 1}</td>
-            <td><div class="prod-img-title"><img class="prd-img-tbl" src="${mergeObj[i].img}" alt=""><p>${mergeObj[i].name}</p></div></td>
+            <td><div class="prod-img-title"><p>${mergeObj[i].name}</p></div></td>
             <td>${mergeObj[i].quantity}</td>
             <td>${vnd(mergeObj[i].total)}</td>
             <td><button class="btn-detail product-order-detail" data-id="${mergeObj[i].id}"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
@@ -895,8 +864,166 @@ function detailOrderProduct(arr, id) {
 
 
 
+//customer thôgns kê
+function switchView() {
+    const productTable = document.getElementById('productTable');
+    const customerTable = document.getElementById('customerTable');
+
+    if (productTable.style.display === 'none') {
+        productTable.style.display = 'block';
+        customerTable.style.display = 'none';
+    } else {
+        productTable.style.display = 'none';
+        customerTable.style.display = 'block';
+    }
+}
+
+// Hàm tạo dữ liệu thống kê từ localStorage cho khách hàng
+
+function createObjCus() {
+    const orders = localStorage.getItem("hoadon") ? JSON.parse(localStorage.getItem("hoadon")) : [];
+    const products = localStorage.getItem("productList") ? JSON.parse(localStorage.getItem("productList")) : [];
+    const productMap = new Map(products.map(prod => [prod.productid, prod]));
+    const result = new Map();
+
+    orders.forEach(order => {
+        if (order.trangthai) {
+            order.items.forEach(item => {
+                const prod = productMap.get(parseInt(item.id));
+                if (prod) {
+                    if (result.has(order.user.username)) {
+                        const existingUser = result.get(order.user.username);
+                        existingUser.quantity += parseInt(item.quantity);
+                        existingUser.total += item.quantity * prod.price;
+                        existingUser.orders.push({
+                            madon: order.id,
+                            productid: item.id,
+                            quantity: item.quantity,
+                            price: prod.price,
+                            date: formatDate(order.date)
+                        });
+                    } else {
+                        result.set(order.user, {
+                            user: order.user.username,
+                            quantity: parseInt(item.quantity),
+                            total: item.quantity * prod.price,
+                            orders: [{
+                                madon: order.id,
+                                productid: item.id,
+                                quantity: item.quantity,
+                                price: prod.price,
+                                date: formatDate(order.date)
+                            }]
+                        });
+                    }
+                }
+            });
+        }
+    });
+
+    return Array.from(result.values());
+}
+function detailOrderCustomer(arr, user) {
+    let orderHtml = "";
+    const userObj = arr.find(item => item.user.username === user.username);
+
+    if (userObj) {
+        const addedOrders = new Set(); // Sử dụng Set để lưu trữ các mã đơn đã thêm
+        userObj.orders.forEach(order => {
+            const uniqueOrderIdentifier = `${order.madon}-${order.productid}`;
+            if (!addedOrders.has(uniqueOrderIdentifier)) {
+                orderHtml += `
+                <tr>
+                    <td>${order.madon}</td>
+                    <td>${order.quantity}</td>
+                    <td>${vnd(order.price)}</td>
+                    <td>${order.date}</td>
+                </tr>`;
+                addedOrders.add(uniqueOrderIdentifier); // Thêm mã đơn vào Set
+            }
+        });
+    }
+
+    document.getElementById("show-customer-order-detail").innerHTML = orderHtml;
+    document.querySelector(".modal.detail-order-product").classList.add("open");
+}
+
+// Thêm sự kiện cho các nút Chi tiết khách hàng
+function addCustomerDetailButtonsEventListeners(arr) {
+    document.querySelectorAll(".customer-order-detail").forEach(button => {
+        button.addEventListener("click", () => {
+            const user = button.getAttribute("data-user");
+            detailOrderCustomer(arr, user);
+        });
+    });
+}
+function showThongKeCustomer(arr) {
+    let orderHtml = "";
+    arr.forEach((item, index) => {
+        orderHtml += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${item.user}</td>
+            <td>${item.quantity}</td>
+            <td>${vnd(item.total)}</td>
+            <td><button class="btn-detail customer-order-detail" data-user="${item.user}"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+        </tr>`;
+    });
+
+    document.getElementById("showTkCustomer").innerHTML = orderHtml;
+    addCustomerDetailButtonsEventListeners(arr);
+}
 
 
+// Gọi hàm hiển thị khi trang tải
+document.addEventListener("DOMContentLoaded", () => {
+    const customerData = createObjCus();
+    showThongKeCustomer(customerData);
+
+    const productData = createObj(); // Hàm createObj() tạo dữ liệu thống kê sản phẩm
+    showThongKeSanPham(productData);
+
+    document.getElementById("form-search-tk").addEventListener("input", () => filterAndSearch());
+});
+
+
+function filterAndSearch(mode) {
+    const searchValue = document.getElementById("form-search-tk").value.toLowerCase();
+    let arr = createObjCus();
+
+    // Lọc theo tên khách hàng
+    let filteredArr = arr.filter(item => item.user.toLowerCase().includes(searchValue));
+
+    // Lọc giá theo mode
+    switch (mode) {
+        case 1:
+            filteredArr.sort((a, b) => a.total - b.total);
+            break;
+        case 2:
+            filteredArr.sort((a, b) => b.total - a.total);
+            break;
+    }
+
+    // Hiển thị kết quả lọc và tìm kiếm
+    showFilteredResults(filteredArr);
+}
+
+function showFilteredResults(arr) {
+    let orderHtml = "";
+    arr.forEach((item, index) => {
+        orderHtml += `
+        <tr>
+            <td>${index + 1}</td>
+            <td>${item.user}</td>
+            <td>${item.quantity}</td>
+            <td>${vnd(item.total)}</td>
+            <td><button class="btn-detail customer-order-detail" data-user="${item.user}"><i class="fa-solid fa-eye"></i> Chi tiết</button></td>
+        </tr>`;
+    });
+
+    document.getElementById("showTkCustomer").innerHTML = orderHtml;
+    addCustomerDetailButtonsEventListeners(arr);
+}
 
 
 // User

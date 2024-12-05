@@ -95,9 +95,9 @@
                     <div class="card-single">
                         <div class="box">
                             <div class="on-box">
-                                <h2 id="amount-user">0</h2>
                                 <h3>Khách hàng</h3>
                                 <i class="fa-solid fa-users-line"></i>
+                                <h2 id="amount-user">0</h2>
 
                             </div>
                         </div>
@@ -108,20 +108,15 @@
                                 <h3>Sản phẩm</h3>
                                 <i class="fa-brands fa-shopify"></i>
                                 <h2 id="amount-product">0</h2>
-
-
                             </div>
                         </div>
                     </div>
                     <div class="card-single">
                         <div class="box">
-
                             <div class="on-box">
                                 <h3>Doanh thu</h3>
                                 <i class="fa-solid fa-coins"></i>
                                 <h2 id="doanh-thu">$5020</h2>
-
-
                             </div>
                         </div>
                     </div>
@@ -131,17 +126,16 @@
             <!-- Product  -->
             <div class="section product-all">
                 <div class="admin-control">
-                    <sạc class="admin-control-left">
+                    <div class="admin-control-left">
                         <select name="the-loai" id="the-loai" onchange="showProduct()">
-                            <option>Tất cả</option>
-                            <option>Quạt đứng</option>
-                            <option>Quạt treo tuờng</option>
-                            <option>Quạt trần</option>
-                            <option>Quạt sạc điện</option>
-                            <option>Quạt bàn</option>
-                            <option>Đã xóa</option>
+                            <option value="Tất cả">Tất cả</option>
+                            <option value="quatdung">Quạt đứng</option>
+                            <option value="quattreotuong">Quạt treo tường</option>
+                            <option value="quattran">Quạt trần</option>
+                            <option value="quatlung">Quạt lửng</option>
+                            <option value="Đã xóa">Đã xóa</option>
                         </select>
-                    </sạc điện>
+                    </div>
                     <div class="admin-control-center">
                         <form action="" class="form-search">
                             <span class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></span>
@@ -268,9 +262,7 @@
                             <option>Quạt đứng</option>
                             <option>Quạt treo tuờng</option>
                             <option>Quạt trần</option>
-                            <option>Quạt sạc điện</option>
-                            <option>Quạt bàn</option>
-                            <option>Sản phẩm khác</option>
+                            <option>Quạt lửng</option>
                         </select>
                     </div>
                     <div class="admin-control-center">
@@ -328,7 +320,8 @@
                     </div>
                 </div>
 
-                <div class="table">
+                <button class="btn-swap-tk" onclick="switchView()"> Khách Hàng\Sản phẩm</button>
+                <div class="table" id="productTable">
                     <table width="100%">
                         <thead>
                             <tr>
@@ -340,6 +333,23 @@
                             </tr>
                         </thead>
                         <tbody id="showTk">
+                            <!-- Thông tin thống kê sản phẩm sẽ được chèn vào đây -->
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table" id="customerTable" style="display: none;">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <td>STT</td>
+                                <td>Tên khách hàng</td>
+                                <td>Số lượng mua</td>
+                                <td>Doanh Thu</td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody id="showTkCustomer">
+                            <!-- Thông tin thống kê khách hàng sẽ được chèn vào đây -->
                         </tbody>
                     </table>
                 </div>
@@ -373,12 +383,10 @@
                         <div class="form-group">
                             <label for="category" class="form-label">Chọn sản phẩm</label>
                             <select name="category" id="chon-sanPham">
-                                <option>Quạt đứng</option>
-                                <option>Quạt treo tuờng</option>
-                                <option>Quạt trần</option>
-                                <option>Quạt lửng</option>
-                                <!-- <option>Quạt sạc điện</option>
-                                <option>Quạt bàn</option> -->
+                                <option value="quatdung">Quạt đứng</option>
+                                <option value="quattreotuong">Quạt treo tường</option>
+                                <option value="quattran">Quạt trần</option>
+                                <option value="quatlung">Quạt lửng</option>
                             </select>
                             <span class="form-message"></span>
                         </div>
@@ -461,6 +469,7 @@
                     </thead>
                     <tbody id="show-product-order-detail">
                     </tbody>
+                    <tbody id="show-customer-order-detail"></tbody>
                 </table>
             </div>
             </form>
