@@ -186,6 +186,7 @@ html {
     left: 0;
     right: 0;
     display: none;
+    z-index: 7;
 }
 
 #info-product {
