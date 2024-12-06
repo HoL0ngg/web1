@@ -135,13 +135,35 @@ body.dark-mode {
     width: 90%;
     margin: 10px auto;
     /* border: 2px solid black; */
+    height: 320px;
     user-select: none;
+    overflow-y: auto;
 }
 
 .container table {
     width: 100%;
     padding: 12px;
     border-spacing: 0;
+}
+
+#hoadon-table td:not(:nth-child(3)) {
+    text-align: center;
+}
+
+#hoadon-table th:nth-child(1) {
+    width: 18%;
+}
+
+#hoadon-table th:nth-child(2) {
+    width: 30%;
+}
+
+#hoadon-table th:nth-child(3) {
+    width: 18%;
+}
+
+#hoadon-table th:nth-child(5) {
+    width: 20%;
 }
 
 .container table th,
@@ -157,6 +179,10 @@ td {
 
 .container table th:nth-child(2) {
     width: 32%;
+}
+
+.container table th:nth-child(1) {
+    width: 15%;
 }
 
 .container table th:nth-child(3) {
@@ -195,6 +221,10 @@ td #chinhsoluong {
 
     .container table th:nth-child(4) {
         width: 8%;
+    }
+
+    .container {
+        height: 400px;
     }
 
     #cart {
@@ -557,15 +587,38 @@ i.active {
 }
 
 @media screen and (max-width: 1250px) {
+    #nhapdiachi-container {
+        flex-direction: column;
+    }
+
+    #hoadon-center {
+        flex-direction: column;
+    }
+
+    #hoadon-container {
+        height: 80% !important;
+        margin: 8% auto !important;
+    }
+
+    #hoadon-left {
+        height: 40% !important;
+        flex: 1;
+    }
+
+    #hoadon-right {
+        border-left: 0px !important;
+        border-top: 2px solid black;
+    }
+
     #confirmPersonalInfo {
         font-size: 1.5rem;
         width: 35%;
     }
 
-    /* #wrap-personal-info{
+    #wrap-personal-info {
         display: flex;
         flex-direction: column;
-    } */
+    }
 
     #personal-form-2 {
         flex-direction: column;
@@ -634,6 +687,11 @@ i.active {
     animation: glowDown 0.5s ease forwards;
 }
 
+#nhapdiachi-container {
+    display: flex;
+    height: 80%;
+}
+
 #nhapdiachi_wrap.show {
     animation: glowUp 0.5s ease;
 }
@@ -682,8 +740,8 @@ i.active {
 #hoadon-container {
     background-color: white;
     width: 70%;
-    height: 62%;
-    margin: 10% auto;
+    height: 70%;
+    margin: 8% auto;
     display: block;
     z-index: 6;
     animation: slideDown 0.5s ease forwards;
@@ -696,11 +754,11 @@ i.active {
 }
 
 #hoadon-left {
-    flex: 2;
+    flex: 5;
 }
 
 #hoadon-right {
-    flex: 1;
+    flex: 2;
     border-left: 2px solid black;
 }
 
@@ -732,7 +790,7 @@ i.active {
 
 #hoadon-product {
     width: 100%;
-    height: calc(100% - 50px);
+    height: calc(100% - 20px);
     margin: 2% auto;
     overflow-y: scroll;
 }
