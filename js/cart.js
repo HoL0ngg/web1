@@ -359,7 +359,7 @@ function checkName(inp) {
 }
 
 function checkDiaChi(inp) {
-    const diachiRegex = /^\d+(\/\d+)*\s+[\p{L}\s]+\s+phường\s+\d+\s+quận\s+(\d+|[\p{L}\s]+)$/u;
+    const diachiRegex = /^\d+(\/\d+)*\s+([\p{L}\s]+)$/u;
     if (!diachiRegex.test(inp.value)) {
         inp.parentElement.classList.add('invalid');
         inp.parentElement.classList.remove('valid');

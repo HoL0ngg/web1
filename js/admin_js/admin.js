@@ -71,20 +71,8 @@ function paginationChange(page, productAll, currentPage) {
     })
     return node;
 }
-function attachDeleteEvents() {
-    document.querySelectorAll('.btn-delete').forEach(button => {
-        button.addEventListener('click', function (e) {
-            const id = e.target.closest('button').dataset.id;
-            console.log("Button clicked, ID:", id); // Kiểm tra ID sản phẩm
-            deleteProduct(parseInt(id)); // Chuyển đổi ID sang số trước khi xóa
-        });
-    });
-}
 
-document.addEventListener('DOMContentLoaded', function () {
-    showProduct();
-    attachDeleteEvents(); // Gán sự kiện click sau khi DOM đã tải
-});
+
 
 
 
@@ -108,22 +96,9 @@ document.addEventListener('DOMContentLoaded', function () {
     showProduct();
 });
 
-// function cancelSearchProduct() {
-//     let products = localStorage.getItem("productList") ? JSON.parse(localStorage.getItem("productList")).filter(item => item.status == 1) : [];
-//     document.getElementById('the-loai').value = "Tất cả";
-//     document.getElementById('form-search-product').value = "";
-//     displayList(products, perPage, currentPage);
-//     setupPagination(products, perPage, currentPage);
-// }
-
 function showUserName() {
     if (document.getElementById('name-acc')) document.getElementById('name-acc').innerText = userlogin.username;
 }
-
-// function getPathImage(path) {
-//     let patharr = path.split("/");
-//     return "./hinhanh/quatdien/" + patharr[patharr.length - 1]
-// }
 
 // Open Popup Modal
 let btnAddProduct = document.getElementById("btn-add-product");

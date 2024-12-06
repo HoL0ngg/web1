@@ -72,9 +72,6 @@
         top: var(--header-height);
     }
 
-    .cards{
-        flex-wrap: wrap;
-    }
 }
 
 @media only screen and (max-width: 786px) {

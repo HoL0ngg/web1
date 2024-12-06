@@ -615,10 +615,10 @@ i.active {
         width: 35%;
     }
 
-    #wrap-personal-info {
+    /* #wrap-personal-info{
         display: flex;
         flex-direction: column;
-    }
+    } */
 
     #personal-form-2 {
         flex-direction: column;

@@ -281,7 +281,7 @@ pre {
 }
 
 .sidebar {
-    flex-shrink: 0;
+    /* flex-shrink: 0; */
     overflow: hidden;
     width: 75px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -491,6 +491,7 @@ pre {
 
 .cards {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .cards .card-single {
@@ -1092,7 +1093,7 @@ label a {
     height: 40px;
 }
 
-.modal.detail-order-product .modal-container,
+.modal.detail-order-product .modal-container, .modal.detail-order-customer .modal-container,
 .modal.detail-order .modal-container {
     width: 800px;
     height: 450px;

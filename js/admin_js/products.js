@@ -63,6 +63,11 @@ function showProduct() {
     }
 
     showProductArr(result);
+    displayList(result, perPage, currentPage);
+
+    // Thiết lập phân trang
+    setupPagination(result, perPage);
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -281,5 +286,20 @@ function setDefaultValue() {
     document.getElementById("madeIn").value = "";
     document.getElementById("year").value = "";
 }
+
+// function attachDeleteEvents() {
+//     document.querySelectorAll('.btn-delete').forEach(button => {
+//         button.addEventListener('click', function (e) {
+//             const id = e.target.closest('button').dataset.id;
+//             console.log("Button clicked, ID:", id); // Kiểm tra ID sản phẩm
+//             deleteProduct(parseInt(id)); // Chuyển đổi ID sang số trước khi xóa
+//         });
+//     });
+// }
+
+// document.addEventListener('DOMContentLoaded', function () {
+//     showProduct();
+//     attachDeleteEvents(); // Gán sự kiện click sau khi DOM đã tải
+// });
 
 

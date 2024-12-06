@@ -74,6 +74,7 @@ function showUser() {
 
     // Hiển thị danh sách kết quả
     showUserArr(result);
+    
 }
 
 // Gọi hàm hiển thị ngay khi DOMContentLoaded

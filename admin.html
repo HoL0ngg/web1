@@ -263,12 +263,12 @@
                 <div class="admin-control">
                     <div class="admin-control-left">
                         <select name="the-loai-tk" id="the-loai-tk" onchange="thongKe()">
-                            <option>Tất cả</option>
-                            <option>Quạt đứng</option>
-                            <option>Quạt treo tuờng</option>
-                            <option>Quạt trần</option>
-                            <option>Quạt lửng</option>
-                        </select>
+                            <option >Tất cả</option>
+                            <option value="quatdung">Quạt đứng</option>
+                            <option value="quattreotuong">Quạt treo tường</option>
+                            <option value="quantran">Quạt trần</option>
+                            <option value="quatlung">Quạt lửng</option>
+                    </select>
                     </div>
                     <div class="admin-control-center">
                         <form action="" class="form-search">
@@ -474,12 +474,35 @@
                     </thead>
                     <tbody id="show-product-order-detail">
                     </tbody>
+                    <!-- <tbody id="show-customer-order-detail"></tbody> -->
+                </table>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal detail-order-customer">
+        <div class="modal-container">
+            <button class="modal-close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="table">
+                <table width="100%">
+                    <thead>
+                        <tr>
+                            <td>Mã đơn</td>
+                            <td>Số lượng</td>
+                            <td>Đơn giá</td>
+                            <td>Ngày đặt</td>
+                        </tr>
+                    </thead>
+                    <!-- <tbody id="show-product-order-detail"> -->
+                    </tbody>
                     <tbody id="show-customer-order-detail"></tbody>
                 </table>
             </div>
             </form>
         </div>
     </div>
+
     <div class="modal signup">
         <div class="modal-container">
             <h3 class="modal-container-title add-account-e">THÊM KHÁCH HÀNG MỚI</h3>
