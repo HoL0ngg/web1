@@ -112,7 +112,7 @@
                     <li>Trang Chủ</li>
                     <li>Liên Hệ</li>
                     <li>Cửa Hàng</li>
-                    <li>Giới Thiệu</li>
+                    <li onclick="displayIntro()">Giới Thiệu</li>
                     <li onclick="window.location.href='OrderHistory.html'">Lịch Sử Đặt Hàng</li>
                 </ul>
             </div>
@@ -149,7 +149,7 @@
                     <div onclick="window.location.href='index.html'">Trang Chủ</div>
                     <div>Liên Hệ</div>
                     <div>Cửa Hàng</div>
-                    <div>Giới Thiệu</div>
+                    <div onclick="displayIntro()">Giới Thiệu</div>
                     <div onclick="window.location.href='OrderHistory.html'">Lịch Sử Đặt Hàng</div>
                 </div>
             </div>
@@ -254,8 +254,31 @@
     </div>
 
     <!-- BRAND DETAIL TABLE -->
-    <div id="wrapBrandInfo">
-        <div id="brandInfo"></div>
+    <div id="wrapIntro">
+        <div id="Intro">
+            <button class="btn-exit" onclick="Exit(1,wrapIntro)">x</button>
+            <div id="header-intro">Giới thiệu</div>
+            <div id="content-intro">
+                <div id="leftIntro">
+                    <div style="text-align: center;font-weight: bold;">Họ và tên</div>
+                    <div>Bùi Nguyễn Trọng Nghĩa</div>
+                    <div>Lưu Phùng Khải Nguyên</div>
+                    <div>Hồ Hoàng Long</div>
+                    <div>Bùi Nguyễn Trọng Nghĩa</div>
+                    <div>Bùi Nguyễn Trọng Nghĩa</div>
+                    <div>Bùi Nguyễn Trọng Nghĩa</div>
+                </div>
+                <div id="rightInfo">
+                    <div style="text-align: center;font-weight: bold;">MSSV</div>
+                    <div>3123560052</div>
+                    <div>3123560054</div>
+                    <div>3123560046</div>
+                    <div>3123560052</div>
+                    <div>3123560052</div>
+                    <div>3123560052</div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="information">
@@ -541,19 +564,19 @@
 
             let totalPages = Math.ceil(Array.length / numOfProducts);
             pageContent(1, Array, numOfProducts);
-
-            for (let i = 1; i <= totalPages; i++) {
-                const button = document.createElement("button");
-                button.setAttribute("class", "pagenum-button");
-                button.textContent = i;
-                button.addEventListener("click", function () {
-                    pageContent(i, Array, numOfProducts);
-                    pageUp();
-                });
-                pageNumContainer.appendChild(button);
+            if (totalPages > 1) {
+                for (let i = 1; i <= totalPages; i++) {
+                    const button = document.createElement("button");
+                    button.setAttribute("class", "pagenum-button");
+                    button.textContent = i;
+                    button.addEventListener("click", function () {
+                        pageContent(i, Array, numOfProducts);
+                        pageUp();
+                    });
+                    pageNumContainer.appendChild(button);
+                }
+                pageNumCurrent(); // Highlight the first page button
             }
-
-            pageNumCurrent(); // Highlight the first page button
         }
 
 
@@ -704,7 +727,11 @@
             displayProductDetailTable();
             updateQuantity(); // Gọi hàm này khi DOM đã sẵn sàng
         });
-
+        function displayIntro() {
+            const wrapIntro = document.getElementById("wrapIntro");
+            wrapIntro.style.display = 'block';
+            wrapIntro.style.backdropFilter = 'blur(4px)';
+        }
         function addToCart() {
             const node = document.getElementById('info-product');
             const btn = document.querySelector('.add-to-cart');

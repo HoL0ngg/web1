@@ -996,7 +996,65 @@ i#find_wrap [type="text"]::placeholder {
     align-items: center;
 }
 
+#wrapIntro {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    z-index: 2;
+    /* background-color: whi; */
+}
 
+#Intro {
+    border: 2px solid rgb(189, 189, 189);
+    border-radius: 7px;
+    position: relative;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    height: 375px;
+    width: 40%;
+    background-color: white;
+    font-size: 1.55rem;
+    line-height: 35px;
+}
+
+#header-intro {
+    text-align: center;
+    font-size: 2.5rem;
+    position: relative;
+    height: 70px;
+    color: #0c673c;
+    font-weight: bold;
+    padding-top: 15px;
+    /* background-color: aqua; */
+    border-bottom: 4px solid #0d5145;
+    width: 85%;
+    margin: 0 auto;
+}
+
+#wrapIntro .btn-exit {
+    font-size: 1.7rem;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+#content-intro {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#leftIntro {
+    text-align: left;
+}
 
 @media only screen and (max-width:1070px) {
     html {
