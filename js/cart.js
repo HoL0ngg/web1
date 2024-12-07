@@ -782,6 +782,172 @@ var brandArray = [
     },
 ];
 
+// Lấy các phần tử dropdown
+const cityDropdown = document.getElementById('city-dropdown');
+const districtDropdown = document.getElementById('district-dropdown');
+const wardDropdown = document.getElementById('ward-dropdown');
+
+const cityMenu = document.getElementById('city-menu');
+const districtMenu = document.getElementById('district-menu');
+const wardMenu = document.getElementById('ward-menu');
+
+const citySelected = document.getElementById('city-selected');
+const districtSelected = document.getElementById('district-selected');
+const wardSelected = document.getElementById('ward-selected');
+
+function toggleMenu(menu) {
+    menu.classList.toggle('menu-open');
+    if (menu.style.display == 'block') {
+        menu.classList.remove('menu-open');
+        setTimeout(() => {
+            menu.style.display = 'none';
+        }, 300);
+    } else menu.style.display = 'block';
+    // menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
+}
+
+// Đóng tất cả menu khác
+function closeAllMenus(exceptMenu) {
+    [wardMenu, districtMenu, cityMenu].forEach(menu => {
+        if (menu !== exceptMenu) {
+            // menu.style.display = 'block';
+            menu.classList.remove('menu-open');
+            setTimeout(() => {
+                menu.style.display = 'none';
+            }, 300);
+            menu.parentElement.parentElement.parentElement.classList.remove('valid');
+            menu.parentElement.querySelector('.caret').classList.remove('caret-rotate');
+            // return;
+        }
+    });
+}
+
+// Dữ liệu cho thành phố, quận, phường
+const data = {
+    TPHCM: {
+        "Quận 1": ["Phường Tân Định", "Phường Bến Nghé", "Phường Đa Kao"],
+        "Quận 3": ["Phường Võ Thị Sáu", "Phường 9", "Phường 11"]
+    },
+    HN: {
+        "Hoàn Kiếm": ["Phường Hàng Bạc", "Phường Hàng Buồm", "Phường Hàng Đào"],
+        "Đống Đa": ["Phường Láng Hạ", "Phường Ô Chợ Dừa", "Phường Văn Miếu"]
+    }
+};
+
+// Thêm sự kiện cho từng dropdown
+cityDropdown.addEventListener('click', () => {
+    toggleMenu(cityMenu);
+    // console.log(cityDropdown.querySelector('.caret'));
+    cityDropdown.querySelector('.caret').classList.toggle('caret-rotate');
+    closeAllMenus(cityMenu);
+});
+
+districtDropdown.addEventListener('click', () => {
+    toggleMenu(districtMenu);
+    closeAllMenus(districtMenu);
+    districtDropdown.querySelector('.caret').classList.toggle('caret-rotate');
+});
+
+wardDropdown.addEventListener('click', () => {
+    toggleMenu(wardMenu);
+    closeAllMenus(wardMenu);
+    wardDropdown.querySelector('.caret').classList.toggle('caret-rotate');
+});
+
+// Xử lý chọn thành phố
+cityMenu.addEventListener('click', (event) => {
+    const city = event.target.getAttribute('data-city');
+
+    if (city) {
+        citySelected.textContent = event.target.textContent;
+        citySelected.style.color = "#000";
+
+        // Tô viền màu xanh cho thành phố
+        cityDropdown.parentElement.classList.add('valid');
+        cityDropdown.parentElement.classList.remove('invalid');
+
+        districtDropdown.parentElement.classList.remove('valid');
+
+        wardDropdown.parentElement.classList.remove('valid');
+
+
+
+        // Reset quận và phường
+        districtMenu.innerHTML = '';
+        wardMenu.innerHTML = '';
+        districtSelected.textContent = "Chọn quận / huyện";
+        wardSelected.textContent = "Chọn phường / xã";
+        districtSelected.style.color = "#6c6c6c";
+        wardSelected.style.color = "#6c6c6c";
+        toggleMenu(districtMenu);
+        closeAllMenus(districtMenu);
+        // Thêm danh sách quận
+        Object.keys(data[city]).forEach(district => {
+            const li = document.createElement('li');
+            li.textContent = district;
+            li.addEventListener('click', () => {
+                toggleMenu(wardMenu);
+                closeAllMenus(wardMenu);
+                districtSelected.textContent = district;
+                districtSelected.style.color = "#000";
+
+                // Tô viền màu xanh cho quận
+                districtDropdown.parentElement.classList.add('valid');
+                districtDropdown.parentElement.classList.remove('invalid');
+
+                wardDropdown.parentElement.classList.remove('valid');
+
+                // Reset và thêm phường
+                wardMenu.innerHTML = '';
+                wardSelected.textContent = "Chọn phường / xã";
+                wardSelected.style.color = "#6c6c6c";
+                data[city][district].forEach(ward => {
+                    const wardLi = document.createElement('li');
+                    wardLi.textContent = ward;
+                    wardLi.addEventListener('click', () => {
+                        // toggleMenu(wardMenu);
+                        // closeAllMenus(wardMenu);
+                        wardDropdown.parentElement.classList.add('valid');
+                        wardDropdown.parentElement.classList.remove('invalid');
+                        wardSelected.textContent = ward;
+                        wardSelected.style.color = "#000";
+                        closeAllMenus(null);
+                    });
+                    wardMenu.appendChild(wardLi);
+                });
+            });
+            districtMenu.appendChild(li);
+        });
+
+        // Đóng menu thành phố
+        cityMenu.style.display = 'none';
+    }
+});
+
+// Hàm lấy dữ liệu
+function getDropdownData() {
+    const city = citySelected.textContent.trim();
+    const district = districtSelected.textContent.trim();
+    const ward = wardSelected.textContent.trim();
+
+    // Kiểm tra nếu dữ liệu chưa được chọn
+    if (city === "Hãy chọn một thành phố" || district === "Hãy chọn một quận" || ward === "Hãy chọn một phường") {
+        // alert("Vui lòng chọn đầy đủ Thành phố, Quận và Phường.");
+        return;
+    }
+
+    // Hiển thị dữ liệu trong console (hoặc xử lý tùy ý)
+    console.log({
+        city: city,
+        district: district,
+        ward: ward
+    });
+
+    return
+
+    alert(`Bạn đã chọn:\nThành phố: ${city}\nQuận: ${district}\nPhường: ${ward}`);
+}
+
 // let productArray = [
 //     {
 //         productid: 'D16027-TV0', brandid: 'Asia', img: 'hinhanh/quatdien/fan18-1.jpg', name: 'Quạt đứng Asia D16027-TV0',

@@ -243,6 +243,15 @@ td #chinhsoluong {
         margin-right: 0 !important;
     }
 
+    /* #wrap-personal-info {} */
+
+    #diachi-selection {
+        flex-direction: column;
+    }
+
+    .dropdown+.dropdown {
+        margin-left: 0px !important;
+    }
 }
 
 @media only screen and (max-width: 800px) {
@@ -529,11 +538,12 @@ i.active {
 #wrap-personal-info {
     border: 2px solid #0c673c;
     border-radius: 10px;
-    width: 40%;
-    position: absolute;
-    left: 50%;
-    top: 35%;
-    transform: translate(-50%, -45%);
+    width: 42%;
+    position: relative;
+    /* left: 50%; */
+    /* top: 37%; */
+    margin: 8% auto;
+    /* transform: translate(-50%, -45%); */
     padding: 15px 20px 15px 20px;
     background-color: white;
 
@@ -793,4 +803,100 @@ i.active {
     height: calc(100% - 20px);
     margin: 2% auto;
     overflow-y: scroll;
+}
+
+#diachi-selection {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+.dropdown {
+    flex: 1;
+    margin-top: 16px;
+    padding: 10px;
+    /* width: 33.3%; */
+    border: 1px solid black;
+    position: relative;
+    user-select: none;
+}
+
+.dropdown+.dropdown {
+    margin-left: 12px;
+}
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.select:hover {
+    /* scale: 1.05; */
+}
+
+.menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    background-color: rgb(226, 226, 226);
+    width: 100%;
+    top: 54px;
+    left: 0px;
+    z-index: 5;
+    animation: kiki 0.3s ease forwards;
+    /* transition: 0.2s; */
+}
+
+.menu li {
+    padding-left: 14px;
+    padding-top: 4px;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background-color: #0c673c;
+    color: white;
+}
+
+@keyframes kaka {
+    from {
+        opacity: 0;
+        top: 0px;
+    }
+
+    to {
+        opacity: 1;
+        top: 54px;
+    }
+}
+
+@keyframes kiki {
+    to {
+        opacity: 0;
+        top: 0px;
+    }
+}
+
+.menu-open {
+    display: block;
+    animation: kaka 0.3s ease;
+}
+
+.caret {
+    transition: 0.3s;
+}
+
+.caret-rotate {
+    transform: rotate(180deg);
+}
+
+.dropdown.valid {
+    border: 2px solid #0c673c;
+}
+
+.dropdown.invalid {
+    border: 2px solid red;
 }

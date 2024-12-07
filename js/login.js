@@ -434,16 +434,49 @@ if (document.getElementById('personal-form')) document.getElementById('personal-
     flag &= checkEmail(document.getElementById('emailPersonal'));
     flag &= checkSDT(document.getElementById('phonePersonal'));
     flag &= checkDiaChi(document.getElementById('addressPersonal'));
+
+    const city = citySelected.textContent.trim();
+    const district = districtSelected.textContent.trim();
+    const ward = wardSelected.textContent.trim();
+
+    if (city === "Chọn tỉnh / thành") {
+        flag = false;
+        cityDropdown.parentElement.classList.add('invalid');
+    }
+
+    if (district === "Chọn quận / huyện") {
+        flag = false;
+        districtDropdown.parentElement.classList.add('invalid');
+    }
+
+    if (ward === "Chọn phường / xã") {
+        flag = false;
+        wardDropdown.parentElement.classList.add('invalid');
+    }
+
+    // Kiểm tra nếu dữ liệu chưa được chọn
+    // if (city === "Hãy chọn một thành phố" || district === "Hãy chọn một quận" || ward === "Hãy chọn một phường") {
+    //     // alert("Vui lòng chọn đầy đủ Thành phố, Quận và Phường.");
+    //     return;
+    // }
     // console.log(flag);
     if (flag) {
+        console.log(document.getElementById('addressPersonal'));
+
+        const diachi = document.getElementById('addressPersonal').value;
         const userInfoArray = JSON.parse(localStorage.getItem('userInfo')) || [];
         let userInfo = {
             username: userlogin.username,
             hoten: document.getElementById('namePersonal').value,
             email: document.getElementById('emailPersonal').value,
             sdt: document.getElementById('phonePersonal').value,
-            diachi: document.getElementById('addressPersonal').value
+            diachi: document.getElementById('addressPersonal').value,
+            quan: district,
+            thanhpho: city,
+            phuong: ward
         }
+        console.log(userInfo);
+
         let index = userInfoArray.findIndex(user => user.username == userInfo.username);
         if (index == -1)
             userInfoArray.push(userInfo);

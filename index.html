@@ -226,6 +226,52 @@
                         placeholder="273 An Dương Vương P3 Quận 5 TPHCM" oninput="checkDiaChi(this)">
                     <span class="error-input">Địa chỉ không hợp lế</span>
                 </div>
+                <div id="diachi-selection">
+                    <div class="dropdown">
+                        <div class="select" id="city-dropdown">
+                            <div>
+                                <div>Tỉnh / thành</div>
+                                <div class="selected" id="city-selected" style="color: #6c6c6c;">Chọn tỉnh / thành</div>
+                            </div>
+                            <div class="btn">
+                                <i class="fa-solid fa-chevron-down caret"></i>
+                            </div>
+                        </div>
+                        <ul class="menu" id="city-menu">
+                            <li data-city="TPHCM">TP.HCM</li>
+                            <li data-city="HN">Hà Nội</li>
+                            <!-- <li data-city="">Đà Nẵng</li> -->
+                            <li>Hihi</li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <div class="select" id="district-dropdown">
+                            <div>
+                                <div>Quận / huyện</div>
+                                <div class="selected" id="district-selected" style="color: #6c6c6c;">Chọn quận / huyện
+                                </div>
+                            </div>
+                            <div class="btn">
+                                <i class="fa-solid fa-chevron-down caret"></i>
+                            </div>
+                        </div>
+                        <ul class="menu" id="district-menu">
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <div class="select" id="ward-dropdown">
+                            <div>
+                                <div>Phường / xã</div>
+                                <div class="selected" id="ward-selected" style="color: #6c6c6c;">Chọn phường / xã</div>
+                            </div>
+                            <div class="btn">
+                                <i class="fa-solid fa-chevron-down caret"></i>
+                            </div>
+                        </div>
+                        <ul class="menu" id="ward-menu">
+                        </ul>
+                    </div>
+                </div>
                 <button type="submit" id="confirmPersonalInfo">Xác nhận</button>
             </form>
         </div>
