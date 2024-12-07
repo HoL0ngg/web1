@@ -30,21 +30,56 @@ html {
 #under-content {
     width: 100%;
     height: max-content;
-    /* border: 5px solid blue; */
+    border: 5px solid blue;
     /* background-color: blue; */
     position: relative;
     top: -40px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+#leftmenu {
+    border: 2px solid greenyellow;
+    width: 13%;
+    /* height: 100px; */
+    background-color: white;
+    padding-top: 17px;
+}
+
+#leftmenu ul {
+    list-style-type: none;
+    font-size: 1.5rem;
+    padding-left: 7px;
+    /* line-height: 30px; */
+}
+
+#leftmenu li {
+    color: #0c673c;
+    /* border-bottom: 2px solid #0c673c; */
+    width: 92%;
+    text-align: left;
+    margin-bottom: 17px;
+}
+
+#leftmenu a {
+    text-decoration: none;
+}
+
+#leftmenu li:hover {
+    border-bottom: 4px solid #0c673c;
+    /* color: yellow; */
+    font-weight: bold;
+    /* transition: all 0.5s ease-in-out; */
 }
 
 #content {
     width: 87%;
     padding-top: 5px;
     padding-bottom: 10px;
-    margin: 0 auto;
     box-shadow: 0px 3px 17px #0d5145;
     border-radius: 17px;
     background-color: white;
-    /* border: 2px solid red; */
+    border: 2px solid red;
 }
 
 #container-items {
@@ -186,7 +221,6 @@ html {
     left: 0;
     right: 0;
     display: none;
-    z-index: 7;
 }
 
 #info-product {
@@ -245,7 +279,7 @@ html {
     line-height: 35px;
 }
 
-#wrapBrandInfo {
+#wrapIntro {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -255,25 +289,53 @@ html {
     /* background-color: whi; */
 }
 
-#brandInfo {
+#Intro {
     border: 2px solid rgb(189, 189, 189);
     border-radius: 7px;
     position: relative;
     left: 50%;
     top: 40%;
     transform: translate(-50%, -50%);
-    height: 400px;
-    width: 480px;
+    height: 375px;
+    width: 40%;
     background-color: white;
     font-size: 1.55rem;
     line-height: 35px;
-    padding: 10px;
-    /* overflow-y: scroll; */
-    /* display: none; */
 }
 
-#brandInfo .btn-exit {
-    font-size: 1.4rem;
+#header-intro {
+    text-align: center;
+    font-size: 2.5rem;
+    position: relative;
+    height: 70px;
+    color: #0c673c;
+    font-weight: bold;
+    padding-top: 15px;
+    /* background-color: aqua; */
+    border-bottom: 4px solid #0d5145;
+    width: 85%;
+    margin: 0 auto;
+}
+
+#wrapIntro .btn-exit {
+    font-size: 1.7rem;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    height: 30px;
+    width: 30px;
+}
+
+#content-intro {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#leftIntro {
+    text-align: left;
 }
 
 #brandInfo span {
@@ -996,65 +1058,7 @@ i#find_wrap [type="text"]::placeholder {
     align-items: center;
 }
 
-#wrapIntro {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: none;
-    z-index: 2;
-    /* background-color: whi; */
-}
 
-#Intro {
-    border: 2px solid rgb(189, 189, 189);
-    border-radius: 7px;
-    position: relative;
-    left: 50%;
-    top: 40%;
-    transform: translate(-50%, -50%);
-    height: 375px;
-    width: 40%;
-    background-color: white;
-    font-size: 1.55rem;
-    line-height: 35px;
-}
-
-#header-intro {
-    text-align: center;
-    font-size: 2.5rem;
-    position: relative;
-    height: 70px;
-    color: #0c673c;
-    font-weight: bold;
-    padding-top: 15px;
-    /* background-color: aqua; */
-    border-bottom: 4px solid #0d5145;
-    width: 85%;
-    margin: 0 auto;
-}
-
-#wrapIntro .btn-exit {
-    font-size: 1.7rem;
-    position: absolute;
-    top: 0px;
-    right: 5px;
-    height: 30px;
-    width: 30px;
-}
-
-#content-intro {
-    text-align: center;
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
-
-#leftIntro {
-    text-align: left;
-}
 
 @media only screen and (max-width:1070px) {
     html {

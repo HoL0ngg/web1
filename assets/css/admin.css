@@ -281,7 +281,7 @@ pre {
 }
 
 .sidebar {
-    /* flex-shrink: 0; */
+    flex-shrink: 0;
     overflow: hidden;
     width: 75px;
     border-right: 1px solid rgba(0, 0, 0, 0.1);
@@ -491,7 +491,6 @@ pre {
 
 .cards {
     display: flex;
-    flex-wrap: wrap;
 }
 
 .cards .card-single {
@@ -538,17 +537,15 @@ pre {
 }
 
 .cards .card-single .box h2 {
-    
-    justify-content: center;
-    align-items: center;
-    position: relative;
+    position: absolute;
     bottom: 20px;
-    /* left: 45%; */
-    font-size: 2rem;
+    left: 45%;
+    font-size: 3rem;
     color: var(--dark-gray);
     transition: 0.3s;
     pointer-events: none;
     margin-top: 30px;
+    
 
 }
 
@@ -1093,7 +1090,7 @@ label a {
     height: 40px;
 }
 
-.modal.detail-order-product .modal-container, .modal.detail-order-customer .modal-container,
+.modal.detail-order-product .modal-container,
 .modal.detail-order .modal-container {
     width: 800px;
     height: 450px;

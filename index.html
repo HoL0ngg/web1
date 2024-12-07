@@ -284,6 +284,7 @@
         <img src="hinhanh/banner/image3.jpg" />
     </div>
     <div id="under-content">
+        <div id="leftmenu"></div>
         <div id="content">
             <div id="container-items"></div>
             <div id="pagenum"></div>
@@ -387,7 +388,33 @@
                 showImage(currentIndex);
             }, 4000); // 4 giây
         }
-
+        //leftmenu
+        function taoleftmenu() {
+            let brand = [
+                { brandid: 'Asia', brandname: 'Quạt Asia' },
+                { brandid: 'Senko', brandname: 'Quạt Senko' },
+                { brandid: 'Kangaroo', brandname: 'Quạt Kangaroo' },
+                { brandid: 'Panasonic', brandname: 'Quạt Panasonic' },
+            ];
+            let s = "";
+            for (let i = 0; i < brand.length; i++) {
+                let a = '<a href="#"><li + id=' + brand[i].brandid + ' onclick="hienthisptheoloai(this)">'
+                    + brand[i].brandname + '</li></a>';
+                s += a;
+            }
+            s = '<ul>' + s + '</ul>';
+            document.getElementById("leftmenu").innerHTML = s;
+        }
+        function hienthisptheoloai(object) {
+            let s = "";
+            let arrProducts = [];
+            for (i = 0; i < productList.length; i++) {
+                if (productList[i].brandid === object.id) {
+                    arrProducts.push(productList[i]);
+                }
+            }
+            phantrang(arrProducts, 8);
+        }
         //product-detail-table
 
         function changeColorBtn1(button) {
@@ -610,19 +637,19 @@
 
             let totalPages = Math.ceil(Array.length / numOfProducts);
             pageContent(1, Array, numOfProducts);
-            if (totalPages > 1) {
-                for (let i = 1; i <= totalPages; i++) {
-                    const button = document.createElement("button");
-                    button.setAttribute("class", "pagenum-button");
-                    button.textContent = i;
-                    button.addEventListener("click", function () {
-                        pageContent(i, Array, numOfProducts);
-                        pageUp();
-                    });
-                    pageNumContainer.appendChild(button);
-                }
-                pageNumCurrent(); // Highlight the first page button
+
+            for (let i = 1; i <= totalPages; i++) {
+                const button = document.createElement("button");
+                button.setAttribute("class", "pagenum-button");
+                button.textContent = i;
+                button.addEventListener("click", function () {
+                    pageContent(i, Array, numOfProducts);
+                    pageUp();
+                });
+                pageNumContainer.appendChild(button);
             }
+
+            pageNumCurrent(); // Highlight the first page button
         }
 
 
@@ -824,29 +851,10 @@
 
             } else { console.log('Không có dữ liệu trong localStorage.'); }
             Exit(0, displayTableDetail);
-
+            Exit(1, wrapIntro);
+            taoleftmenu();
             displayProductDetailTable(); updateQuantity();
         };
-
-        // var brandArray = [
-        //     {
-        //         brandid: 'Panasonic',
-        //         brandintro: '<br>- Thương hiệu Nhật Bản.<br>- Thành lập năm 1918.<br>- Panasonic nổi tiếng với các sản phẩm tủ lạnh, máy lạnh, tivi và các thiết bị gia dụng như lò vi sóng, quạt, máy xay sinh tố,...<br>- Các sản phẩm Panasonic nổi tiếng với độ bền cao, tiết kiệm điện, mẫu mã đẹp.'
-        //     },
-        //     {
-        //         brandid: 'Asia',
-        //         brandintro: '<br>- Thương hiệu Việt Nam.<br>- Thành lập 1990.<br>- Được vinh danh nằm trong top 20 "Nhãn hiệu hàng đầu Việt Nam - Sản phẩm vàng, Dịch vụ vàng Việt Nam năm 2017".<br>- Được biết đến các sản phẩm quạt điện, quạt sưởi chất lượng, giá thành phù hợp với đại đa số người tiêu dùng Việt.'
-        //     },
-        //     {
-        //         brandid: 'Senko',
-        //         brandintro: '<br>- Thương hiệu Việt Nam.<br>- Thành lập năm 1998.<br>- Với sứ mệnh "Làm mát cho cuộc sống" quạt điện SENKO đáp ứng mọi nhu cầu của khách hàng và là sự lựa chọn hoàn hảo của mọi nhà về quạt bàn, quạt treo, quạt lửng, quạt đứng, quạt trần,...<br>- Chất lượng cao, mẫu mã đẹp, tiết kiệm năng lượng là những tiêu chí cốt lõi trong mỗi sản phẩm của quạt điện Senko.'
-        //     },
-        //     {
-        //         brandid: 'Kangaroo',
-        //         brandintro: '<br>- Thương hiệu Việt Nam.<br>- Thành lập 2003. Các sản phẩm Kangaroo hướng đến phục vụ sức khỏe và tiện nghi cuộc sống như máy lọc nước, hàng gia dụng - nhà bếp và các thiết bị điện tiêu dùng khác.<br>- "Không đối đầu mà luôn đi trước đón đầu" là tiêu chí trong hoạt động sản xuất và kinh doanh của Kangaroo.'
-        //     },
-        // ];
-
 
     </script>
 </body>
