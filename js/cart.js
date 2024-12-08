@@ -31,9 +31,11 @@ function updateUser() {
 }
 
 function updatePersonalInfo(user) {
+    console.log(user);
+
     let s = `
             <p>Họ và tên: ${user.username}</p>
-            <p>Địa chỉ: ${user.diachi}</p>
+            <p>Địa chỉ: ${user.diachi} ${user.phuong} ${user.quan} ${user.thanhpho}</p>
             <p>SĐT: ${user.sdt}</p>`
     if (document.getElementById('info')) document.getElementById('info').innerHTML = s;
 }
@@ -411,7 +413,7 @@ function chondiachi(callback) {
     moPopUpNhapdiachi();
     const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
     let user = accountsInfo.find(acc => acc.username == userlogin.username);
-    document.getElementById('diachicuaban').innerText = user.diachi;
+    document.getElementById('diachicuaban').innerText = user.diachi + " " + user.phuong + " " + user.quan + " " + user.thanhpho;
     const nhapdiachiform = document.getElementById('nhapdiachi-form');
     const closebtn = document.getElementById('diachi-btn');
 

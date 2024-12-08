@@ -370,6 +370,29 @@
     <script src="./js/cart.js"></script>
     <!-- <script src="./js/createAdminAccount.js"></script> -->
     <script>
+        document.addEventListener('mousedown', function (event) {
+            const find = document.getElementById("find");
+            const find_wrap = document.getElementById("find_wrap");
+            const nameUser = document.getElementById('user--name');
+            const hihi = document.getElementsByClassName('user--selection')[0];
+            if (!find.contains(event.target)) {
+                find_wrap.style.display = 'none';
+            }
+
+
+            var bar = document.getElementById("bar");
+            var bar_wrap = document.getElementById("bar_wrap");
+            if (!bar.contains(event.target)) {
+                bar_wrap.style.display = 'none';
+            }
+
+            if (!nameUser.contains(event.target) && !hihi.contains(event.target)) {
+                document.getElementsByClassName('user--selection')[0].classList.add('hidden');
+            }
+
+        });
+
+
         const images = document.querySelectorAll('.banner img');
         let currentIndex = 0;
 

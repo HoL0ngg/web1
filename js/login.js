@@ -383,9 +383,9 @@ function findAccount(numberphoneOrUsername, password) {
 
 function updatePersonalForm() {
     const userInfoArray = JSON.parse(localStorage.getItem('userInfo')) || [];
-    console.log(userlogin);
 
     let hihi = userInfoArray.find(user => user.username == userlogin.username);
+    console.log(hihi);
 
     // Không tìm thấy
     if (hihi == undefined) return false;
@@ -394,6 +394,24 @@ function updatePersonalForm() {
     if (document.getElementById('emailPersonal')) document.getElementById('emailPersonal').value = hihi.email;
     if (document.getElementById('phonePersonal')) document.getElementById('phonePersonal').value = hihi.sdt;
     if (document.getElementById('addressPersonal')) document.getElementById('addressPersonal').value = hihi.diachi;
+    console.log(document.getElementById('city-selected'));
+
+    if (document.getElementById('city-selected')) {
+        document.getElementById('city-selected').innerText = hihi.thanhpho;
+        document.getElementById('city-selected').style.color = 'black';
+        document.getElementById('city-dropdown').parentElement.classList.add('valid');
+    }
+    if (document.getElementById('district-selected')) {
+        document.getElementById('district-selected').innerText = hihi.quan;
+        document.getElementById('district-selected').style.color = 'black';
+        document.getElementById('district-dropdown').parentElement.classList.add('valid');
+    }
+    if (document.getElementById('ward-selected')) {
+        document.getElementById('ward-selected').innerText = hihi.phuong;
+        document.getElementById('ward-selected').style.color = 'black';
+        document.getElementById('ward-dropdown').parentElement.classList.add('valid');
+    }
+
     return true;
 }
 

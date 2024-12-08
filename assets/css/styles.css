@@ -900,3 +900,7 @@ i.active {
 .dropdown.invalid {
     border: 2px solid red;
 }
+
+li.active {
+    background-color: green;
+}
