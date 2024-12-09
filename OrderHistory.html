@@ -68,6 +68,17 @@
             </div>
         </div>
     </div>
+    <div class="changePassForm hidden">
+        <span class="close-login" id="cancelChangePass">&times;</span>
+        <h3>Đổi mật khẩu</h3>
+        <form id="changePassForm">
+            <input id="repass" type="password" placeholder="Mật khẩu hiện tại" required />
+            <input id="repass" type="password" placeholder="Mật khẩu mới" required />
+            <input id="repass" type="password" placeholder="Nhập lại mật khẩu mới" required />
+            <button type="submit">Xác nhận</button>
+
+        </form>
+    </div>
     <div class="login" id="container-login" style="display: none;">
         <div class="login-content">
             <span class="close-login" id="CloseFormLogin">&times;</span>
@@ -194,7 +205,7 @@
 
     <script src="./js/OrderHistory.js"></script>
     <script src="./js/login.js"></script>
-    <script src="./js/cart.js"></script>
+    <!-- <script src="./js/cart.js"></script> -->
 </body>
 
 </html>

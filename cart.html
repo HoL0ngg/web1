@@ -287,6 +287,17 @@
             </div>
         </div>
     </div>
+    <div class="changePassForm hidden">
+        <span class="close-login" id="cancelChangePass">&times;</span>
+        <h3>Đổi mật khẩu</h3>
+        <form id="changePassForm">
+            <input id="repass" type="password" placeholder="Mật khẩu hiện tại" required />
+            <input id="repass" type="password" placeholder="Mật khẩu mới" required />
+            <input id="repass" type="password" placeholder="Nhập lại mật khẩu mới" required />
+            <button type="submit">Xác nhận</button>
+
+        </form>
+    </div>
     <div id="toast">
         <div style="text-align: center; font-size: 20px; margin-top: 10px; font-weight: 700;">Thông báo</div>
         <div id="toast-msg" style="margin-top: 20px; text-align: center;"></div>
@@ -519,7 +530,7 @@
                     <i class="fa-solid fa-xmark"></i>
                 </div>
             </div>
-            <div style="display: flex; height: 80%;">
+            <div id="chondiachi-form">
                 <div class="nhapdiachi-input">
                     <div style="text-align: center; padding-top: 12px; font-weight: 700; font-size: larger;">
                         Chọn địa chỉ giao hàng mặc định
@@ -538,9 +549,58 @@
                     </div>
                     <div class="payment-input">
                         <label for="addressPersonal">Địa chỉ</label>
-                        <input type=" text" id="diachinhap" placeholder="273 An Dương Vương P3 Quận 5 TPHCM"
+                        <input type=" text" id="diachinhap" placeholder="273 An Dương Vương"
                             oninput="checkDiaChi(this)">
                         <span class="error-input">Địa chỉ không hợp lệ</span>
+                    </div>
+                    <div id="diachi-selection-2">
+                        <div class="dropdown">
+                            <div class="select" id="city-dropdown-2">
+                                <div>
+                                    <div>Tỉnh / thành</div>
+                                    <div class="selected" id="city-selected-2" style="color: #6c6c6c;">Chọn tỉnh / thành
+                                    </div>
+                                </div>
+                                <div class="btn">
+                                    <i class="fa-solid fa-chevron-down caret"></i>
+                                </div>
+                            </div>
+                            <ul class="menu" id="city-menu-2">
+                                <li data-city="TPHCM">TP.HCM</li>
+                                <li data-city="HN">Hà Nội</li>
+                                <!-- <li data-city="">Đà Nẵng</li> -->
+                                <li>Hihi</li>
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <div class="select" id="district-dropdown-2">
+                                <div>
+                                    <div>Quận / huyện</div>
+                                    <div class="selected" id="district-selected-2" style="color: #6c6c6c;">Chọn quận /
+                                        huyện
+                                    </div>
+                                </div>
+                                <div class="btn">
+                                    <i class="fa-solid fa-chevron-down caret"></i>
+                                </div>
+                            </div>
+                            <ul class="menu" id="district-menu-2">
+                            </ul>
+                        </div>
+                        <div class="dropdown">
+                            <div class="select" id="ward-dropdown-2">
+                                <div>
+                                    <div>Phường / xã</div>
+                                    <div class="selected" id="ward-selected-2" style="color: #6c6c6c;">Chọn phường / xã
+                                    </div>
+                                </div>
+                                <div class="btn">
+                                    <i class="fa-solid fa-chevron-down caret"></i>
+                                </div>
+                            </div>
+                            <ul class="menu" id="ward-menu-2">
+                            </ul>
+                        </div>
                     </div>
                     <div id="diachinhap-btn"
                         style="text-align: center; padding: 12px; width: 100%; color: white; background-color: #0d5146; margin: 16px auto; cursor: pointer;">

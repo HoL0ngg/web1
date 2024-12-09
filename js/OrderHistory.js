@@ -85,6 +85,8 @@ function displayOrders() {
 
 function updateQuantity() {
     const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+    console.log(cartItems);
+
     let totalQuantity = 0;
     cartItems.forEach(item => {
         totalQuantity += Number(item.quantity);
@@ -97,6 +99,23 @@ function updateQuantity() {
     }
     else
         document.getElementById('item-quantity').style.display = 'none';
+}
+
+function hien(y) {
+    var element = document.getElementById(y);
+    console.log(element);
+    if (element) {
+        if (y === 'find_wrap') {
+            element.style.display = 'block';
+            element.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+            document.getElementById('find').classList.add('show');
+
+        } else if (y === 'bar_wrap') {
+            element.style.display = 'block';
+            element.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+            document.getElementById('bar').classList.add('show');
+        }
+    }
 }
 
 // Hiển thị dữ liệu khi tải trang

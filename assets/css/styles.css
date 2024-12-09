@@ -219,6 +219,10 @@ td #chinhsoluong {
         flex-direction: column;
     }
 
+    #chondiachi-form {
+        flex-direction: column;
+    }
+
     .container table th:nth-child(4) {
         width: 8%;
     }
@@ -711,7 +715,7 @@ i.active {
 }
 
 #nhapdiachi-form {
-    width: 50%;
+    width: 66%;
     margin: 10% auto;
     background-color: white;
     height: max-content;
@@ -811,6 +815,12 @@ i.active {
     /* justify-content: space-between; */
 }
 
+#diachi-selection-2 {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
 .dropdown {
     flex: 1;
     margin-top: 16px;
@@ -903,4 +913,9 @@ i.active {
 
 li.active {
     background-color: green;
+}
+
+#chondiachi-form {
+    display: flex;
+    height: 80%;
 }

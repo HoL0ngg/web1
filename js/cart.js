@@ -55,7 +55,6 @@ function loadCart() {
     console.log(cart);
     const container = document.getElementById('cart-container');
     const productArray = JSON.parse(localStorage.getItem('productList')) || [];
-    console.log(productArray);
 
     let s = '';
 
@@ -399,6 +398,10 @@ function moPopUpNhapdiachi() {
     document.getElementById('nhapdiachi_wrap').classList.add('show');
     document.getElementById('nhapdiachi-form').classList.add('show');
     document.getElementById('nhapdiachi_wrap').style.display = 'block';
+
+    const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
+    let user = accountsInfo.find(acc => acc.username == userlogin.username);
+    document.getElementById('diachicuaban').innerText = user.diachi + " " + user.phuong + " " + user.quan + " " + user.thanhpho;
 }
 
 function dongPopUpNhapdiachi() {
@@ -414,7 +417,6 @@ function chondiachi(callback) {
     const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
     let user = accountsInfo.find(acc => acc.username == userlogin.username);
     document.getElementById('diachicuaban').innerText = user.diachi + " " + user.phuong + " " + user.quan + " " + user.thanhpho;
-    const nhapdiachiform = document.getElementById('nhapdiachi-form');
     const closebtn = document.getElementById('diachi-btn');
 
     const diachi1 = document.getElementById('diachicuaban');
@@ -438,6 +440,64 @@ function chondiachi(callback) {
         }
     });
 }
+
+function checkDiaChiKhac() {
+    let flag = true;
+    const city = citySelected2.innerText.trim();
+
+    const district = districtSelected2.innerText.trim();
+    // console.log(district);
+    const ward = wardSelected2.innerText.trim();
+
+    if (city === "Chọn tỉnh / thành") {
+        flag = false;
+        cityDropdown2.parentElement.classList.add('invalid');
+    }
+
+    if (district === "Chọn quận / huyện") {
+        flag = false;
+        districtDropdown2.parentElement.classList.add('invalid');
+    }
+
+    if (ward === "Chọn phường / xã") {
+        flag = false;
+        wardDropdown2.parentElement.classList.add('invalid');
+    }
+    if (flag) return true;
+    return false;
+    // return (flag);
+}
+
+const nhapdiachiform = document.getElementById('nhapdiachi-form');
+if (nhapdiachiform) nhapdiachiform.addEventListener('click', (e) => {
+    const closebtn = document.getElementById('diachi-btn');
+
+    const diachi1 = document.getElementById('diachicuaban');
+    const diachi2 = document.getElementById('diachinhap');
+
+    const diachi1_btn = document.getElementById('diachicuaban-btn');
+    const diachi2_btn = document.getElementById('diachinhap-btn');
+    if (closebtn.contains(e.target)) {
+        dongPopUpNhapdiachi();
+        // Không chọn địa chỉ
+    } else if (diachi1_btn.contains(e.target)) {
+        dongPopUpNhapdiachi();
+        HienXacNhanDonHang(diachi1.innerText);
+        // callback(diachi1.innerText); // Chọn địa chỉ 1
+    } else if (diachi2_btn.contains(e.target)) {
+        let flag = true;
+        flag &= checkDiaChiKhac();
+        flag &= checkDiaChi(diachi2);
+        // checkDiaChiKhac();
+        if (flag) {
+            if (checkDiaChiKhac()) {
+                dongPopUpNhapdiachi();
+                HienXacNhanDonHang(diachi2.value + ' ' + wardSelected2.textContent.trim() + ' ' + districtSelected2.textContent.trim() + ' ' + citySelected2.textContent.trim())
+            }
+            // callback(diachi2.value); // Chọn địa chỉ 2
+        }
+    }
+});
 
 function loadBill() {
     const cart = JSON.parse(localStorage.getItem('cart'));
@@ -544,17 +604,17 @@ if (document.getElementById('xacnhandonhang-btn')) document.getElementById('xacn
 function ThanhToan() {
     if (totalQuantity == 0) return displayToast('Giỏ hàng của bạn đang trống');
     if (!icon_active) return displayToast('Bạn phải chọn phương thức thanh toán trước');
-
-    chondiachi((diachi) => {
-        if (diachi) {
-            if (HienXacNhanDonHang(diachi)) {
-                // LuuHoaDon(diachi);
-                // displayToast('Bạn đã đặt hàng thành công');
-            } else return;
-        } else {
-            displayToast('Bạn chưa chọn địa chỉ');
-        }
-    });
+    moPopUpNhapdiachi();
+    // chondiachi((diachi) => {
+    //     if (diachi) {
+    //         if (HienXacNhanDonHang(diachi)) {
+    //             // LuuHoaDon(diachi);
+    //             // displayToast('Bạn đã đặt hàng thành công');
+    //         } else return;
+    //     } else {
+    //         displayToast('Bạn chưa chọn địa chỉ');
+    //     }
+    // });
 }
 
 
@@ -810,7 +870,7 @@ function toggleMenu(menu) {
 
 // Đóng tất cả menu khác
 function closeAllMenus(exceptMenu) {
-    [wardMenu, districtMenu, cityMenu].forEach(menu => {
+    [wardMenu, districtMenu, cityMenu, wardMenu2, districtMenu2, cityMenu2].forEach(menu => {
         if (menu !== exceptMenu) {
             // menu.style.display = 'block';
             menu.classList.remove('menu-open');
@@ -819,7 +879,6 @@ function closeAllMenus(exceptMenu) {
             }, 300);
             menu.parentElement.parentElement.parentElement.classList.remove('valid');
             menu.parentElement.querySelector('.caret').classList.remove('caret-rotate');
-            // return;
         }
     });
 }
@@ -837,27 +896,27 @@ const data = {
 };
 
 // Thêm sự kiện cho từng dropdown
-cityDropdown.addEventListener('click', () => {
+if (cityDropdown) cityDropdown.addEventListener('click', () => {
     toggleMenu(cityMenu);
     // console.log(cityDropdown.querySelector('.caret'));
     cityDropdown.querySelector('.caret').classList.toggle('caret-rotate');
     closeAllMenus(cityMenu);
 });
 
-districtDropdown.addEventListener('click', () => {
+if (districtDropdown) districtDropdown.addEventListener('click', () => {
     toggleMenu(districtMenu);
     closeAllMenus(districtMenu);
     districtDropdown.querySelector('.caret').classList.toggle('caret-rotate');
 });
 
-wardDropdown.addEventListener('click', () => {
+if (wardDropdown) wardDropdown.addEventListener('click', () => {
     toggleMenu(wardMenu);
     closeAllMenus(wardMenu);
     wardDropdown.querySelector('.caret').classList.toggle('caret-rotate');
 });
 
 // Xử lý chọn thành phố
-cityMenu.addEventListener('click', (event) => {
+if (cityMenu) cityMenu.addEventListener('click', (event) => {
     const city = event.target.getAttribute('data-city');
 
     if (city) {
@@ -871,8 +930,6 @@ cityMenu.addEventListener('click', (event) => {
         districtDropdown.parentElement.classList.remove('valid');
 
         wardDropdown.parentElement.classList.remove('valid');
-
-
 
         // Reset quận và phường
         districtMenu.innerHTML = '';
@@ -949,6 +1006,114 @@ function getDropdownData() {
 
     alert(`Bạn đã chọn:\nThành phố: ${city}\nQuận: ${district}\nPhường: ${ward}`);
 }
+
+document.addEventListener('mousedown', function (event) {
+    const nameUser = document.getElementById('user--name');
+    const hihi = document.getElementsByClassName('user--selection')[0];
+    if (!nameUser.contains(event.target) && !hihi.contains(event.target)) {
+        document.getElementsByClassName('user--selection')[0].classList.add('hidden');
+    }
+});
+
+const cityDropdown2 = document.getElementById('city-dropdown-2');
+const districtDropdown2 = document.getElementById('district-dropdown-2');
+const wardDropdown2 = document.getElementById('ward-dropdown-2');
+
+const cityMenu2 = document.getElementById('city-menu-2');
+const districtMenu2 = document.getElementById('district-menu-2');
+const wardMenu2 = document.getElementById('ward-menu-2');
+
+const citySelected2 = document.getElementById('city-selected-2');
+const districtSelected2 = document.getElementById('district-selected-2');
+const wardSelected2 = document.getElementById('ward-selected-2');
+
+// Thêm sự kiện cho từng dropdown
+if (cityDropdown2) cityDropdown2.addEventListener('click', () => {
+    toggleMenu(cityMenu2);
+    // console.log(cityDropdown.querySelector('.caret'));
+    cityDropdown2.querySelector('.caret').classList.toggle('caret-rotate');
+    closeAllMenus(cityMenu2);
+});
+
+if (districtDropdown2) districtDropdown2.addEventListener('click', () => {
+    toggleMenu(districtMenu2);
+    closeAllMenus(districtMenu2);
+    districtDropdown2.querySelector('.caret').classList.toggle('caret-rotate');
+});
+
+if (wardDropdown2) wardDropdown2.addEventListener('click', () => {
+    toggleMenu(wardMenu2);
+    closeAllMenus(wardMenu2);
+    wardDropdown2.querySelector('.caret').classList.toggle('caret-rotate');
+});
+
+// Xử lý chọn thành phố
+if (cityMenu2) cityMenu2.addEventListener('click', (event) => {
+    const city = event.target.getAttribute('data-city');
+
+    if (city) {
+        citySelected2.textContent = event.target.textContent;
+        citySelected2.style.color = "#000";
+
+        // Tô viền màu xanh cho thành phố
+        cityDropdown2.parentElement.classList.add('valid');
+        cityDropdown2.parentElement.classList.remove('invalid');
+
+        districtDropdown2.parentElement.classList.remove('valid');
+
+        wardDropdown2.parentElement.classList.remove('valid');
+
+        // Reset quận và phường
+        districtMenu2.innerHTML = '';
+        wardMenu2.innerHTML = '';
+        districtSelected2.textContent = "Chọn quận / huyện";
+        wardSelected2.textContent = "Chọn phường / xã";
+        districtSelected2.style.color = "#6c6c6c";
+        wardSelected2.style.color = "#6c6c6c";
+        toggleMenu(districtMenu2);
+        closeAllMenus(districtMenu2);
+        // Thêm danh sách quận
+        Object.keys(data[city]).forEach(district => {
+            const li = document.createElement('li');
+            li.textContent = district;
+            li.addEventListener('click', () => {
+                toggleMenu(wardMenu2);
+                closeAllMenus(wardMenu2);
+                districtSelected2.textContent = district;
+                districtSelected2.style.color = "#000";
+
+                // Tô viền màu xanh cho quận
+                districtDropdown2.parentElement.classList.add('valid');
+                districtDropdown2.parentElement.classList.remove('invalid');
+
+                wardDropdown2.parentElement.classList.remove('valid');
+
+                // Reset và thêm phường
+                wardMenu2.innerHTML = '';
+                wardSelected2.textContent = "Chọn phường / xã";
+                wardSelected2.style.color = "#6c6c6c";
+                data[city][district].forEach(ward => {
+                    const wardLi = document.createElement('li');
+                    wardLi.textContent = ward;
+                    wardLi.addEventListener('click', () => {
+                        // toggleMenu(wardMenu2);
+                        // closeAllMenus(wardMenu2);
+                        wardDropdown2.parentElement.classList.add('valid');
+                        wardDropdown2.parentElement.classList.remove('invalid');
+                        wardSelected2.textContent = ward;
+                        wardSelected2.style.color = "#000";
+                        closeAllMenus(null);
+                    });
+                    wardMenu2.appendChild(wardLi);
+                });
+            });
+            districtMenu2.appendChild(li);
+        });
+
+        // Đóng menu thành phố
+        cityMenu2.style.display = 'none';
+    }
+});
 
 // let productArray = [
 //     {
