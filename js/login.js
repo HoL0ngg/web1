@@ -164,6 +164,9 @@ function logout() {
     if (document.getElementById('district-dropdown')) document.getElementById('district-dropdown').parentElement.classList.remove('invalid');
     if (document.getElementById('ward-dropdown')) document.getElementById('ward-dropdown').parentElement.classList.remove('valid');
     if (document.getElementById('ward-dropdown')) document.getElementById('ward-dropdown').parentElement.classList.remove('invalid');
+    if (document.getElementById('city-selected')) document.getElementById('city-selected').textContent = "Chọn tỉnh / thành";
+    if (document.getElementById('district-selected')) document.getElementById('district-selected').textContent = "Chọn quận / huyện";
+    if (document.getElementById('ward-selected')) document.getElementById('ward-selected').textContent = "Chọn phường / xã";
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
     loadCart();

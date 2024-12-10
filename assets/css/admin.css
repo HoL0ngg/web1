@@ -318,23 +318,24 @@ pre {
     ;
     margin-bottom: 0.5rem;
     width: 100%;
-    align-items: center;  
-    position: relative;  
+    align-items: center;
+    position: relative;
 }
 
 .sidebar .channel-logo {
-    
-   
+
+
     transition: var(--animation-duration) var(--animation-timing-curve);
 }
 
 .sidebar.open .channel-logo {
     width: 100px;
     height: 100px;
-    
-   
+
+
 }
-.your-channel{
+
+.your-channel {
     position: absolute;
     top: 45px;
 }
@@ -407,7 +408,7 @@ pre {
     position: relative;
     width: 100%;
     color: var(--light-gray);
-} 
+}
 
 .sidebar-list-item.active {
     color: var(--green);
@@ -422,7 +423,7 @@ pre {
 .sidebar-list-item.active::before {
     height: 100%;
     background-color: var(--medium-gray);
-    
+
 }
 
 .sidebar.open {
@@ -465,11 +466,12 @@ pre {
     font-weight: 600;
     margin-bottom: 10px;
     font-size: 24px;
-    width:30%;
-    
+    width: 30%;
+
 }
-.page-title-bottom{
-   margin-top: 100px;
+
+.page-title-bottom {
+    margin-top: 100px;
 }
 
 .content {
@@ -494,12 +496,11 @@ pre {
 }
 
 .cards .card-single {
-    background: linear-gradient(
-    to top right, 
-    #013220 0%, /* Xanh đậm bắt đầu từ 0% */
-    rgba(2, 106, 25, 0.2) 95%, 
-    #3d8102 99% 
-  );
+    background: linear-gradient(to top right,
+            #013220 0%,
+            /* Xanh đậm bắt đầu từ 0% */
+            rgba(2, 106, 25, 0.2) 95%,
+            #3d8102 99%);
     height: 300px;
     width: 31%;
     min-width: 290px;
@@ -545,7 +546,7 @@ pre {
     transition: 0.3s;
     pointer-events: none;
     margin-top: 30px;
-    
+
 
 }
 
@@ -555,17 +556,17 @@ pre {
     color: var(--dark-gray);
     z-index: 1;
     transition: 0.3s;
-   padding-bottom: 20px;
-    
+    padding-bottom: 20px;
+
 }
 
 
 
 
-.cards .card-single .box .on-box i{
-    
+.cards .card-single .box .on-box i {
+
     font-size: 75px;
-    
+
 }
 
 /* customer */
@@ -640,9 +641,9 @@ tbody tr td {
     justify-content: space-between;
     background-color: #fff;
     position: relative;
-    height:9rem;
+    height: 9rem;
     white-space: nowrap;
-    
+
 }
 
 .list-header {
@@ -672,16 +673,21 @@ tbody tr td {
     border-radius: 30px;
     font-size: 13px;
 }
-::-webkit-scrollbar { display: none; }
-.list-detail{
-    display:flex;
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.list-detail {
+    display: flex;
     flex-direction: column;
     gap: 10px;
-    overflow-y:auto;
+    overflow-y: auto;
     white-space: nowrap;
-    font-size:15px;
-    
+    font-size: 15px;
+
 }
+
 .list-right {
     display: flex;
     width: 20%;
@@ -710,14 +716,15 @@ tbody tr td {
     -webkit-box-orient: vertical;
     
 } */
-.list-center{
-    display:flex;
+.list-center {
+    display: flex;
     flex-direction: column;
     width: 30%;
     margin-top: 20px;
-    overflow-y:hiden;
+    overflow-y: hiden;
 
 }
+
 .list-price {
     display: flex;
     flex-direction: row;
@@ -838,7 +845,7 @@ tbody tr td {
     box-shadow: 0px 4px 30px rgb(0 0 0 / 25%);
     border-radius: 5px;
     overflow: hidden;
-    
+
     overflow-y: overlay;
     position: relative;
     transform: scale(0.8);
@@ -849,10 +856,12 @@ tbody tr td {
     width: 800px;
     padding-bottom: 20px;
 }
-.modal-content-right{
+
+.modal-content-right {
     overflow-y: scroll;
 
 }
+
 .modal-container-title {
     display: inline-block;
     margin-top: 16px;
@@ -1213,9 +1222,9 @@ li.active {
     cursor: pointer;
     padding: 7px;
 }
-  
 
-  
+
+
 
 .modal.detail-order-product .modal-container,
 .modal.detail-order .modal-container {
@@ -1465,13 +1474,14 @@ li.active {
 }
 
 /* order-statistical */
-.btn-swap-tk{
+.btn-swap-tk {
     height: 40px;
     padding: 10px;
-    border-radius:5px;
-    margin:5px;
+    border-radius: 5px;
+    margin: 5px;
 
 }
+
 .order-statistical {
     display: flex;
     margin: 30px 0;

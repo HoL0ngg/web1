@@ -401,7 +401,20 @@ function moPopUpNhapdiachi() {
 
     const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
     let user = accountsInfo.find(acc => acc.username == userlogin.username);
-    document.getElementById('diachicuaban').innerText = user.diachi + " " + user.phuong + " " + user.quan + " " + user.thanhpho;
+    document.getElementById('diachicuaban').innerText = user.diachi;
+
+    if (document.getElementById('city-selected-cuaban')) {
+        document.getElementById('city-selected-cuaban').textContent = user.thanhpho;
+        document.getElementById('city-dropdown-cuaban').parentElement.classList.add('valid');
+    }
+    if (document.getElementById('district-selected-cuaban')) {
+        document.getElementById('district-selected-cuaban').textContent = user.quan;
+        document.getElementById('district-dropdown-cuaban').parentElement.classList.add('valid');
+    }
+    if (document.getElementById('ward-selected-cuaban')) {
+        document.getElementById('ward-selected-cuaban').textContent = user.phuong;
+        document.getElementById('ward-dropdown-cuaban').parentElement.classList.add('valid');
+    }
 }
 
 function dongPopUpNhapdiachi() {
@@ -412,34 +425,34 @@ function dongPopUpNhapdiachi() {
     }, 500);
 }
 
-function chondiachi(callback) {
-    moPopUpNhapdiachi();
-    const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
-    let user = accountsInfo.find(acc => acc.username == userlogin.username);
-    document.getElementById('diachicuaban').innerText = user.diachi + " " + user.phuong + " " + user.quan + " " + user.thanhpho;
-    const closebtn = document.getElementById('diachi-btn');
+// function chondiachi(callback) {
+//     moPopUpNhapdiachi();
+//     const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
+//     let user = accountsInfo.find(acc => acc.username == userlogin.username);
+//     document.getElementById('diachicuaban').innerText = user.diachi + " " + user.phuong + " " + user.quan + " " + user.thanhpho;
+//     const closebtn = document.getElementById('diachi-btn');
 
-    const diachi1 = document.getElementById('diachicuaban');
-    const diachi2 = document.getElementById('diachinhap');
+//     const diachi1 = document.getElementById('diachicuaban');
+//     const diachi2 = document.getElementById('diachinhap');
 
-    const diachi1_btn = document.getElementById('diachicuaban-btn');
-    const diachi2_btn = document.getElementById('diachinhap-btn');
+//     const diachi1_btn = document.getElementById('diachicuaban-btn');
+//     const diachi2_btn = document.getElementById('diachinhap-btn');
 
-    nhapdiachiform.addEventListener('click', (e) => {
-        if (closebtn.contains(e.target)) {
-            dongPopUpNhapdiachi();
-            callback(""); // Không chọn địa chỉ
-        } else if (diachi1_btn.contains(e.target)) {
-            dongPopUpNhapdiachi();
-            callback(diachi1.innerText); // Chọn địa chỉ 1
-        } else if (diachi2_btn.contains(e.target)) {
-            if (checkDiaChi(diachi2)) {
-                dongPopUpNhapdiachi();
-                callback(diachi2.value); // Chọn địa chỉ 2
-            }
-        }
-    });
-}
+//     nhapdiachiform.addEventListener('click', (e) => {
+//         if (closebtn.contains(e.target)) {
+//             dongPopUpNhapdiachi();
+//             callback(""); // Không chọn địa chỉ
+//         } else if (diachi1_btn.contains(e.target)) {
+//             dongPopUpNhapdiachi();
+//             callback(diachi1.innerText); // Chọn địa chỉ 1
+//         } else if (diachi2_btn.contains(e.target)) {
+//             if (checkDiaChi(diachi2)) {
+//                 dongPopUpNhapdiachi();
+//                 callback(diachi2.value); // Chọn địa chỉ 2
+//             }
+//         }
+//     });
+// }
 
 function checkDiaChiKhac() {
     let flag = true;
