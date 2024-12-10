@@ -490,12 +490,14 @@ if (nhapdiachiform) nhapdiachiform.addEventListener('click', (e) => {
 
     const diachi1_btn = document.getElementById('diachicuaban-btn');
     const diachi2_btn = document.getElementById('diachinhap-btn');
+    const accountsInfo = JSON.parse(localStorage.getItem('userInfo')) || [];
+    let user = accountsInfo.find(acc => acc.username == userlogin.username);
     if (closebtn.contains(e.target)) {
         dongPopUpNhapdiachi();
         // Không chọn địa chỉ
     } else if (diachi1_btn.contains(e.target)) {
         dongPopUpNhapdiachi();
-        HienXacNhanDonHang(diachi1.innerText);
+        HienXacNhanDonHang(diachi1.innerText + ' ' + user.phuong + ' ' + user.quan + ' ' + user.thanhpho);
         // callback(diachi1.innerText); // Chọn địa chỉ 1
     } else if (diachi2_btn.contains(e.target)) {
         let flag = true;
