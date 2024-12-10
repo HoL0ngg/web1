@@ -1090,6 +1090,133 @@ label a {
     height: 40px;
 }
 
+#diachi-selection {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+#diachi-selection-2 {
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+}
+
+.dropdown {
+    flex: 1;
+    margin-top: 16px;
+    padding: 10px;
+    /* width: 33.3%; */
+    border: 1px solid black;
+    position: relative;
+    user-select: none;
+    margin-bottom: 8px;
+    background-color: #eee;
+    border-radius: 10px;
+    border: none;
+}
+
+.dropdown+.dropdown {
+    margin-left: 12px;
+    margin-bottom: 8px;
+}
+
+.select {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.select:hover {
+    /* scale: 1.05; */
+}
+
+.menu {
+    display: none;
+    list-style: none;
+    padding: 0;
+    position: absolute;
+    background-color: rgb(226, 226, 226);
+    width: 100%;
+    top: 54px;
+    left: 0px;
+    z-index: 5;
+    animation: kiki 0.3s ease forwards;
+    /* transition: 0.2s; */
+}
+
+.menu li {
+    padding-left: 14px;
+    padding-top: 4px;
+    cursor: pointer;
+}
+
+.menu li:hover {
+    background-color: #0c673c;
+    color: white;
+}
+
+@keyframes kaka {
+    from {
+        opacity: 0;
+        top: 0px;
+    }
+
+    to {
+        opacity: 1;
+        top: 54px;
+    }
+}
+
+@keyframes kiki {
+    to {
+        opacity: 0;
+        top: 0px;
+    }
+}
+
+.menu-open {
+    display: block;
+    animation: kaka 0.3s ease;
+}
+
+.caret {
+    transition: 0.3s;
+}
+
+.caret-rotate {
+    transform: rotate(180deg);
+}
+
+.dropdown.valid {
+    border: 2px solid #0c673c;
+}
+
+.dropdown.invalid {
+    border: 2px solid red;
+}
+
+li.active {
+    background-color: green;
+}
+
+#confirmPersonalInfo {
+    width: 30%;
+    text-align: center;
+    background-color: #0c673c;
+    color: white;
+    margin: 0 auto;
+    font-size: 1.8rem;
+    margin-top: 10px;
+    border-radius: 7px;
+    cursor: pointer;
+    padding: 7px;
+}
+  
+
+  
+
 .modal.detail-order-product .modal-container,
 .modal.detail-order .modal-container {
     width: 800px;

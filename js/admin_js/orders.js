@@ -172,3 +172,84 @@ function findOrder() {
 
     showOrder(result);
 }
+
+var citis = document.getElementById("city-selected");
+var districts = document.getElementById("district-selected");
+var wards = document.getElementById("ward-selected");
+
+// Sử dụng các menu tương ứng
+var districtMenu = document.getElementById("district-menu");
+var wardMenu = document.getElementById("ward-menu");
+
+// Cấu hình axios
+var Parameter = {
+  url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
+  method: "GET",
+  responseType: "application/json",
+};
+
+// Fetch dữ liệu từ API
+axios(Parameter).then(function (result) {
+  renderCity(result.data);
+});
+
+// Hàm render thành phố
+function renderCity(data) {
+  for (const city of data) {
+    const cityLi = document.createElement("li");
+    cityLi.textContent = city.Name;
+    cityLi.setAttribute("data-id", city.Id);
+    cityLi.addEventListener("click", () => {
+      citis.textContent = city.Name;
+      citis.style.color = "#000";
+
+      // Reset quận và phường
+      districtMenu.innerHTML = "";
+      wardMenu.innerHTML = "";
+      districts.textContent = "Chọn quận / huyện";
+      wards.textContent = "Chọn phường / xã";
+      districts.style.color = "#6c6c6c";
+      wards.style.color = "#6c6c6c";
+
+      // Render quận/huyện
+      renderDistricts(city.Districts);
+    });
+    document.querySelector("#city-dropdown").appendChild(cityLi);
+  }
+}
+
+// Hàm render quận/huyện
+function renderDistricts(districtsData) {
+  for (const district of districtsData) {
+    const districtLi = document.createElement("li");
+    districtLi.textContent = district.Name;
+    districtLi.setAttribute("data-id", district.Id);
+    districtLi.addEventListener("click", () => {
+      districts.textContent = district.Name;
+      districts.style.color = "#000";
+
+      // Reset phường
+      wardMenu.innerHTML = "";
+      wards.textContent = "Chọn phường / xã";
+      wards.style.color = "#6c6c6c";
+
+      // Render phường/xã
+      renderWards(district.Wards);
+    });
+    districtMenu.appendChild(districtLi);
+  }
+}
+
+// Hàm render phường/xã
+function renderWards(wardsData) {
+  for (const ward of wardsData) {
+    const wardLi = document.createElement("li");
+    wardLi.textContent = ward.Name;
+    wardLi.setAttribute("data-id", ward.Id);
+    wardLi.addEventListener("click", () => {
+      wards.textContent = ward.Name;
+      wards.style.color = "#000";
+    });
+    wardMenu.appendChild(wardLi);
+  }
+}

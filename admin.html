@@ -242,6 +242,49 @@
                         <!-- <button class="btn-reset-order" onclick="cancelSearchOrder()"><i class="fa-solid fa-arrow-rotate-right"></i></button>                -->
                     </div>
                 </div>
+
+                <div id="diachi-selection">
+                    <div class="dropdown">
+                      <div class="select" id="city-dropdown">
+                        <div>
+                          <div>Tỉnh / thành</div>
+                          <div class="selected" id="city-selected" style="color: #6c6c6c;">Chọn tỉnh / thành</div>
+                        </div>
+                        <div class="btn">
+                          <i class="fa-solid fa-chevron-down caret"></i>
+                        </div>
+                      </div>
+                      <ul class="menu" id="city-menu"></ul> <!-- Thêm menu cho thành phố -->
+                    </div>
+                  
+                    <div class="dropdown">
+                      <div class="select" id="district-dropdown">
+                        <div>
+                          <div>Quận / huyện</div>
+                          <div class="selected" id="district-selected" style="color: #6c6c6c;">Chọn quận / huyện</div>
+                        </div>
+                        <div class="btn">
+                          <i class="fa-solid fa-chevron-down caret"></i>
+                        </div>
+                      </div>
+                      <ul class="menu" id="district-menu"></ul>
+                    </div>
+                  
+                    <div class="dropdown">
+                      <div class="select" id="ward-dropdown">
+                        <div>
+                          <div>Phường / xã</div>
+                          <div class="selected" id="ward-selected" style="color: #6c6c6c;">Chọn phường / xã</div>
+                        </div>
+                        <div class="btn">
+                          <i class="fa-solid fa-chevron-down caret"></i>
+                        </div>
+                      </div>
+                      <ul class="menu" id="ward-menu"></ul>
+                    </div>
+                </div>
+                  
+
                 <div class="table">
                     <table width="100%">
                         <thead>
@@ -258,6 +301,8 @@
                         </tbody>
                     </table>
                 </div>
+
+
             </div>
             <div class="section">
                 <div class="admin-control">
@@ -549,7 +594,7 @@
     <script src="./js/admin_js/users.js"></script>
     <script src="./js/admin_js/orders.js"></script>
     <script src="./js/admin_js/over_views.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
     <script src="./js/admin_js/toast-message.js"></script>
 </body>
 
