@@ -158,6 +158,12 @@ function logout() {
     if (document.getElementById('dangky-form')) document.getElementById('dangky-form').reset();
     if (document.getElementById('personal-form')) document.getElementById('personal-form').reset();
     if (document.getElementById('payment-form')) document.getElementById('payment-form').reset();
+    if (document.getElementById('city-dropdown')) document.getElementById('city-dropdown').parentElement.classList.remove('valid');
+    if (document.getElementById('city-dropdown')) document.getElementById('city-dropdown').parentElement.classList.remove('invalid');
+    if (document.getElementById('district-dropdown')) document.getElementById('district-dropdown').parentElement.classList.remove('valid');
+    if (document.getElementById('district-dropdown')) document.getElementById('district-dropdown').parentElement.classList.remove('invalid');
+    if (document.getElementById('ward-dropdown')) document.getElementById('ward-dropdown').parentElement.classList.remove('valid');
+    if (document.getElementById('ward-dropdown')) document.getElementById('ward-dropdown').parentElement.classList.remove('invalid');
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('valid'));
     document.querySelectorAll('.payment-input').forEach(inp => inp.classList.remove('invalid'));
     loadCart();
