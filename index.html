@@ -284,7 +284,12 @@
         <img src="hinhanh/banner/image3.jpg" />
     </div>
     <div id="under-content">
-        <div id="leftmenu"></div>
+        <div id="leftmenu">
+            <div id="leftmenu-heading">                
+                Danh mục sản phẩm
+            </div>
+            <div id="category-list"></div>
+        </div>
         <div id="content">
             <div id="container-items"></div>
             <div id="pagenum"></div>
@@ -412,21 +417,37 @@
             }, 4000); // 4 giây
         }
         //leftmenu
-        function taoleftmenu() {
-            let brand = [
-                { brandid: 'Asia', brandname: 'Quạt Asia' },
-                { brandid: 'Senko', brandname: 'Quạt Senko' },
-                { brandid: 'Kangaroo', brandname: 'Quạt Kangaroo' },
-                { brandid: 'Panasonic', brandname: 'Quạt Panasonic' },
+        function taoleftmenu(){
+            let brand=[
+                {brandid: 'Asia', brandname:'Quạt Asia'},
+                {brandid: 'Senko', brandname:'Quạt Senko'},
+                {brandid: 'Kangaroo', brandname:'Quạt Kangaroo'},
+                {brandid: 'Panasonic', brandname:'Quạt Panasonic'},
             ];
             let s = "";
-            for (let i = 0; i < brand.length; i++) {
-                let a = '<a href="#"><li + id=' + brand[i].brandid + ' onclick="hienthisptheoloai(this)">'
-                    + brand[i].brandname + '</li></a>';
-                s += a;
-            }
-            s = '<ul>' + s + '</ul>';
-            document.getElementById("leftmenu").innerHTML = s;
+            for(i = 0; i < brand.length; i++){
+                let a = `<li class="category-item" id="${brand[i].brandid}"` + ` onclick="hienthisptheoloai(this)">` + 
+                    `<a href="#">` + brand[i].brandname + `</a></li>`;
+                    s += a;
+            }            
+            s = '<ul>' + s + '</ul>';            
+            document.getElementById("category-list").innerHTML = s;
+            hightlightCategoryCurrent();
+        }
+        function delHighLightCategoryCurrent(){
+            const categoryList = document.querySelectorAll("#category-list a");
+            categoryList.forEach(category=> category.classList.remove("active-link"));
+        }
+        function hightlightCategoryCurrent(){
+            const categoryList = document.querySelectorAll("#category-list a");
+            // console.log(categoryList);
+            categoryList.forEach(category=>{
+                category.addEventListener('click', function(){
+                    categoryList.forEach(ele => ele.classList.remove("active-link"));
+                    category.classList.add("active-link");
+                });
+
+            });
         }
         function hienthisptheoloai(object) {
             let s = "";
@@ -696,6 +717,7 @@
 
                 if (minprice <= maxprice) {
                     findItem(find, minprice, maxprice, selectedCategories, selectedBrands);
+                    delHighLightCategoryCurrent();
                 }
                 else {
                     displayToast('Vui lòng nhập giá trị hợp lệ.');
@@ -753,6 +775,7 @@
 
                     if (minprice <= maxprice) {
                         findItem(find, minprice, maxprice, selectedCategories, selectedBrands);
+                        delHighLightCategoryCurrent();
                     }
                     else {
                         displayToast('Vui lòng nhập giá trị hợp lệ.');
